@@ -111,6 +111,30 @@
   .open p{margin:0;color:var(--muted)}
   .final{text-align:left;padding:72px 0 56px}
   .final h2{max-width:none}
+  .cases{display:grid;gap:36px 40px}
+  @media(min-width:900px){.cases{grid-template-columns:1fr 1fr}}
+  .case h3{font:600 1.1rem/1.35 var(--sans);margin:0 0 8px}
+  .case .problem{margin:0 0 8px;color:var(--ink)} .case .fix{margin:0 0 14px;color:var(--muted)}
+  .loop{margin:0} .loop-svg{width:100%;height:auto;display:block;max-width:520px}
+  .loop-track{fill:none;stroke:var(--line);stroke-width:1.2;stroke-dasharray:4 5}
+  .diagram,.chart,.ladder{margin:0 0 8px}
+  .room-svg,.chart-svg,.ladder-svg{width:100%;height:auto;display:block}
+  .room-fill{fill:var(--surface);stroke:var(--line-strong);stroke-width:1.2}
+  .card-fill{fill:var(--surface-2);stroke:var(--line);stroke-width:1}
+  .accent-card{fill:var(--accent-soft);stroke:var(--a5);stroke-width:1}
+  .ink-fill{fill:var(--g9)} .accent-fill{fill:var(--accent)} .bg-fill{fill:var(--g12)} .bg-stroke{stroke:var(--g12);stroke-width:1.6;stroke-linecap:round;fill:none}
+  .flow{fill:none;stroke:var(--line-strong);stroke-width:1.6} .arrow-fill{fill:var(--line-strong)}
+  .ledger-lines rect{fill:var(--g6)}
+  .t-head{font:600 15px var(--sans);fill:var(--ink)} .t-label{font:500 13px var(--sans);fill:var(--ink)} .t-tiny{font:400 11.5px var(--sans);fill:var(--muted)} .t-num{font:500 13px var(--sans);fill:var(--ink);font-variant-numeric:tabular-nums}
+  .axis line{stroke:var(--line-strong);stroke-width:1} .bar-muted{fill:var(--g6)} .bar-accent{fill:var(--accent)}
+  @media(prefers-color-scheme:dark){.bg-fill{fill:var(--g1)} .bg-stroke{stroke:var(--g1)} .t-num,.t-label,.t-head{fill:var(--ink)}}
+  .packs li{display:flex;flex-direction:column;gap:6px}
+  .want{margin-top:auto;align-self:flex-start;font-size:13px;font-weight:500;color:var(--accent-ink);text-decoration:none;padding:6px 10px;border-radius:8px;background:var(--accent-soft)} .want:hover{background:var(--a5)}
+  form.wait{display:flex;gap:10px;flex-wrap:wrap;max-width:620px}
+  form.wait input[type=text]{flex:1 1 280px;padding:12px 14px;border:1px solid var(--line-strong);border-radius:10px;background:var(--surface-2);color:var(--ink);font:15px var(--sans)}
+  form.wait input[type=text]:focus{outline:2px solid var(--a8);outline-offset:2px}
+  form.wait button{border:0;cursor:pointer}
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
   footer{border-top:1px solid var(--line);padding:28px 0 40px;color:var(--faint);font-size:13px;display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-between}
   footer a{color:var(--muted);text-decoration:none} footer a:hover{color:var(--ink)}
 </style>
@@ -123,21 +147,21 @@
       MassRelay
     </a>
     <nav class="top" aria-label="Sections">
-      <a href="#how">How a room works</a>
-      <a href="#who">Who it is for</a>
+      <a href="#problems">What it fixes</a>
+      <a href="#packs">Packs</a>
       <a href="#price">Price</a>
-      <a class="nav-cta" href="mailto:support@massrelay.ai?subject=An%20early%20room">Ask for a room</a>
+      <a class="nav-cta" href="#waitlist">Join the waiting list</a>
     </nav>
   </header>
 
   <main>
     <div class="hero">
       <div>
-        <h1>The room where people and their agents work, pay and keep the record.</h1>
-        <p class="lede">Not one person and an assistant. A team, a class, a business with its accountant, a professional with clients: everyone's agent in the same room, nothing done without an approval, every outcome on a receipt anyone can check, the cost split by a rule each payer accepted.</p>
-        <a class="cta primary" href="mailto:support@massrelay.ai?subject=An%20early%20room&body=Who%20we%20are%2C%20what%20the%20room%20is%20for%2C%20how%20many%20people.">Ask for an early room</a>
-        <a class="cta quiet" href="#how">See how a room works</a>
-        <p class="fine">In private build. Early rooms open by invitation; the self-hosted edition follows.</p>
+        <h1>Your agents do the work. Nobody can prove what they did, or who paid.</h1>
+        <p class="lede">MassRelay is the room that fixes that. People and their agents work in one place, nothing acts without an approval, every outcome leaves a receipt anyone can verify, and the bill is split by a rule each payer accepted. Not one more assistant: the record between them.</p>
+        <a class="cta primary" href="#waitlist">Join the waiting list</a>
+        <a class="cta quiet" href="#problems">See what it fixes</a>
+        <p class="fine">Coming soon. In private build today; early rooms open by invitation, the self-hosted edition follows.</p>
       </div>
 
       <figure class="receipt" aria-label="An example receipt">
@@ -166,48 +190,94 @@
       </figure>
     </div>
 
-    <section id="what">
-      <h2>Four things a room is, that an assistant is not.</h2>
-      <dl class="props">
-        <div><dt>Neutral</dt><dd>Any model, any provider. A person's own assistant from another vendor may join as a guest: it can suggest, never act.</dd></div>
-        <div><dt>Shared</dt><dd>One room, one bill. The cost is split by a rule each payer accepted, and routing keeps the number small.</dd></div>
-        <div><dt>Accountable</dt><dd>Nothing acts without an accepted proposal. Every outcome has a receipt with a hash anyone can verify against the record.</dd></div>
-        <div><dt>Human-finished</dt><dd>A verified person completes what a model cannot, signs it, and is paid on the same receipt.</dd></div>
-      </dl>
+
+
+    <section id="problems">
+<h2>Four problems a room fixes.</h2>
+<p class="intro">Each one runs the same loop: ask, propose, approve, work, finish, receipt. The loop is the product; the use case is what you put in it.</p>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><marker id="arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="arrow-fill"/></marker></defs></svg>
+<div class="cases">
+<article class="case" id="case-books"><h3>A small business and its accountant</h3><p class="problem">The books are late, the receipts are in a drawer, and nobody trusts a number that an app typed in by itself.</p><p class="fix">Two sides in one room. The agent folds the month; the accountant signs it; the receipt names both, the hash proves it, the cost splits as agreed.</p><figure class="loop"><svg viewBox="0 0 500 200" class="loop-svg" role="img" aria-hidden="true"><rect x="60" y="22" width="380" height="146" rx="60" class="loop-track"/><g transform="translate(90,40)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="card-fill"/><text y="-2" text-anchor="middle" class="t-label">ask</text><text y="14" text-anchor="middle" class="t-tiny">"close September"</text></g><g transform="translate(250,40)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="card-fill"/><text y="-2" text-anchor="middle" class="t-label">propose</text><text y="14" text-anchor="middle" class="t-tiny">the fold, the plan</text></g><g transform="translate(410,40)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="card-fill"/><text y="-2" text-anchor="middle" class="t-label">approve</text><text y="14" text-anchor="middle" class="t-tiny">the owner says yes</text></g><g transform="translate(410,150)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="card-fill"/><text y="-2" text-anchor="middle" class="t-label">work</text><text y="14" text-anchor="middle" class="t-tiny">masked, within budget</text></g><g transform="translate(250,150)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="card-fill"/><text y="-2" text-anchor="middle" class="t-label">finish</text><text y="14" text-anchor="middle" class="t-tiny">Dewi signs</text></g><g transform="translate(90,150)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="card-fill"/><text y="-2" text-anchor="middle" class="t-label">receipt</text><text y="14" text-anchor="middle" class="t-tiny">split 50/25/25</text></g><path d="M148 40 L192 40" class="flow" marker-end="url(#arr2)"/><path d="M308 40 L352 40" class="flow" marker-end="url(#arr2)"/><path d="M410 62 L410 132" class="flow" marker-end="url(#arr2)"/><path d="M352 150 L308 150" class="flow" marker-end="url(#arr2)"/><path d="M192 150 L148 150" class="flow" marker-end="url(#arr2)"/><path d="M90 132 L90 62" class="flow" marker-end="url(#arr2)"/></svg></figure></article>
+<article class="case" id="case-team"><h3>A team paying for five assistants</h3><p class="problem">Everyone has their own subscription, nothing is shared, and the costs are invisible until the card statement.</p><p class="fix">One room, one shared memory under clearance, one bill. A member's laptop running a local model serves the whole room for free; the receipt shows what each task cost and what the top model would have.</p><figure class="loop"><svg viewBox="0 0 500 200" class="loop-svg" role="img" aria-hidden="true"><rect x="60" y="22" width="380" height="146" rx="60" class="loop-track"/><g transform="translate(90,40)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="card-fill"/><text y="-2" text-anchor="middle" class="t-label">ask</text><text y="14" text-anchor="middle" class="t-tiny">anyone in the room</text></g><g transform="translate(250,40)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="card-fill"/><text y="-2" text-anchor="middle" class="t-label">route</text><text y="14" text-anchor="middle" class="t-tiny">cheapest that passes</text></g><g transform="translate(410,40)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="card-fill"/><text y="-2" text-anchor="middle" class="t-label">approve</text><text y="14" text-anchor="middle" class="t-tiny">whoever pays</text></g><g transform="translate(410,150)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="card-fill"/><text y="-2" text-anchor="middle" class="t-label">work</text><text y="14" text-anchor="middle" class="t-tiny">shared memory, walls</text></g><g transform="translate(250,150)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="card-fill"/><text y="-2" text-anchor="middle" class="t-label">answer</text><text y="14" text-anchor="middle" class="t-tiny">labelled: model or person</text></g><g transform="translate(90,150)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="card-fill"/><text y="-2" text-anchor="middle" class="t-label">receipt</text><text y="14" text-anchor="middle" class="t-tiny">per task, per payer</text></g><path d="M148 40 L192 40" class="flow" marker-end="url(#arr2)"/><path d="M308 40 L352 40" class="flow" marker-end="url(#arr2)"/><path d="M410 62 L410 132" class="flow" marker-end="url(#arr2)"/><path d="M352 150 L308 150" class="flow" marker-end="url(#arr2)"/><path d="M192 150 L148 150" class="flow" marker-end="url(#arr2)"/><path d="M90 132 L90 62" class="flow" marker-end="url(#arr2)"/></svg></figure></article>
+<article class="case" id="case-pro"><h3>A professional with clients</h3><p class="problem">Finding clients is a marketplace page; getting paid is a chase; proving the work was yours is a screenshot.</p><p class="fix">A public front room: what you offer, your published receipts, a hire button. Hiring opens a private room with the deliverable pinned; you are paid on verification, and the receipt is your credit.</p><figure class="loop"><svg viewBox="0 0 500 200" class="loop-svg" role="img" aria-hidden="true"><rect x="60" y="22" width="380" height="146" rx="60" class="loop-track"/><g transform="translate(90,40)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="card-fill"/><text y="-2" text-anchor="middle" class="t-label">front room</text><text y="14" text-anchor="middle" class="t-tiny">your offer, your receipts</text></g><g transform="translate(250,40)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="card-fill"/><text y="-2" text-anchor="middle" class="t-label">hire</text><text y="14" text-anchor="middle" class="t-tiny">a proposal to you</text></g><g transform="translate(410,40)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="card-fill"/><text y="-2" text-anchor="middle" class="t-label">accept</text><text y="14" text-anchor="middle" class="t-tiny">the private room opens</text></g><g transform="translate(410,150)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="card-fill"/><text y="-2" text-anchor="middle" class="t-label">deliver</text><text y="14" text-anchor="middle" class="t-tiny">the kind, pinned</text></g><g transform="translate(250,150)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="card-fill"/><text y="-2" text-anchor="middle" class="t-label">verify</text><text y="14" text-anchor="middle" class="t-tiny">a rung, signed</text></g><g transform="translate(90,150)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="card-fill"/><text y="-2" text-anchor="middle" class="t-label">receipt</text><text y="14" text-anchor="middle" class="t-tiny">paid, carried, credited</text></g><path d="M148 40 L192 40" class="flow" marker-end="url(#arr2)"/><path d="M308 40 L352 40" class="flow" marker-end="url(#arr2)"/><path d="M410 62 L410 132" class="flow" marker-end="url(#arr2)"/><path d="M352 150 L308 150" class="flow" marker-end="url(#arr2)"/><path d="M192 150 L148 150" class="flow" marker-end="url(#arr2)"/><path d="M90 132 L90 62" class="flow" marker-end="url(#arr2)"/></svg></figure></article>
+<article class="case" id="case-record"><h3>A record that is yours, not an app's</h3><p class="problem">A calorie tracker, a running log, a baby diary: each one a subscription, each one a silo, each one guessing.</p><p class="fix">The same room with a typed record. The bot asks instead of guessing, the fold is yours on your own machine, and a verified professional can review it as a paid deliverable.</p><figure class="loop"><svg viewBox="0 0 500 200" class="loop-svg" role="img" aria-hidden="true"><rect x="60" y="22" width="380" height="146" rx="60" class="loop-track"/><g transform="translate(90,40)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="card-fill"/><text y="-2" text-anchor="middle" class="t-label">log</text><text y="14" text-anchor="middle" class="t-tiny">a photo, a sentence</text></g><g transform="translate(250,40)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="card-fill"/><text y="-2" text-anchor="middle" class="t-label">confirm</text><text y="14" text-anchor="middle" class="t-tiny">the bot asks, never guesses</text></g><g transform="translate(410,40)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="card-fill"/><text y="-2" text-anchor="middle" class="t-label">fold</text><text y="14" text-anchor="middle" class="t-tiny">your week, your machine</text></g><g transform="translate(410,150)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="card-fill"/><text y="-2" text-anchor="middle" class="t-label">match</text><text y="14" text-anchor="middle" class="t-tiny">a dietitian, by consent</text></g><g transform="translate(250,150)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="card-fill"/><text y="-2" text-anchor="middle" class="t-label">review</text><text y="14" text-anchor="middle" class="t-tiny">a signed plan</text></g><g transform="translate(90,150)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="card-fill"/><text y="-2" text-anchor="middle" class="t-label">receipt</text><text y="14" text-anchor="middle" class="t-tiny">priced by the pro</text></g><path d="M148 40 L192 40" class="flow" marker-end="url(#arr2)"/><path d="M308 40 L352 40" class="flow" marker-end="url(#arr2)"/><path d="M410 62 L410 132" class="flow" marker-end="url(#arr2)"/><path d="M352 150 L308 150" class="flow" marker-end="url(#arr2)"/><path d="M192 150 L148 150" class="flow" marker-end="url(#arr2)"/><path d="M90 132 L90 62" class="flow" marker-end="url(#arr2)"/></svg></figure></article>
+</div></section>
+
+    <section id="room" class="diagram-section">
+      <h2>One room. Everyone's agent. One record.</h2>
+      <p class="intro">People sit in the room with their own agents. Every action an agent wants to take becomes a proposal; a person approves; what happens is written to a record nobody can edit, and the receipt is built from it.</p>
+      <figure class="diagram" aria-label="Diagram: people and agents around a room, proposals going to approvals, approvals written to the record, the record producing the receipt">
+        <svg viewBox="0 0 960 420" role="img" aria-hidden="true" class="room-svg">
+          <defs>
+            <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="arrow-fill"/></marker>
+          </defs>
+          <!-- the room -->
+          <rect x="300" y="60" width="360" height="300" rx="28" class="room-fill"/>
+          <text x="480" y="98" text-anchor="middle" class="t-head">the room</text>
+          <!-- people with their agents (left) -->
+          <g class="person" transform="translate(120,130)"><circle cx="0" cy="0" r="18" class="ink-fill"/><path d="M-30 52c0-17 13-30 30-30s30 13 30 30" class="ink-fill"/><text x="0" y="78" text-anchor="middle" class="t-label">Ayu</text><g transform="translate(44,-6)"><rect x="-12" y="-12" width="24" height="24" rx="6" class="accent-fill"/><circle cx="-4" cy="-2" r="2" class="bg-fill"/><circle cx="4" cy="-2" r="2" class="bg-fill"/><path d="M-5 5h10" class="bg-stroke"/></g><text x="44" y="30" text-anchor="middle" class="t-tiny">her agent</text></g>
+          <g class="person" transform="translate(120,290)"><circle cx="0" cy="0" r="18" class="ink-fill"/><path d="M-30 52c0-17 13-30 30-30s30 13 30 30" class="ink-fill"/><text x="0" y="78" text-anchor="middle" class="t-label">Dewi, accountant</text><g transform="translate(44,-6)"><rect x="-12" y="-12" width="24" height="24" rx="6" class="accent-fill"/><circle cx="-4" cy="-2" r="2" class="bg-fill"/><circle cx="4" cy="-2" r="2" class="bg-fill"/><path d="M-5 5h10" class="bg-stroke"/></g><text x="44" y="30" text-anchor="middle" class="t-tiny">her agent</text></g>
+          <path d="M190 140 C 250 140, 250 160, 300 170" class="flow" marker-end="url(#arr)"/>
+          <path d="M190 300 C 250 300, 250 280, 300 270" class="flow" marker-end="url(#arr)"/>
+          <!-- inside the room: proposal → approval -->
+          <g transform="translate(340,130)"><rect width="130" height="54" rx="10" class="card-fill"/><text x="65" y="23" text-anchor="middle" class="t-label">proposal</text><text x="65" y="41" text-anchor="middle" class="t-tiny">steps · tools · cost</text></g>
+          <path d="M470 157 H 500" class="flow" marker-end="url(#arr)"/>
+          <g transform="translate(500,130)"><rect width="130" height="54" rx="10" class="card-fill"/><text x="65" y="23" text-anchor="middle" class="t-label">approval</text><text x="65" y="41" text-anchor="middle" class="t-tiny">whoever pays decides</text></g>
+          <g transform="translate(340,230)"><rect width="130" height="54" rx="10" class="card-fill"/><text x="65" y="23" text-anchor="middle" class="t-label">walls</text><text x="65" y="41" text-anchor="middle" class="t-tiny">clearance · budget · tools</text></g>
+          <g transform="translate(500,230)"><rect width="130" height="54" rx="10" class="card-fill"/><text x="65" y="23" text-anchor="middle" class="t-label">human finish</text><text x="65" y="41" text-anchor="middle" class="t-tiny">a verified person signs</text></g>
+          <path d="M565 184 V 230" class="flow" marker-end="url(#arr)"/>
+          <path d="M405 184 V 230" class="flow" marker-end="url(#arr)"/>
+          <!-- the record (right) -->
+          <path d="M660 210 C 710 210, 710 210, 740 210" class="flow" marker-end="url(#arr)"/>
+          <g transform="translate(745,120)"><rect width="150" height="180" rx="12" class="card-fill"/><text x="75" y="26" text-anchor="middle" class="t-label">the record</text><g class="ledger-lines"><rect x="18" y="44" width="114" height="6" rx="3"/><rect x="18" y="60" width="90" height="6" rx="3"/><rect x="18" y="76" width="104" height="6" rx="3"/><rect x="18" y="92" width="70" height="6" rx="3"/><rect x="18" y="108" width="114" height="6" rx="3"/></g><text x="75" y="150" text-anchor="middle" class="t-tiny">append-only</text><text x="75" y="166" text-anchor="middle" class="t-tiny">hash-chained</text></g>
+          <path d="M820 300 V 340" class="flow" marker-end="url(#arr)"/>
+          <text x="820" y="372" text-anchor="middle" class="t-label">the receipt, anyone can verify</text>
+          <!-- a guest agent, outside -->
+          <g transform="translate(480,392)"><text x="0" y="0" text-anchor="middle" class="t-tiny">a guest assistant from another vendor may suggest from outside — it never acts</text></g>
+        </svg>
+      </figure>
     </section>
 
-    <section id="how">
-      <h2>How a week in a room goes.</h2>
-      <p class="intro">The sequence is the product. Each step leaves a line in an append-only record, and the receipt at the end is built from those lines, never from a summary.</p>
-      <ol class="flow">
-        <li><b>Ask</b><span>A person writes what they need. The room's agents read within their clearance.</span></li>
-        <li><b>Propose</b><span>An agent drafts a plan: steps, tools, cost. Nothing has moved yet.</span></li>
-        <li><b>Approve</b><span>Whoever pays decides. A refusal stops that share, and only that share.</span></li>
-        <li><b>Work</b><span>Agents run inside the walls: masked data, allowed tools, a budget that degrades before it blocks.</span></li>
-        <li><b>Finish</b><span>A verified person signs off what needs a human: the plan, the books, the translation.</span></li>
-        <li><b>Receipt</b><span>What was asked, done, by whom, at what cost, split how. Hashed into the record.</span></li>
-      </ol>
+
+
+
+
+
+    <section id="cost">
+      <h2>The price of a task, shown. Routing is why it is small.</h2>
+      <p class="intro">Every answer can show what it cost and what the top model would have cost. Example figures for one monthly-books task; the real numbers are on your receipt.</p>
+      <figure class="chart" aria-label="Bar chart, example: the top model alone about Rp 18.000 for the task; routed hops about Rp 2.900; a member's own machine Rp 0">
+        <svg viewBox="0 0 720 220" role="img" aria-hidden="true" class="chart-svg">
+          <g class="axis"><line x1="200" y1="30" x2="200" y2="190"/></g>
+          <g transform="translate(0,40)"><text x="190" y="20" text-anchor="end" class="t-label">top model alone</text><rect x="200" y="4" width="440" height="24" rx="4" class="bar-muted"/><text x="650" y="21" class="t-num">Rp 18.000</text></g>
+          <g transform="translate(0,95)"><text x="190" y="20" text-anchor="end" class="t-label">routed, cheapest that passes</text><rect x="200" y="4" width="71" height="24" rx="4" class="bar-accent"/><text x="281" y="21" class="t-num">Rp 2.900</text></g>
+          <g transform="translate(0,150)"><text x="190" y="20" text-anchor="end" class="t-label">a member's own machine</text><rect x="200" y="4" width="3" height="24" rx="2" class="bar-muted"/><text x="213" y="21" class="t-num">Rp 0</text></g>
+          <text x="200" y="212" class="t-tiny">example, one task, six hops · the answer check decides which model passes</text>
+        </svg>
+      </figure>
     </section>
 
-    <section id="who">
-      <h2>Who opens a room.</h2>
-      <div class="scenes">
-        <div><h3>A small business and its accountant</h3><p>Two sides in one room. Each side keeps its own notes; what crosses is a proposal the other side accepts. The monthly books come back as a receipt with the accountant's name on them.</p></div>
-        <div><h3>A team that pays for one brain</h3><p>Everyone's agent, one shared memory under clearance, one bill split by a rule. A member's machine running a local model serves the whole room for free.</p></div>
-        <div><h3>A class, a cohort, a cooperative</h3><p>A group keeps one record and one memory. The owner sets what a guest may do and how many turns the room pays for.</p></div>
-        <div><h3>A professional with clients</h3><p>A public front room: what you offer, your published receipts, a hire button. Hiring opens a private room with the work pinned; the receipt is your credit.</p></div>
-      </div>
-    </section>
+
 
     <section id="packs">
-      <h2>A niche is data on the room, not another app.</h2>
-      <p class="intro">A calorie log, a running plan, a receipts box, a baby's sleep diary: the same room with a typed record, a bot that reads it, a professional who can be matched, and a receipt when they are paid. New ones are a folder of data, not code.</p>
+      <h2>Packs: the same room, a different record. Free to start, paid where a person finishes.</h2>
+      <p class="intro">A pack is data on the room: a typed record, a bot that reads it, a professional who can be matched, a receipt when they are paid. Each one climbs the same three rungs.</p>
+      <figure class="ladder" aria-label="The three rungs of every pack: free on your own machine, metered cloud hops in cents, a verified professional on a receipt">
+        <svg viewBox="0 0 960 150" role="img" aria-hidden="true" class="ladder-svg">
+          <g transform="translate(20,20)"><rect width="280" height="100" rx="14" class="card-fill"/><text x="20" y="34" class="t-head">Free</text><text x="20" y="58" class="t-label">your record, your machine</text><text x="20" y="80" class="t-tiny">the bot reads the fold and answers over the record · Rp 0</text></g>
+          <path d="M302 70 H 338" class="flow" marker-end="url(#arr)"/>
+          <g transform="translate(340,20)"><rect width="280" height="100" rx="14" class="card-fill"/><text x="20" y="34" class="t-head">Metered</text><text x="20" y="58" class="t-label">cloud hops when you ask for more</text><text x="20" y="80" class="t-tiny">a photo guess, a weekly chart · cents per task, on the receipt</text></g>
+          <path d="M622 70 H 658" class="flow" marker-end="url(#arr)"/>
+          <g transform="translate(660,20)"><rect width="280" height="100" rx="14" class="accent-card"/><text x="20" y="34" class="t-head">Professional</text><text x="20" y="58" class="t-label">a verified person signs it</text><text x="20" y="80" class="t-tiny">a review as a deliverable · priced by the professional · split by the room</text></g>
+        </svg>
+      </figure>
       <ul class="packs">
-        <li><b>Nutrition</b><span>Photo or sentence to a confirmed entry. A dietitian's review as a paid deliverable.</span></li>
-        <li><b>Running</b><span>Sessions folded by week. A coach's plan, signed and paid on the receipt.</span></li>
-        <li><b>Receipts</b><span>The box, the monthly fold, the bookkeeper's review.</span></li>
-        <li><b>Baby</b><span>Sleep and feeds as a record the household shares. Information, never advice.</span></li>
+        <li><b>Nutrition</b><span>Photo or sentence → a confirmed entry; the week folded. Up the ladder: a dietitian's plan review.</span><a class="want" href="mailto:support@massrelay.ai?subject=I%20want%20the%20Nutrition%20pack">I want this</a></li>
+        <li><b>Running</b><span>Sessions folded by week against a target. Up the ladder: a coach's plan, signed.</span><a class="want" href="mailto:support@massrelay.ai?subject=I%20want%20the%20Running%20pack">I want this</a></li>
+        <li><b>Receipts</b><span>The box, the monthly fold, totals by category. Up the ladder: a bookkeeper's review.</span><a class="want" href="mailto:support@massrelay.ai?subject=I%20want%20the%20Receipts%20pack">I want this</a></li>
+        <li><b>Baby</b><span>Sleep and feeds the household shares. Information, never advice. Up the ladder: a consultation.</span><a class="want" href="mailto:support@massrelay.ai?subject=I%20want%20the%20Baby%20pack">I want this</a></li>
       </ul>
+      <p class="note">More packs are folders of data, not code: a country's law for a service kind, a persona, a public context pack, a room template for "Bali, this week". Tell us which one you want.</p>
     </section>
 
     <section id="price">
@@ -233,10 +303,16 @@
       </div>
     </section>
 
-    <section class="final" id="ask">
-      <h2>Open a room with us.</h2>
-      <p class="intro">Tell us who you are and what the room is for. We reply from a person, with a receipt for the conversation.</p>
-      <a class="cta primary" href="mailto:support@massrelay.ai?subject=An%20early%20room&body=Who%20we%20are%2C%20what%20the%20room%20is%20for%2C%20how%20many%20people.">Write to support@massrelay.ai</a>
+    <section class="final" id="waitlist">
+      <h2>Join the waiting list.</h2>
+      <p class="intro">Early rooms open by invitation, in the order people asked. One line about who you are and what the room is for. A person replies.</p>
+      <form class="wait" action="mailto:support@massrelay.ai" method="get" enctype="text/plain">
+        <input type="hidden" name="subject" value="Waiting list">
+        <label class="sr" for="wl-body">What the room is for</label>
+        <input id="wl-body" name="body" type="text" placeholder="I'm a … and the room is for …" required>
+        <button class="cta primary" type="submit">Join the waiting list</button>
+      </form>
+      <p class="fine">Opens your mail app addressed to support@massrelay.ai. No tracking, no third party.</p>
     </section>
   </main>
 
