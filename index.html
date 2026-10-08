@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#F7F8FA">
 <title>MassRelay</title>
 <meta name="description" content="Ask for what you need. Your agent does what it can; when it cannot, a verified person finishes it, and you get a receipt you can check.">
 <meta property="og:title" content="MassRelay — your agent first, a real person when it matters">
@@ -22,11 +24,6 @@
     --sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     --serif: "Fraunces", Georgia, "Times New Roman", serif;
     --max: 1120px;
-  }
-  @media (prefers-color-scheme: dark){
-    :root{ --g1:#121419; --g2:#181B21; --g3:#20242B; --g6:#2E333B; --g7:#3A404A; --g9:#7C8593; --g11:#A9B1BC; --g12:#E6E8EC;
-      --a3:#2A231F; --a5:#3A2E27; --a8:#8E7360; --a9:#A88468; --a11:#D9B9A3; --a12:#EBD7C8; --ok:#6FB388;
-      --surface-2:#1C2027; --shadow: 0 1px 2px rgba(0,0,0,.4), 0 16px 40px -18px rgba(0,0,0,.7); }
   }
   *{box-sizing:border-box} html{scroll-behavior:smooth}
   body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--sans);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
@@ -144,7 +141,6 @@
   .ledger-lines rect{fill:var(--g6)}
   .t-head{font:600 15px var(--sans);fill:var(--ink)} .t-label{font:500 13px var(--sans);fill:var(--ink)} .t-tiny{font:400 11.5px var(--sans);fill:var(--muted)} .t-num{font:500 13px var(--sans);fill:var(--ink);font-variant-numeric:tabular-nums}
   .axis line{stroke:var(--line-strong);stroke-width:1} .bar-muted{fill:var(--g6)} .bar-accent{fill:var(--accent)}
-  @media(prefers-color-scheme:dark){.bg-fill{fill:var(--g1)} .bg-stroke{stroke:var(--g1)} .t-num,.t-label,.t-head{fill:var(--ink)}}
   .packs li{display:flex;flex-direction:column;gap:6px}
   .want{margin-top:auto;align-self:flex-start;font-size:13px;font-weight:500;color:var(--accent-ink);text-decoration:none;padding:6px 10px;border-radius:8px;background:var(--accent-soft)} .want:hover{background:var(--a5)}
   form.wait{display:flex;gap:10px;flex-wrap:wrap;max-width:620px}
