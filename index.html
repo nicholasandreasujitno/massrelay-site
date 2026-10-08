@@ -4,48 +4,246 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MassRelay</title>
-<meta name="description" content="MassRelay is the room: people, their agents, shared money and a record. Neutral, shared, accountable, human-finished.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231f6feb'/%3E%3Cpath d='M8 22V10l8 7 8-7v12' fill='none' stroke='%23fff' stroke-width='3' stroke-linejoin='round'/%3E%3C/svg%3E">
+<meta name="description" content="MassRelay is the room where people and their AI agents work, pay and keep the record. Neutral, shared, accountable, human-finished.">
+<meta property="og:title" content="MassRelay — the room, the receipt and the shared bill">
+<meta property="og:description" content="People and their agents in one room. Nothing acts without an approval. Every outcome leaves a receipt anyone can verify. The cost is split by a rule each payer accepted.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231A1D23'/%3E%3Cpath d='M9 22V10l7 6 7-6v12' fill='none' stroke='%23C9A48C' stroke-width='2.6' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Fraunces:opsz,wght@9..144,400;9..144,500&display=swap" rel="stylesheet">
 <style>
-  :root { --bg:#ffffff; --fg:#111418; --muted:#5c6570; --line:#e3e7eb; --accent:#1f6feb; }
-  @media (prefers-color-scheme: dark) { :root { --bg:#0e1116; --fg:#e8ecf1; --muted:#98a2ad; --line:#232a33; --accent:#4c8dff; } }
-  * { box-sizing:border-box }
-  body { margin:0; background:var(--bg); color:var(--fg); font:17px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif; }
-  main { max-width:720px; margin:0 auto; padding:64px 16px 48px; }
-  h1 { font-size:2.1rem; margin:0 0 8px; letter-spacing:-0.02em }
-  .tag { color:var(--muted); margin:0 0 40px; font-size:1.05rem }
-  h2 { font-size:1.05rem; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); margin:40px 0 12px }
-  dl { display:grid; grid-template-columns: 9em 1fr; gap:10px 16px; margin:0 }
-  dt { font-weight:600 } dd { margin:0; color:var(--muted) }
-  @media (max-width:520px){ dl{grid-template-columns:1fr} dt{margin-top:8px} }
-  footer { border-top:1px solid var(--line); margin-top:48px; padding-top:20px; color:var(--muted); font-size:.95rem }
-  a { color:var(--accent); text-decoration:none } a:hover { text-decoration:underline }
+  :root{
+    --g1:#F7F8FA; --g2:#F1F3F6; --g3:#E8EBEF; --g6:#D3D8DE; --g7:#C2C8D0; --g9:#8A93A0; --g11:#4F5866; --g12:#1A1D23;
+    --a3:#F4EBE4; --a5:#E7D4C6; --a8:#A28776; --a9:#C9A48C; --a11:#7A553E; --a12:#4A3225;
+    --ok:#3D7A52;
+    --bg:var(--g1); --surface:var(--g2); --surface-2:#FFFFFF; --ink:var(--g12); --muted:var(--g11); --faint:var(--g9); --line:var(--g6); --line-strong:var(--g7);
+    --accent:var(--a9); --accent-soft:var(--a3); --accent-ink:var(--a11); --on-accent:var(--g12);
+    --shadow: 0 1px 2px rgba(26,29,35,.06), 0 12px 32px -16px rgba(26,29,35,.18);
+    --sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --serif: "Fraunces", Georgia, "Times New Roman", serif;
+    --max: 1120px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --g1:#121419; --g2:#181B21; --g3:#20242B; --g6:#2E333B; --g7:#3A404A; --g9:#7C8593; --g11:#A9B1BC; --g12:#E6E8EC;
+      --a3:#2A231F; --a5:#3A2E27; --a8:#8E7360; --a9:#A88468; --a11:#D9B9A3; --a12:#EBD7C8; --ok:#6FB388;
+      --surface-2:#1C2027; --shadow: 0 1px 2px rgba(0,0,0,.4), 0 16px 40px -18px rgba(0,0,0,.7); }
+  }
+  *{box-sizing:border-box} html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--sans);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  a{color:inherit}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  header.top{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:600;letter-spacing:-.01em;text-decoration:none}
+  .brand svg{width:26px;height:26px}
+  nav.top a{color:var(--muted);text-decoration:none;font-size:14px;margin-left:22px}
+  nav.top a:hover{color:var(--ink)}
+  nav.top a:not(.nav-cta){display:none}
+  @media(min-width:720px){nav.top a:not(.nav-cta){display:inline}}
+
+  /* hero */
+  .hero{display:grid;gap:40px;padding:56px 0 48px;align-items:center}
+  @media(min-width:900px){.hero{grid-template-columns:1.05fr .95fr;gap:56px;padding:88px 0 72px}}
+  h1{font:500 clamp(2.4rem,5.2vw,4rem)/1.04 var(--serif);letter-spacing:-.02em;margin:0 0 22px;text-wrap:balance}
+  .lede{font-size:clamp(1.05rem,1.4vw,1.25rem);color:var(--muted);max-width:34em;margin:0 0 30px}
+  .cta{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:10px;text-decoration:none;font-weight:500;font-size:15px;transition:background .15s ease,transform .15s ease}
+  .cta.primary{background:var(--accent);color:var(--on-accent)} .cta.primary:hover{background:var(--a8);color:#fff}
+  .cta.quiet{color:var(--ink);background:transparent;border:1px solid var(--line-strong);margin-left:10px} .cta.quiet:hover{background:var(--surface)}
+  .cta:focus-visible,a:focus-visible{outline:2px solid var(--a8);outline-offset:3px;border-radius:6px}
+  .fine{color:var(--faint);font-size:13px;margin-top:16px}
+
+  /* receipt */
+  .receipt{background:var(--surface-2);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:22px 24px 18px;font-size:14px;position:relative;max-width:520px;justify-self:center;width:100%}
+  .receipt .head{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px dashed var(--line-strong);padding-bottom:12px;margin-bottom:14px}
+  .receipt .head b{font-weight:600;font-size:15px}
+  .receipt .head span{color:var(--faint);font-variant-numeric:tabular-nums}
+  .receipt dl{display:grid;grid-template-columns:7.5em 1fr;gap:8px 14px;margin:0}
+  .receipt dt{color:var(--faint)} .receipt dd{margin:0}
+  .receipt .lines{margin:14px 0 0;border-top:1px dashed var(--line-strong);padding-top:12px}
+  .receipt .row{display:flex;justify-content:space-between;gap:12px;padding:4px 0;font-variant-numeric:tabular-nums}
+  .receipt .row span:last-child{color:var(--muted)}
+  .receipt .row.total{border-top:1px solid var(--line);margin-top:6px;padding-top:10px;font-weight:600}
+  .receipt .row.total span:last-child{color:var(--ink)}
+  .receipt .split{margin-top:12px;background:var(--surface);border-radius:10px;padding:10px 12px}
+  .receipt .split .row{padding:2px 0}
+  .receipt .verify{display:flex;align-items:center;gap:10px;margin-top:16px;padding-top:12px;border-top:1px dashed var(--line-strong);color:var(--muted);font-size:13px}
+  .receipt .verify code{font:12px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--ink);background:var(--surface);padding:2px 6px;border-radius:6px}
+  .tick{width:18px;height:18px;flex:none}
+  .tick circle{fill:none;stroke:var(--ok);stroke-width:1.6}
+  .tick path{fill:none;stroke:var(--ok);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:14;stroke-dashoffset:14;animation:draw .5s cubic-bezier(.2,.8,.2,1) .7s forwards}
+  @keyframes draw{to{stroke-dashoffset:0}}
+  @media(prefers-reduced-motion:reduce){.tick path{animation:none;stroke-dashoffset:0}}
+  .stamp{position:absolute;top:-10px;right:18px;background:var(--accent-soft);color:var(--accent-ink);font-size:12px;font-weight:500;padding:3px 9px;border-radius:999px;border:1px solid var(--a5)}
+
+  /* sections */
+  section{padding:56px 0;border-top:1px solid var(--line)}
+  @media(min-width:900px){section{padding:80px 0}}
+  h2{font:500 clamp(1.7rem,3vw,2.4rem)/1.15 var(--serif);letter-spacing:-.015em;margin:0 0 14px;text-wrap:balance;max-width:24em}
+  .intro{color:var(--muted);max-width:40em;margin:0 0 36px;font-size:1.05rem}
+  .two{display:grid;gap:28px}
+  @media(min-width:800px){.two{grid-template-columns:1fr 1fr;gap:40px}}
+  .props{display:grid;gap:22px 40px;margin:0}
+  @media(min-width:800px){.props{grid-template-columns:1fr 1fr}}
+  .props dt{font-weight:600;margin-bottom:4px} .props dd{margin:0;color:var(--muted)}
+  .flow{display:grid;gap:14px;margin:0;padding:0;list-style:none;counter-reset:step}
+  @media(min-width:800px){.flow{grid-template-columns:repeat(6,1fr);gap:18px}}
+  .flow li{position:relative;padding:14px 14px 14px;border:1px solid var(--line);border-radius:12px;background:var(--surface);font-size:14px}
+  .flow li b{display:block;font-weight:600;margin-bottom:4px}
+  .flow li span{color:var(--muted)}
+  .flow li::before{counter-increment:step;content:counter(step);position:absolute;top:-10px;left:12px;background:var(--bg);color:var(--faint);font-size:12px;padding:0 6px;font-variant-numeric:tabular-nums}
+  .scenes{display:grid;gap:26px 40px;margin:0}
+  @media(min-width:800px){.scenes{grid-template-columns:1fr 1fr}}
+  .scenes h3{font:600 1.05rem/1.4 var(--sans);margin:0 0 6px}
+  .scenes p{margin:0;color:var(--muted)}
+  .packs{display:grid;gap:12px;margin:0;padding:0;list-style:none}
+  @media(min-width:640px){.packs{grid-template-columns:repeat(4,1fr)}}
+  .packs li{border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--surface-2)}
+  .packs li b{display:block;font-weight:600;margin-bottom:4px}
+  .packs li span{color:var(--muted);font-size:14px}
+  table.price{width:100%;border-collapse:collapse;font-size:15px}
+  table.price th,table.price td{text-align:left;padding:12px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  table.price th{font-weight:600;color:var(--muted);font-size:13px;letter-spacing:.02em}
+  table.price td:first-child{font-weight:500;white-space:nowrap}
+  table.price td:last-child{color:var(--muted)}
+  @media(max-width:640px){table.price thead{display:none} table.price tr{display:block;padding:12px 0;border-bottom:1px solid var(--line)} table.price td{display:block;border:0;padding:2px 0} table.price td:first-child{font-weight:600} table.price td:last-child::before{content:"Who pays the model: ";color:var(--faint)}}
+  .note{color:var(--muted);font-size:14px;max-width:40em}
+  .open{display:grid;gap:18px}
+  @media(min-width:800px){.open{grid-template-columns:1fr 1fr}}
+  .open p{margin:0;color:var(--muted)}
+  .final{text-align:left;padding:72px 0 56px}
+  .final h2{max-width:none}
+  footer{border-top:1px solid var(--line);padding:28px 0 40px;color:var(--faint);font-size:13px;display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-between}
+  footer a{color:var(--muted);text-decoration:none} footer a:hover{color:var(--ink)}
 </style>
 </head>
 <body>
-<main>
-  <h1>MassRelay</h1>
-  <p class="tag">The room: people, their agents, shared money and a record.</p>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="/" aria-label="MassRelay">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="var(--g12)"/><path d="M9 22V10l7 6 7-6v12" fill="none" stroke="var(--a9)" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/></svg>
+      MassRelay
+    </a>
+    <nav class="top" aria-label="Sections">
+      <a href="#how">How a room works</a>
+      <a href="#who">Who it is for</a>
+      <a href="#price">Price</a>
+      <a class="nav-cta" href="mailto:support@massrelay.ai?subject=An%20early%20room">Ask for a room</a>
+    </nav>
+  </header>
 
-  <p>Single-user assistants are one person and their model. MassRelay is built for the group that does the work: a team, a class,
-  a business with its accountant, a professional with their clients. Everyone's agent joins the same room, every action goes
-  through an approval, every outcome leaves a receipt anyone can check, and the cost is split by a rule each payer accepted.</p>
+  <main>
+    <div class="hero">
+      <div>
+        <h1>The room where people and their agents work, pay and keep the record.</h1>
+        <p class="lede">Not one person and an assistant. A team, a class, a business with its accountant, a professional with clients: everyone's agent in the same room, nothing done without an approval, every outcome on a receipt anyone can check, the cost split by a rule each payer accepted.</p>
+        <a class="cta primary" href="mailto:support@massrelay.ai?subject=An%20early%20room&body=Who%20we%20are%2C%20what%20the%20room%20is%20for%2C%20how%20many%20people.">Ask for an early room</a>
+        <a class="cta quiet" href="#how">See how a room works</a>
+        <p class="fine">In private build. Early rooms open by invitation; the self-hosted edition follows.</p>
+      </div>
 
-  <h2>Four properties</h2>
-  <dl>
-    <dt>Neutral</dt><dd>Any model. Any person's own assistant may join as a guest.</dd>
-    <dt>Shared</dt><dd>The cost is split, and routing keeps it small.</dd>
-    <dt>Accountable</dt><dd>Nothing acts without an accepted proposal. Every outcome has a receipt with a verifiable hash.</dd>
-    <dt>Human-finished</dt><dd>A verified person completes what a model cannot, and is paid on the receipt.</dd>
-  </dl>
+      <figure class="receipt" aria-label="An example receipt">
+        <span class="stamp">Receipt</span>
+        <div class="head"><b>Monthly books, September</b><span>r_7f3a·2c91</span></div>
+        <dl>
+          <dt>Asked by</dt><dd>Ayu, for Warung Kopi Tiga</dd>
+          <dt>Done by</dt><dd>the bookkeeping agent, finished by Dewi (verified accountant)</dd>
+          <dt>Sources</dt><dd>bank export · 41 receipts · the August books</dd>
+          <dt>Approved</dt><dd>Ayu, 2 Oct · the plan before any write</dd>
+        </dl>
+        <div class="lines">
+          <div class="row"><span>Model hops, 6 · routed to the cheapest that passed</span><span>Rp 2.900</span></div>
+          <div class="row"><span>Dewi's review and sign-off</span><span>Rp 150.000</span></div>
+          <div class="row total"><span>Total</span><span>Rp 152.900</span></div>
+        </div>
+        <div class="split">
+          <div class="row"><span>Split by the room's rule</span><span>3 payers</span></div>
+          <div class="row"><span>Ayu · 50%</span><span>Rp 76.450</span></div>
+          <div class="row"><span>Budi · 25% · Sari · 25%</span><span>Rp 38.225 each</span></div>
+        </div>
+        <div class="verify">
+          <svg class="tick" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8.5"/><path d="M6 10.5l2.6 2.6L14 7.5"/></svg>
+          <span>Hash <code>sha256 · 9b1e…f04a</code> matches the audit chain. Anyone can re-check it.</span>
+        </div>
+      </figure>
+    </div>
 
-  <h2>Status</h2>
-  <p>In private build. A community edition for self-hosting is planned; the hosted service opens to early rooms by invitation.</p>
+    <section id="what">
+      <h2>Four things a room is, that an assistant is not.</h2>
+      <dl class="props">
+        <div><dt>Neutral</dt><dd>Any model, any provider. A person's own assistant from another vendor may join as a guest: it can suggest, never act.</dd></div>
+        <div><dt>Shared</dt><dd>One room, one bill. The cost is split by a rule each payer accepted, and routing keeps the number small.</dd></div>
+        <div><dt>Accountable</dt><dd>Nothing acts without an accepted proposal. Every outcome has a receipt with a hash anyone can verify against the record.</dd></div>
+        <div><dt>Human-finished</dt><dd>A verified person completes what a model cannot, signs it, and is paid on the same receipt.</dd></div>
+      </dl>
+    </section>
 
-  <h2>Contact</h2>
-  <p><a href="mailto:hello@massrelay.ai">hello@massrelay.ai</a></p>
+    <section id="how">
+      <h2>How a week in a room goes.</h2>
+      <p class="intro">The sequence is the product. Each step leaves a line in an append-only record, and the receipt at the end is built from those lines, never from a summary.</p>
+      <ol class="flow">
+        <li><b>Ask</b><span>A person writes what they need. The room's agents read within their clearance.</span></li>
+        <li><b>Propose</b><span>An agent drafts a plan: steps, tools, cost. Nothing has moved yet.</span></li>
+        <li><b>Approve</b><span>Whoever pays decides. A refusal stops that share, and only that share.</span></li>
+        <li><b>Work</b><span>Agents run inside the walls: masked data, allowed tools, a budget that degrades before it blocks.</span></li>
+        <li><b>Finish</b><span>A verified person signs off what needs a human: the plan, the books, the translation.</span></li>
+        <li><b>Receipt</b><span>What was asked, done, by whom, at what cost, split how. Hashed into the record.</span></li>
+      </ol>
+    </section>
 
-  <footer>© 2026 MassRelay. massrelay.ai</footer>
-</main>
+    <section id="who">
+      <h2>Who opens a room.</h2>
+      <div class="scenes">
+        <div><h3>A small business and its accountant</h3><p>Two sides in one room. Each side keeps its own notes; what crosses is a proposal the other side accepts. The monthly books come back as a receipt with the accountant's name on them.</p></div>
+        <div><h3>A team that pays for one brain</h3><p>Everyone's agent, one shared memory under clearance, one bill split by a rule. A member's machine running a local model serves the whole room for free.</p></div>
+        <div><h3>A class, a cohort, a cooperative</h3><p>A group keeps one record and one memory. The owner sets what a guest may do and how many turns the room pays for.</p></div>
+        <div><h3>A professional with clients</h3><p>A public front room: what you offer, your published receipts, a hire button. Hiring opens a private room with the work pinned; the receipt is your credit.</p></div>
+      </div>
+    </section>
+
+    <section id="packs">
+      <h2>A niche is data on the room, not another app.</h2>
+      <p class="intro">A calorie log, a running plan, a receipts box, a baby's sleep diary: the same room with a typed record, a bot that reads it, a professional who can be matched, and a receipt when they are paid. New ones are a folder of data, not code.</p>
+      <ul class="packs">
+        <li><b>Nutrition</b><span>Photo or sentence to a confirmed entry. A dietitian's review as a paid deliverable.</span></li>
+        <li><b>Running</b><span>Sessions folded by week. A coach's plan, signed and paid on the receipt.</span></li>
+        <li><b>Receipts</b><span>The box, the monthly fold, the bookkeeper's review.</span></li>
+        <li><b>Baby</b><span>Sleep and feeds as a record the household shares. Information, never advice.</span></li>
+      </ul>
+    </section>
+
+    <section id="price">
+      <h2>Free forever on your own machine. Paid where a machine serves others.</h2>
+      <table class="price" aria-label="How the room is paid for">
+        <thead><tr><th>Rung</th><th>What it is</th><th>Who pays the model</th></tr></thead>
+        <tbody>
+          <tr><td>Free forever</td><td>A model on your own computer, through the paired companion. Nothing leaves it.</td><td>Nobody</td></tr>
+          <tr><td>Free while it lasts</td><td>Your own free-tier provider keys, tracked per provider with quota and fall-through.</td><td>The provider's free tier</td></tr>
+          <tr><td>Prepaid</td><td>Credits at the provider's list price, a 5% loading fee on top-ups.</td><td>You</td></tr>
+          <tr><td>Seats</td><td>Team $15, Business $30 per budget-holder seat per month.</td><td>The company</td></tr>
+          <tr><td>Earn</td><td>List a spare machine for rent: 90% of what it earns is yours.</td><td>The buyer</td></tr>
+        </tbody>
+      </table>
+      <p class="note">The platform never pools free accounts to serve its users. Each person's keys, each person's balance, each room's rule.</p>
+    </section>
+
+    <section id="open">
+      <h2>Hosted by us, or by you.</h2>
+      <div class="open">
+        <p>The kernel is identity, tenancy, policy gates, an append-only audit chain and a ledger. Every consequential write passes a gate and leaves an audit row. Row-level security keeps one workspace from ever reading another's rows.</p>
+        <p>Rust and TypeScript on Postgres, one Docker Compose, no inbound port. A self-hosted community edition with the same code is planned once the export checks are green. Until then, the hosted service opens early rooms by invitation.</p>
+      </div>
+    </section>
+
+    <section class="final" id="ask">
+      <h2>Open a room with us.</h2>
+      <p class="intro">Tell us who you are and what the room is for. We reply from a person, with a receipt for the conversation.</p>
+      <a class="cta primary" href="mailto:support@massrelay.ai?subject=An%20early%20room&body=Who%20we%20are%2C%20what%20the%20room%20is%20for%2C%20how%20many%20people.">Write to support@massrelay.ai</a>
+    </section>
+  </main>
+
+  <footer>
+    <span>© 2026 MassRelay · PT Behire International Indonesia</span>
+    <span><a href="mailto:support@massrelay.ai">support@massrelay.ai</a> · <a href="mailto:security@massrelay.ai">security@massrelay.ai</a></span>
+  </footer>
+</div>
 </body>
 </html>
