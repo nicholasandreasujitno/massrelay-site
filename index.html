@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MassRelay</title>
+<meta name="description" content="MassRelay is the room: people, their agents, shared money and a record. Neutral, shared, accountable, human-finished.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231f6feb'/%3E%3Cpath d='M8 22V10l8 7 8-7v12' fill='none' stroke='%23fff' stroke-width='3' stroke-linejoin='round'/%3E%3C/svg%3E">
+<style>
+  :root { --bg:#ffffff; --fg:#111418; --muted:#5c6570; --line:#e3e7eb; --accent:#1f6feb; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#0e1116; --fg:#e8ecf1; --muted:#98a2ad; --line:#232a33; --accent:#4c8dff; } }
+  * { box-sizing:border-box }
+  body { margin:0; background:var(--bg); color:var(--fg); font:17px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif; }
+  main { max-width:720px; margin:0 auto; padding:64px 16px 48px; }
+  h1 { font-size:2.1rem; margin:0 0 8px; letter-spacing:-0.02em }
+  .tag { color:var(--muted); margin:0 0 40px; font-size:1.05rem }
+  h2 { font-size:1.05rem; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); margin:40px 0 12px }
+  dl { display:grid; grid-template-columns: 9em 1fr; gap:10px 16px; margin:0 }
+  dt { font-weight:600 } dd { margin:0; color:var(--muted) }
+  @media (max-width:520px){ dl{grid-template-columns:1fr} dt{margin-top:8px} }
+  footer { border-top:1px solid var(--line); margin-top:48px; padding-top:20px; color:var(--muted); font-size:.95rem }
+  a { color:var(--accent); text-decoration:none } a:hover { text-decoration:underline }
+</style>
+</head>
+<body>
+<main>
+  <h1>MassRelay</h1>
+  <p class="tag">The room: people, their agents, shared money and a record.</p>
+
+  <p>Single-user assistants are one person and their model. MassRelay is built for the group that does the work: a team, a class,
+  a business with its accountant, a professional with their clients. Everyone's agent joins the same room, every action goes
+  through an approval, every outcome leaves a receipt anyone can check, and the cost is split by a rule each payer accepted.</p>
+
+  <h2>Four properties</h2>
+  <dl>
+    <dt>Neutral</dt><dd>Any model. Any person's own assistant may join as a guest.</dd>
+    <dt>Shared</dt><dd>The cost is split, and routing keeps it small.</dd>
+    <dt>Accountable</dt><dd>Nothing acts without an accepted proposal. Every outcome has a receipt with a verifiable hash.</dd>
+    <dt>Human-finished</dt><dd>A verified person completes what a model cannot, and is paid on the receipt.</dd>
+  </dl>
+
+  <h2>Status</h2>
+  <p>In private build. A community edition for self-hosting is planned; the hosted service opens to early rooms by invitation.</p>
+
+  <h2>Contact</h2>
+  <p><a href="mailto:hello@massrelay.ai">hello@massrelay.ai</a></p>
+
+  <footer>© 2026 MassRelay. massrelay.ai</footer>
+</main>
+</body>
+</html>
