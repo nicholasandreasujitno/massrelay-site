@@ -6,292 +6,359 @@
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#F7F8FA">
 <title>MassRelay</title>
-<meta name="description" content="Ask for what you need. Your agent does what it can; when it cannot, a verified person finishes it, and you get a receipt you can check.">
-<meta property="og:title" content="MassRelay — your agent first, a real person when it matters">
-<meta property="og:description" content="Lose weight without guessing, get the books signed by an accountant, find a tutor, meet people this week. An agent does the work it can; a verified person does the rest; one receipt.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231A1D23'/%3E%3Cpath d='M9 22V10l7 6 7-6v12' fill='none' stroke='%23C9A48C' stroke-width='2.6' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E">
+<meta name="description" content="Ask for what you need. Your agent does it free; when a real person is needed, you see the price first and pay once. Coming soon — join the waiting list.">
+<meta property="og:title" content="MassRelay — ask, and it gets done">
+<meta property="og:description" content="Your agent first, free. A real person when it matters, at a price you see first. One receipt.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://massrelay.ai/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Fraunces:opsz,wght@9..144,400;9..144,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --g1:#F7F8FA; --g2:#F1F3F6; --g3:#E8EBEF; --g6:#D3D8DE; --g7:#C2C8D0; --g9:#8A93A0; --g11:#4F5866; --g12:#1A1D23;
-    --a3:#F4EBE4; --a5:#E7D4C6; --a8:#A28776; --a9:#C9A48C; --a11:#7A553E; --a12:#4A3225;
+    --g1:#F7F8FA; --g2:#F1F3F6; --g3:#E9ECF1; --g6:#D3D8E0; --g9:#8A93A3; --g11:#555D6B; --g12:#1A1D23;
+    --a3:#F3E9E1; --a9:#E7CDB9; --a11:#8A6346;
     --ok:#3D7A52;
-    --bg:var(--g1); --surface:var(--g2); --surface-2:#FFFFFF; --ink:var(--g12); --muted:var(--g11); --faint:var(--g9); --line:var(--g6); --line-strong:var(--g7);
+    --bg:var(--g1); --surface:#FFFFFF; --surface-2:var(--g2); --ink:var(--g12); --muted:var(--g11); --faint:var(--g9); --line:var(--g6);
     --accent:var(--a9); --accent-soft:var(--a3); --accent-ink:var(--a11); --on-accent:var(--g12);
-    --shadow: 0 1px 2px rgba(26,29,35,.06), 0 12px 32px -16px rgba(26,29,35,.18);
-    --sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-    --serif: "Fraunces", Georgia, "Times New Roman", serif;
-    --max: 1120px;
+    --shadow: 0 1px 2px rgba(26,29,35,.05), 0 16px 40px -20px rgba(26,29,35,.18);
+    --sans:"Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --serif:"Fraunces", Georgia, "Times New Roman", serif;
+    --max:1080px; --r:18px;
   }
-  :root[data-theme="dark"]{ --g1:#121419; --g2:#181B21; --g3:#20242B; --g6:#2E333B; --g7:#3A404A; --g9:#7C8593; --g11:#A9B1BC; --g12:#E6E8EC;
-    --a3:#2A231F; --a5:#3A2E27; --a8:#8E7360; --a9:#A88468; --a11:#D9B9A3; --a12:#EBD7C8; --ok:#6FB388;
-    --surface-2:#1C2027; --shadow: 0 1px 2px rgba(0,0,0,.4), 0 16px 40px -18px rgba(0,0,0,.7); color-scheme:dark }
-  :root[data-theme="dark"] .bg-fill{fill:var(--g1)} :root[data-theme="dark"] .bg-stroke{stroke:var(--g1)}
-  .theme{display:inline-flex;align-items:center;gap:6px;margin-left:18px;padding:5px 10px;border:1px solid var(--line-strong);border-radius:999px;background:transparent;color:var(--muted);font:500 12px var(--sans);cursor:pointer}
-  .theme:hover{color:var(--ink);background:var(--surface)} .theme svg{width:14px;height:14px}
-  *{box-sizing:border-box} html{scroll-behavior:smooth}
-  body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--sans);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  :root[data-theme="dark"]{
+    --g1:#111318; --g2:#171A20; --g3:#1E222A; --g6:#2E343F; --g9:#6F7887; --g11:#A7AEBB; --g12:#F2F4F7;
+    --a3:#2A2320; --a9:#B98F72; --a11:#E0C2AA;
+    --bg:var(--g1); --surface:var(--g2); --surface-2:var(--g3); --ink:var(--g12); --muted:var(--g11); --faint:var(--g9); --line:var(--g6);
+    --accent:var(--a9); --accent-soft:var(--a3); --accent-ink:var(--a11); --on-accent:#111318;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 16px 40px -20px rgba(0,0,0,.6);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.55;-webkit-font-smoothing:antialiased}
   a{color:inherit}
-  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
-  header.top{display:flex;align-items:center;justify-content:space-between;height:64px}
-  .brand{display:flex;align-items:center;gap:10px;font-weight:600;letter-spacing:-.01em;text-decoration:none}
-  .brand svg{width:26px;height:26px}
-  nav.top a{color:var(--muted);text-decoration:none;font-size:14px;margin-left:22px}
-  nav.top a:hover{color:var(--ink)}
-  nav.top a:not(.nav-cta){display:none}
-  @media(min-width:720px){nav.top a:not(.nav-cta){display:inline}}
-
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 16px}
+  header{position:sticky;top:0;z-index:5;background:color-mix(in oklab,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:60px;gap:12px}
+  .brand{font-family:var(--serif);font-weight:600;font-size:20px;letter-spacing:-.01em;text-decoration:none}
+  .nav-right{display:flex;align-items:center;gap:10px}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);text-decoration:none;font-weight:600;font-size:15px;cursor:pointer;transition:transform .15s ease, background .15s ease}
+  .btn:hover{transform:translateY(-1px)}
+  .btn.primary{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+  .btn.ghost{background:transparent}
+  .switch{font-size:13px;padding:8px 12px}
+  h1,h2,h3{font-family:var(--serif);font-weight:600;letter-spacing:-.02em;line-height:1.1;margin:0}
+  h1{font-size:clamp(38px,6.2vw,66px)}
+  h2{font-size:clamp(28px,4vw,42px)}
+  h3{font-size:22px;font-family:var(--sans);font-weight:600;letter-spacing:-.01em}
+  p{margin:0}
+  .lead{font-size:clamp(17px,2vw,21px);color:var(--muted);max-width:34ch}
+  section{padding:88px 0}
+  .sec-head{display:flex;flex-direction:column;gap:14px;max-width:62ch;margin-bottom:40px}
+  .sec-head p{color:var(--muted);font-size:18px}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .grid2{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:26px;box-shadow:var(--shadow)}
+  .card .num{font-family:var(--serif);font-size:40px;font-weight:600;letter-spacing:-.02em;line-height:1}
+  .card .label{color:var(--muted);font-size:15px;margin-top:6px}
+  .card p{color:var(--muted);font-size:15.5px;margin-top:10px}
+  .tag{display:inline-block;font-size:12.5px;font-weight:600;padding:5px 10px;border-radius:999px;background:var(--surface-2);color:var(--muted)}
+  .tag.accent{background:var(--accent);color:var(--on-accent)}
   /* hero */
-  .hero{display:grid;gap:40px;padding:56px 0 48px;align-items:center}
-  @media(min-width:900px){.hero{grid-template-columns:1.05fr .95fr;gap:56px;padding:88px 0 72px}}
-  h1{font:500 clamp(2.4rem,5.2vw,4rem)/1.04 var(--serif);letter-spacing:-.02em;margin:0 0 22px;text-wrap:balance}
-  .lede{font-size:clamp(1.05rem,1.4vw,1.25rem);color:var(--muted);max-width:34em;margin:0 0 30px}
-  .cta{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:10px;text-decoration:none;font-weight:500;font-size:15px;transition:background .15s ease,transform .15s ease}
-  .cta.primary{background:var(--accent);color:var(--on-accent)} .cta.primary:hover{background:var(--a8);color:#fff}
-  .cta.quiet{color:var(--ink);background:transparent;border:1px solid var(--line-strong);margin-left:10px} .cta.quiet:hover{background:var(--surface)}
-  .cta:focus-visible,a:focus-visible{outline:2px solid var(--a8);outline-offset:3px;border-radius:6px}
-  .fine{color:var(--faint);font-size:13px;margin-top:16px}
-
-  /* receipt */
-  .receipt{background:var(--surface-2);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:22px 24px 18px;font-size:14px;position:relative;max-width:520px;justify-self:center;width:100%}
-  .receipt .head{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px dashed var(--line-strong);padding-bottom:12px;margin-bottom:14px}
-  .receipt .head b{font-weight:600;font-size:15px}
-  .receipt .head span{color:var(--faint);font-variant-numeric:tabular-nums}
-  .receipt dl{display:grid;grid-template-columns:7.5em 1fr;gap:8px 14px;margin:0}
-  .receipt dt{color:var(--faint)} .receipt dd{margin:0}
-  .receipt .lines{margin:14px 0 0;border-top:1px dashed var(--line-strong);padding-top:12px}
-  .receipt .row{display:flex;justify-content:space-between;gap:12px;padding:4px 0;font-variant-numeric:tabular-nums}
-  .receipt .row span:last-child{color:var(--muted)}
-  .receipt .row.total{border-top:1px solid var(--line);margin-top:6px;padding-top:10px;font-weight:600}
-  .receipt .row.total span:last-child{color:var(--ink)}
-  .receipt .split{margin-top:12px;background:var(--surface);border-radius:10px;padding:10px 12px}
-  .receipt .split .row{padding:2px 0}
-  .receipt .verify{display:flex;align-items:center;gap:10px;margin-top:16px;padding-top:12px;border-top:1px dashed var(--line-strong);color:var(--muted);font-size:13px}
-  .receipt .verify code{font:12px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--ink);background:var(--surface);padding:2px 6px;border-radius:6px}
-  .tick{width:18px;height:18px;flex:none}
-  .tick circle{fill:none;stroke:var(--ok);stroke-width:1.6}
-  .tick path{fill:none;stroke:var(--ok);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:14;stroke-dashoffset:14;animation:draw .5s cubic-bezier(.2,.8,.2,1) .7s forwards}
-  @keyframes draw{to{stroke-dashoffset:0}}
-  @media(prefers-reduced-motion:reduce){.tick path{animation:none;stroke-dashoffset:0}}
-  .stamp{position:absolute;top:-10px;right:18px;background:var(--accent-soft);color:var(--accent-ink);font-size:12px;font-weight:500;padding:3px 9px;border-radius:999px;border:1px solid var(--a5)}
-
-  /* sections */
-  section{padding:56px 0;border-top:1px solid var(--line)}
-  @media(min-width:900px){section{padding:80px 0}}
-  h2{font:500 clamp(1.7rem,3vw,2.4rem)/1.15 var(--serif);letter-spacing:-.015em;margin:0 0 14px;text-wrap:balance;max-width:24em}
-  .intro{color:var(--muted);max-width:40em;margin:0 0 36px;font-size:1.05rem}
-  .two{display:grid;gap:28px}
-  @media(min-width:800px){.two{grid-template-columns:1fr 1fr;gap:40px}}
-  .props{display:grid;gap:22px 40px;margin:0}
-  @media(min-width:800px){.props{grid-template-columns:1fr 1fr}}
-  .props dt{font-weight:600;margin-bottom:4px} .props dd{margin:0;color:var(--muted)}
-  .flow{display:grid;gap:14px;margin:0;padding:0;list-style:none;counter-reset:step}
-  @media(min-width:800px){.flow{grid-template-columns:repeat(6,1fr);gap:18px}}
-  .flow li{position:relative;padding:14px 14px 14px;border:1px solid var(--line);border-radius:12px;background:var(--surface);font-size:14px}
-  .flow li b{display:block;font-weight:600;margin-bottom:4px}
-  .flow li span{color:var(--muted)}
-  .flow li::before{counter-increment:step;content:counter(step);position:absolute;top:-10px;left:12px;background:var(--bg);color:var(--faint);font-size:12px;padding:0 6px;font-variant-numeric:tabular-nums}
-  .scenes{display:grid;gap:26px 40px;margin:0}
-  @media(min-width:800px){.scenes{grid-template-columns:1fr 1fr}}
-  .scenes h3{font:600 1.05rem/1.4 var(--sans);margin:0 0 6px}
-  .scenes p{margin:0;color:var(--muted)}
-  .packs{display:grid;gap:12px;margin:0;padding:0;list-style:none}
-  @media(min-width:640px){.packs{grid-template-columns:repeat(4,1fr)}}
-  .packs li{border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--surface-2)}
-  .packs li b{display:block;font-weight:600;margin-bottom:4px}
-  .packs li span{color:var(--muted);font-size:14px}
-  table.price{width:100%;border-collapse:collapse;font-size:15px}
-  table.price th,table.price td{text-align:left;padding:12px 10px;border-bottom:1px solid var(--line);vertical-align:top}
-  table.price th{font-weight:600;color:var(--muted);font-size:13px;letter-spacing:.02em}
-  table.price td:first-child{font-weight:500;white-space:nowrap}
-  table.price td:last-child{color:var(--muted)}
-  @media(max-width:640px){table.price thead{display:none} table.price tr{display:block;padding:12px 0;border-bottom:1px solid var(--line)} table.price td{display:block;border:0;padding:2px 0} table.price td:first-child{font-weight:600} table.price td:last-child::before{content:"Who pays the model: ";color:var(--faint)}}
-  .note{color:var(--muted);font-size:14px;max-width:40em}
-  .open{display:grid;gap:18px}
-  @media(min-width:800px){.open{grid-template-columns:1fr 1fr}}
-  .open p{margin:0;color:var(--muted)}
-  .final{text-align:left;padding:72px 0 56px}
-  .final h2{max-width:none}
-  .cases{display:grid;gap:36px 40px}
-  @media(min-width:900px){.cases{grid-template-columns:1fr 1fr}}
-  .case h3{font:600 1.1rem/1.35 var(--sans);margin:0 0 8px}
-  .case .problem{margin:0 0 8px;color:var(--ink)} .case .fix{margin:0 0 14px;color:var(--muted)} .case .meta{font-size:13px;color:var(--faint);margin:10px 0 0}
-  .loop{margin:0} .loop-svg{width:100%;height:auto;display:block;max-width:520px}
-  .loop-track{fill:none;stroke:var(--line);stroke-width:1.2;stroke-dasharray:4 5}
-  .needs{display:grid;gap:28px 40px}
-  @media(min-width:800px){.needs{grid-template-columns:1fr 1fr}}
-  @media(min-width:1100px){.needs{grid-template-columns:1fr 1fr 1fr}}
-  .needs h3{font:500 1.25rem/1.3 var(--serif);margin:0 0 8px;letter-spacing:-.01em}
-  .needs p{margin:0 0 8px;color:var(--muted)} .needs .meta{font-size:13px;color:var(--faint)}
-  .chip{display:inline-block;font-size:12px;font-weight:500;padding:2px 8px;border-radius:999px;margin-right:6px;border:1px solid var(--line-strong);color:var(--muted)}
-  .chip.now{background:var(--accent-soft);color:var(--accent-ink);border-color:var(--a5)}
-  .levels{display:grid;gap:14px;margin:0;padding:0;list-style:none}
-  @media(min-width:800px){.levels{grid-template-columns:1fr 1fr 1fr;gap:18px}}
-  .levels li{border:1px solid var(--line);border-radius:14px;padding:18px 18px 16px;background:var(--surface-2);position:relative}
-  .levels li.human{background:var(--accent-soft);border-color:var(--a5)}
-  .levels .lvl{font:500 12px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--faint);margin-bottom:6px}
-  .levels li.human .lvl{color:var(--accent-ink)}
-  .levels b{display:block;font:600 1.05rem/1.35 var(--sans);margin-bottom:6px}
-  .levels p{margin:0;color:var(--muted);font-size:14.5px}
-  .hand{display:flex;align-items:center;gap:8px;margin:12px 0 0;font-size:13px;color:var(--faint)}
-  .hand svg{width:18px;height:18px;flex:none}
-  .diagram,.chart,.ladder{margin:0 0 8px}
-  .room-svg,.chart-svg,.ladder-svg{width:100%;height:auto;display:block}
-  .room-fill{fill:var(--surface);stroke:var(--line-strong);stroke-width:1.2}
-  .card-fill{fill:var(--surface-2);stroke:var(--line);stroke-width:1}
-  .accent-card{fill:var(--accent-soft);stroke:var(--a5);stroke-width:1}
-  .ink-fill{fill:var(--g9)} .accent-fill{fill:var(--accent)} .bg-fill{fill:var(--g12)} .bg-stroke{stroke:var(--g12);stroke-width:1.6;stroke-linecap:round;fill:none}
-  .flow{fill:none;stroke:var(--line-strong);stroke-width:1.6} .arrow-fill{fill:var(--line-strong)}
-  .ledger-lines rect{fill:var(--g6)}
-  .t-head{font:600 15px var(--sans);fill:var(--ink)} .t-label{font:500 13px var(--sans);fill:var(--ink)} .t-tiny{font:400 11.5px var(--sans);fill:var(--muted)} .t-num{font:500 13px var(--sans);fill:var(--ink);font-variant-numeric:tabular-nums}
-  .axis line{stroke:var(--line-strong);stroke-width:1} .bar-muted{fill:var(--g6)} .bar-accent{fill:var(--accent)}
-  .packs li{display:flex;flex-direction:column;gap:6px}
-  .want{margin-top:auto;align-self:flex-start;font-size:13px;font-weight:500;color:var(--accent-ink);text-decoration:none;padding:6px 10px;border-radius:8px;background:var(--accent-soft)} .want:hover{background:var(--a5)}
-  form.wait{display:flex;gap:10px;flex-wrap:wrap;max-width:620px}
-  form.wait input[type=text]{flex:1 1 280px;padding:12px 14px;border:1px solid var(--line-strong);border-radius:10px;background:var(--surface-2);color:var(--ink);font:15px var(--sans)}
-  form.wait input[type=text]:focus{outline:2px solid var(--a8);outline-offset:2px}
-  form.wait button{border:0;cursor:pointer}
-  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
-  footer{border-top:1px solid var(--line);padding:28px 0 40px;color:var(--faint);font-size:13px;display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-between}
-  footer a{color:var(--muted);text-decoration:none} footer a:hover{color:var(--ink)}
+  .hero{padding:72px 0 64px}
+  .hero .grid2{gap:48px}
+  .hero-ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+  .hero-note{color:var(--faint);font-size:14px;margin-top:14px}
+  .phone{background:var(--surface);border:1px solid var(--line);border-radius:28px;padding:18px;box-shadow:var(--shadow);max-width:400px;margin:0 auto}
+  .msg{display:flex;flex-direction:column;gap:10px}
+  .bubble{padding:12px 14px;border-radius:16px;font-size:15px;max-width:88%;line-height:1.45}
+  .bubble.me{align-self:flex-end;background:var(--ink);color:var(--bg);border-bottom-right-radius:6px}
+  .bubble.bot{align-self:flex-start;background:var(--surface-2);border-bottom-left-radius:6px}
+  .bubble.person{align-self:flex-start;background:var(--accent-soft);border:1px solid var(--accent);border-bottom-left-radius:6px}
+  .bubble small{display:block;color:var(--faint);font-size:12px;margin-bottom:4px}
+  .receipt{margin-top:12px;border-top:1px dashed var(--line);padding-top:12px;font-size:14px;display:grid;gap:6px}
+  .receipt div{display:flex;justify-content:space-between;color:var(--muted)}
+  .receipt div b{color:var(--ink);font-weight:600}
+  /* ways */
+  .way .ico{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:var(--surface-2);margin-bottom:14px}
+  .way .ico svg{width:24px;height:24px;stroke:var(--ink);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .way .price{margin-top:14px;font-weight:600}
+  /* needs */
+  .needs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .need{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px;display:flex;flex-direction:column;gap:8px;min-height:150px}
+  .need .k{font-size:13px;color:var(--faint);font-weight:600;letter-spacing:.02em}
+  .need .ask{font-size:17px;font-weight:600;letter-spacing:-.01em}
+  .need .how{color:var(--muted);font-size:14.5px}
+  /* ladder */
+  .ladder{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--surface)}
+  .step{padding:28px 24px;border-right:1px solid var(--line);position:relative}
+  .step:last-child{border-right:0}
+  .step .n{font-family:var(--serif);font-size:13px;color:var(--faint);letter-spacing:.06em;text-transform:uppercase;font-family:var(--sans);font-weight:600}
+  .step h3{margin:8px 0 8px}
+  .step p{color:var(--muted);font-size:15px}
+  .step ul{margin:12px 0 0;padding:0;list-style:none;display:grid;gap:6px;font-size:14.5px}
+  .step li::before{content:"— ";color:var(--faint)}
+  .step.accent{background:var(--accent-soft)}
+  /* trending */
+  .trend{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px;box-shadow:var(--shadow)}
+  .trend .head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:14px}
+  .trend .head b{font-weight:600}
+  .trend .head span{color:var(--faint);font-size:13px}
+  .bar{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;font-size:14.5px;margin:8px 0}
+  .bar i{display:block;height:8px;border-radius:999px;background:var(--surface-2);position:relative;overflow:hidden}
+  .bar i::after{content:"";position:absolute;inset:0;width:var(--w);background:var(--accent)}
+  .bar b{font-weight:600;color:var(--muted);font-variant-numeric:tabular-nums}
+  .bar .l{display:flex;justify-content:space-between;margin-bottom:4px}
+  .trend .foot{color:var(--faint);font-size:12.5px;margin-top:12px}
+  /* open */
+  .facts{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  /* room */
+  .room{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:28px}
+  .room p{color:var(--muted);font-size:16px;margin-top:10px}
+  .people{display:flex;gap:-6px}
+  .avatars{display:flex}
+  .av{width:40px;height:40px;border-radius:50%;border:2px solid var(--surface);margin-left:-8px;display:grid;place-items:center;font-size:12px;font-weight:600;background:var(--surface-2)}
+  .av.bot{background:var(--accent);color:var(--on-accent)}
+  .av:first-child{margin-left:0}
+  /* faq */
+  details{border-top:1px solid var(--line);padding:18px 0}
+  details:last-of-type{border-bottom:1px solid var(--line)}
+  summary{cursor:pointer;font-weight:600;font-size:17px;list-style:none;display:flex;justify-content:space-between;gap:12px}
+  summary::after{content:"+";color:var(--faint);font-weight:400}
+  details[open] summary::after{content:"–"}
+  details p{color:var(--muted);margin-top:10px;max-width:70ch}
+  /* close */
+  .close{text-align:center;padding:96px 0}
+  .close .lead{margin:14px auto 0}
+  footer{border-top:1px solid var(--line);padding:28px 0;color:var(--faint);font-size:13.5px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  footer a{color:var(--muted);text-decoration:none}
+  @media (max-width:860px){
+    .grid3,.needs,.facts,.ladder{grid-template-columns:1fr}
+    .grid2,.room{grid-template-columns:1fr}
+    .step{border-right:0;border-bottom:1px solid var(--line)}
+    .step:last-child{border-bottom:0}
+    section{padding:64px 0}
+    .hero{padding:40px 0 48px}
+  }
+  @media (prefers-reduced-motion: reduce){ .btn{transition:none} }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header class="top">
-    <a class="brand" href="/" aria-label="MassRelay">
-      <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="var(--g12)"/><path d="M9 22V10l7 6 7-6v12" fill="none" stroke="var(--a9)" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/></svg>
-      MassRelay
-    </a>
-    <nav class="top" aria-label="Sections">
-      <a href="#solutions">What it solves</a>
-      <a href="#how">How it works</a>
-      <a href="#price">Price</a>
-      <a class="nav-cta" href="#waitlist">Join the waiting list</a>
-      <button class="theme" type="button" id="theme" aria-pressed="false" title="Switch light and dark"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 3a7 7 0 0 1 0 14z" fill="currentColor"/></svg><span>Dark</span></button>
-    </nav>
-  </header>
-  <main>
-    <div class="hero">
-      <div>
-        <h1>An assistant that admits what it cannot do, and finds the person who can.</h1>
-        <p class="lede">Chat assistants guess, forget, and keep no record. MassRelay's agent does the work it honestly can, then finds a verified person for the part that needs one: a dietitian, an accountant, a tutor, a nurse. Nothing happens without your yes. You get one receipt you can check.</p>
-        <a class="cta primary" href="#waitlist">Join the waiting list</a>
-        <a class="cta quiet" href="#solutions">See what it solves</a>
-        <p class="fine">Coming soon. Early access opens by invitation; a free self-hosted edition follows.</p>
-      </div>
-      <figure class="receipt" aria-label="An example receipt">
-        <span class="stamp">Receipt</span>
-        <div class="head"><b>September books, signed</b><span>r_7f3a·2c91</span></div>
-        <dl>
-          <dt>Asked by</dt><dd>Maya, for her café</dd>
-          <dt>Done by</dt><dd>her agent, finished by Jordan (licensed accountant)</dd>
-          <dt>Sources</dt><dd>bank export · 41 receipts · August's books</dd>
-          <dt>Approved</dt><dd>Maya, 2 Oct · the plan before any write</dd>
-        </dl>
-        <div class="lines">
-          <div class="row"><span>Agent work, 6 model calls</span><span>$0.19</span></div>
-          <div class="row"><span>Jordan's review and signature</span><span>$95.00</span></div>
-          <div class="row total"><span>Total</span><span>$95.19</span></div>
-        </div>
-        <div class="split">
-          <div class="row"><span>Paid as agreed</span><span>2 payers</span></div>
-          <div class="row"><span>Maya · 50%</span><span>$47.60</span></div>
-          <div class="row"><span>Her business partner · 50%</span><span>$47.59</span></div>
-        </div>
-        <div class="verify">
-          <svg class="tick" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8.5"/><path d="M6 10.5l2.6 2.6L14 7.5"/></svg>
-          <span>Hash <code>sha256 · 9b1e…f04a</code> matches the record. Anyone can re-check it.</span>
-        </div>
-      </figure>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="/">MassRelay</a>
+    <div class="nav-right">
+      <button class="btn ghost switch" id="theme" type="button" aria-label="Switch light and dark">Dark</button>
+      <a class="btn primary" href="#waitlist">Join the waiting list</a>
     </div>
+  </div>
+</header>
 
-    <section id="how">
-      <h2>Three levels, one receipt.</h2>
-      <p class="intro">Every request climbs the same three levels and stops at the first one that can honestly solve it. You decide before anything moves, and the receipt names who did what and what it cost.</p>
-      <ol class="levels">
-        <li><div class="lvl">Level 1</div><b>Your agent, on your own device</b><p>Logs, folds, drafts, reminds, answers over your own record. Free, and nothing leaves your machine.</p><div class="hand"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10h11M10 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>needs more than a small model knows</div></li>
-        <li><div class="lvl">Level 2</div><b>The right model for the task, metered</b><p>A photo read, a long document, a careful draft. Routed to the cheapest model that passes the check; cents per task, on the receipt.</p><div class="hand"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10h11M10 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>needs a licence, a judgement, a signature</div></li>
-        <li class="human"><div class="lvl">Level 3</div><b>A verified person, found for you</b><p>Matched by consent and by what they are licensed to do. They finish and sign; you pay on verification; the receipt is proof for both of you.</p><div class="hand"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l3 3 9-9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>done, named, verifiable</div></li>
-      </ol>
-    </section>
-
-    <section id="solutions">
-      <h2>What it solves.</h2>
-      <p class="intro">Six things people actually come with. Each shows where the agent stops and the person starts, and what the free part is.</p>
-      <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><marker id="arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="arrow-fill"/></marker></defs></svg>
-      <div class="cases">
-        <article class="case" id="case-weight"><h3>Lose weight without guessing</h3><p class="problem">Apps guess your calories from a photo and move on. Nobody checks, nobody adjusts, and the plan you paid for was written for someone else.</p><p class="fix">Your agent turns a photo or a sentence into an entry and asks when it is not sure. It folds your week and answers over your own record. When you want a plan, it finds a registered dietitian who reads your actual weeks and signs one.</p><figure class="loop"><svg viewBox="0 0 500 200" class="loop-svg" role="img" aria-hidden="true"><rect x="60" y="22" width="380" height="146" rx="60" class="loop-track"/><g transform="translate(90,40)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="card-fill"/><text y="-2" text-anchor="middle" class="t-label">you log</text><text y="14" text-anchor="middle" class="t-tiny">a photo, a line</text></g><g transform="translate(250,40)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="card-fill"/><text y="-2" text-anchor="middle" class="t-label">agent asks</text><text y="14" text-anchor="middle" class="t-tiny">never guesses</text></g><g transform="translate(410,40)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="card-fill"/><text y="-2" text-anchor="middle" class="t-label">your week</text><text y="14" text-anchor="middle" class="t-tiny">folded, yours</text></g><g transform="translate(410,150)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="card-fill"/><text y="-2" text-anchor="middle" class="t-label">needs a plan?</text><text y="14" text-anchor="middle" class="t-tiny">the agent finds</text></g><g transform="translate(250,150)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="accent-card"/><text y="-2" text-anchor="middle" class="t-label">dietitian</text><text y="14" text-anchor="middle" class="t-tiny">reads it, signs it</text></g><g transform="translate(90,150)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="card-fill"/><text y="-2" text-anchor="middle" class="t-label">receipt</text><text y="14" text-anchor="middle" class="t-tiny">what you paid</text></g><path d="M148 40 L192 40" class="flow" marker-end="url(#arr2)"/><path d="M308 40 L352 40" class="flow" marker-end="url(#arr2)"/><path d="M410 62 L410 132" class="flow" marker-end="url(#arr2)"/><path d="M352 150 L308 150" class="flow" marker-end="url(#arr2)"/><path d="M192 150 L148 150" class="flow" marker-end="url(#arr2)"/><path d="M90 132 L90 62" class="flow" marker-end="url(#arr2)"/></svg></figure><p class="meta"><span class="chip now">in early access</span> Free on your own device · a dietitian's plan priced by the dietitian</p></article>
-        <article class="case" id="case-books"><h3>Get the books done, signed by an accountant</h3><p class="problem">The receipts are in a drawer, the software "auto-categorised" half of them wrong, and the person who signs your taxes has never seen the rest.</p><p class="fix">Your agent folds the month from the bank export and the receipts, shows you the plan before it writes anything, and hands the result to your accountant. The accountant checks, fixes and signs. You get one receipt that names both.</p><figure class="loop"><svg viewBox="0 0 500 200" class="loop-svg" role="img" aria-hidden="true"><rect x="60" y="22" width="380" height="146" rx="60" class="loop-track"/><g transform="translate(90,40)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="card-fill"/><text y="-2" text-anchor="middle" class="t-label">you ask</text><text y="14" text-anchor="middle" class="t-tiny">"close the month"</text></g><g transform="translate(250,40)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="card-fill"/><text y="-2" text-anchor="middle" class="t-label">agent folds</text><text y="14" text-anchor="middle" class="t-tiny">bank, receipts</text></g><g transform="translate(410,40)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="card-fill"/><text y="-2" text-anchor="middle" class="t-label">you approve</text><text y="14" text-anchor="middle" class="t-tiny">before any write</text></g><g transform="translate(410,150)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="card-fill"/><text y="-2" text-anchor="middle" class="t-label">needs a signature</text><text y="14" text-anchor="middle" class="t-tiny">the agent hands over</text></g><g transform="translate(250,150)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="accent-card"/><text y="-2" text-anchor="middle" class="t-label">accountant</text><text y="14" text-anchor="middle" class="t-tiny">checks, signs</text></g><g transform="translate(90,150)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="card-fill"/><text y="-2" text-anchor="middle" class="t-label">receipt</text><text y="14" text-anchor="middle" class="t-tiny">both named</text></g><path d="M148 40 L192 40" class="flow" marker-end="url(#arr2)"/><path d="M308 40 L352 40" class="flow" marker-end="url(#arr2)"/><path d="M410 62 L410 132" class="flow" marker-end="url(#arr2)"/><path d="M352 150 L308 150" class="flow" marker-end="url(#arr2)"/><path d="M192 150 L148 150" class="flow" marker-end="url(#arr2)"/><path d="M90 132 L90 62" class="flow" marker-end="url(#arr2)"/></svg></figure><p class="meta"><span class="chip now">in early access</span> Free to run · the accountant's review priced by the accountant</p></article>
-        <article class="case" id="case-tutor"><h3>Find a tutor who finishes what the app cannot</h3><p class="problem">Homework apps explain the same thing five ways and the child still does not get it. A parent needs a person, on the one topic, this week.</p><p class="fix">The child works with the agent; the agent notices what is not landing and, with the parent's yes, finds a tutor for exactly that. One session, one topic, one receipt. The record of what was learned stays with the family.</p><figure class="loop"><svg viewBox="0 0 500 200" class="loop-svg" role="img" aria-hidden="true"><rect x="60" y="22" width="380" height="146" rx="60" class="loop-track"/><g transform="translate(90,40)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="card-fill"/><text y="-2" text-anchor="middle" class="t-label">child works</text><text y="14" text-anchor="middle" class="t-tiny">with the agent</text></g><g transform="translate(250,40)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="card-fill"/><text y="-2" text-anchor="middle" class="t-label">agent notices</text><text y="14" text-anchor="middle" class="t-tiny">what is not landing</text></g><g transform="translate(410,40)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="card-fill"/><text y="-2" text-anchor="middle" class="t-label">parent says yes</text><text y="14" text-anchor="middle" class="t-tiny">to a session</text></g><g transform="translate(410,150)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="card-fill"/><text y="-2" text-anchor="middle" class="t-label">agent finds</text><text y="14" text-anchor="middle" class="t-tiny">a tutor, by consent</text></g><g transform="translate(250,150)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="accent-card"/><text y="-2" text-anchor="middle" class="t-label">tutor</text><text y="14" text-anchor="middle" class="t-tiny">one topic, done</text></g><g transform="translate(90,150)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="card-fill"/><text y="-2" text-anchor="middle" class="t-label">receipt</text><text y="14" text-anchor="middle" class="t-tiny">the family keeps</text></g><path d="M148 40 L192 40" class="flow" marker-end="url(#arr2)"/><path d="M308 40 L352 40" class="flow" marker-end="url(#arr2)"/><path d="M410 62 L410 132" class="flow" marker-end="url(#arr2)"/><path d="M352 150 L308 150" class="flow" marker-end="url(#arr2)"/><path d="M192 150 L148 150" class="flow" marker-end="url(#arr2)"/><path d="M90 132 L90 62" class="flow" marker-end="url(#arr2)"/></svg></figure><p class="meta"><span class="chip soon">coming</span> Free to run · a tutor's session priced by the tutor</p></article>
-        <article class="case" id="case-meet"><h3>Meet people this week, not someday</h3><p class="problem">New in a city, or just tired of eating alone. Apps match profiles; nobody actually sets a table.</p><p class="fix">"This week: dinner, a run, co-work." Your agent opens the window, finds people who opened the same one, within a distance band and only with their consent, and sets the time. You turn up. Nobody pays anybody.</p><figure class="loop"><svg viewBox="0 0 500 200" class="loop-svg" role="img" aria-hidden="true"><rect x="60" y="22" width="380" height="146" rx="60" class="loop-track"/><g transform="translate(90,40)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="card-fill"/><text y="-2" text-anchor="middle" class="t-label">you say</text><text y="14" text-anchor="middle" class="t-tiny">"dinner this week"</text></g><g transform="translate(250,40)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="card-fill"/><text y="-2" text-anchor="middle" class="t-label">agent opens</text><text y="14" text-anchor="middle" class="t-tiny">a window, not a profile</text></g><g transform="translate(410,40)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="card-fill"/><text y="-2" text-anchor="middle" class="t-label">others opened</text><text y="14" text-anchor="middle" class="t-tiny">the same window</text></g><g transform="translate(410,150)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="card-fill"/><text y="-2" text-anchor="middle" class="t-label">agent matches</text><text y="14" text-anchor="middle" class="t-tiny">by consent, a band</text></g><g transform="translate(250,150)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="accent-card"/><text y="-2" text-anchor="middle" class="t-label">you meet</text><text y="14" text-anchor="middle" class="t-tiny">people, in person</text></g><g transform="translate(90,150)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="card-fill"/><text y="-2" text-anchor="middle" class="t-label">record</text><text y="14" text-anchor="middle" class="t-tiny">yours, no fee</text></g><path d="M148 40 L192 40" class="flow" marker-end="url(#arr2)"/><path d="M308 40 L352 40" class="flow" marker-end="url(#arr2)"/><path d="M410 62 L410 132" class="flow" marker-end="url(#arr2)"/><path d="M352 150 L308 150" class="flow" marker-end="url(#arr2)"/><path d="M192 150 L148 150" class="flow" marker-end="url(#arr2)"/><path d="M90 132 L90 62" class="flow" marker-end="url(#arr2)"/></svg></figure><p class="meta"><span class="chip soon">coming</span> Free · no fee, no profile page</p></article>
-        <article class="case" id="case-today"><h3>Get it done today, by someone real</h3><p class="problem">A translation that must be certified, a contract someone should actually read, a form a professional has to file. The AI draft is not the deliverable; the signature is.</p><p class="fix">Your agent takes the intake and prepares everything. A verified professional does the part only a person can do and signs it. You pay when it is verified, and the receipt is proof for both of you.</p><figure class="loop"><svg viewBox="0 0 500 200" class="loop-svg" role="img" aria-hidden="true"><rect x="60" y="22" width="380" height="146" rx="60" class="loop-track"/><g transform="translate(90,40)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="card-fill"/><text y="-2" text-anchor="middle" class="t-label">you ask</text><text y="14" text-anchor="middle" class="t-tiny">what, by when</text></g><g transform="translate(250,40)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="card-fill"/><text y="-2" text-anchor="middle" class="t-label">agent prepares</text><text y="14" text-anchor="middle" class="t-tiny">the intake, the draft</text></g><g transform="translate(410,40)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="card-fill"/><text y="-2" text-anchor="middle" class="t-label">needs a licence</text><text y="14" text-anchor="middle" class="t-tiny">the agent finds</text></g><g transform="translate(410,150)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="accent-card"/><text y="-2" text-anchor="middle" class="t-label">professional</text><text y="14" text-anchor="middle" class="t-tiny">does the part only they can</text></g><g transform="translate(250,150)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="card-fill"/><text y="-2" text-anchor="middle" class="t-label">verified</text><text y="14" text-anchor="middle" class="t-tiny">then paid</text></g><g transform="translate(90,150)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="card-fill"/><text y="-2" text-anchor="middle" class="t-label">receipt</text><text y="14" text-anchor="middle" class="t-tiny">proof for both</text></g><path d="M148 40 L192 40" class="flow" marker-end="url(#arr2)"/><path d="M308 40 L352 40" class="flow" marker-end="url(#arr2)"/><path d="M410 62 L410 132" class="flow" marker-end="url(#arr2)"/><path d="M352 150 L308 150" class="flow" marker-end="url(#arr2)"/><path d="M192 150 L148 150" class="flow" marker-end="url(#arr2)"/><path d="M90 132 L90 62" class="flow" marker-end="url(#arr2)"/></svg></figure><p class="meta"><span class="chip now">in early access</span> Free intake · the professional's price, on the receipt</p></article>
-        <article class="case" id="case-care"><h3>Care for a parent from far away</h3><p class="problem">Siblings in three cities, a carer, a doctor, a chat thread nobody can search. Who went on Tuesday? What did the doctor say?</p><p class="fix">One shared record: medicines, appointments, who went, what was said. The agent keeps it straight and reminds. When something needs a nurse or a doctor, it finds one and books it. Information, never advice.</p><figure class="loop"><svg viewBox="0 0 500 200" class="loop-svg" role="img" aria-hidden="true"><rect x="60" y="22" width="380" height="146" rx="60" class="loop-track"/><g transform="translate(90,40)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="card-fill"/><text y="-2" text-anchor="middle" class="t-label">family logs</text><text y="14" text-anchor="middle" class="t-tiny">visits, medicines</text></g><g transform="translate(250,40)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="card-fill"/><text y="-2" text-anchor="middle" class="t-label">agent keeps</text><text y="14" text-anchor="middle" class="t-tiny">the week straight</text></g><g transform="translate(410,40)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="card-fill"/><text y="-2" text-anchor="middle" class="t-label">agent reminds</text><text y="14" text-anchor="middle" class="t-tiny">who, when</text></g><g transform="translate(410,150)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="card-fill"/><text y="-2" text-anchor="middle" class="t-label">needs a nurse?</text><text y="14" text-anchor="middle" class="t-tiny">the agent finds</text></g><g transform="translate(250,150)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="accent-card"/><text y="-2" text-anchor="middle" class="t-label">nurse</text><text y="14" text-anchor="middle" class="t-tiny">visits, reports</text></g><g transform="translate(90,150)"><rect x="-58" y="-18" width="116" height="40" rx="9" class="card-fill"/><text y="-2" text-anchor="middle" class="t-label">record</text><text y="14" text-anchor="middle" class="t-tiny">the family's</text></g><path d="M148 40 L192 40" class="flow" marker-end="url(#arr2)"/><path d="M308 40 L352 40" class="flow" marker-end="url(#arr2)"/><path d="M410 62 L410 132" class="flow" marker-end="url(#arr2)"/><path d="M352 150 L308 150" class="flow" marker-end="url(#arr2)"/><path d="M192 150 L148 150" class="flow" marker-end="url(#arr2)"/><path d="M90 132 L90 62" class="flow" marker-end="url(#arr2)"/></svg></figure><p class="meta"><span class="chip soon">coming</span> Free to run · a visit priced by the nurse</p></article>
+<main>
+  <section class="hero">
+    <div class="wrap grid2">
+      <div>
+        <h1>Ask, and it gets done.</h1>
+        <p class="lead" style="margin-top:18px">Your agent does what it can, free. When a real person is needed, you see the price first and pay once. One receipt.</p>
+        <div class="hero-ctas">
+          <a class="btn primary" href="#waitlist">Join the waiting list</a>
+          <a class="btn" href="#how">See how it works</a>
+        </div>
+        <p class="hero-note">Coming soon. Free to start on your own device.</p>
       </div>
-      <p class="note">More arrive as data, not code: a kind of work, a country's rules for it, a persona, a template for a week. Tell us which one you need.</p>
-    </section>
-
-    <section id="cost">
-      <h2>You see what each thing cost, and what it would have cost.</h2>
-      <p class="intro">Every answer can show its price next to the top model's price. Example for one monthly-books task; your real numbers are on your receipt.</p>
-      <figure class="chart" aria-label="Bar chart, example: the top model alone about $2.40 for the task; routed calls about $0.19; your own device $0">
-        <svg viewBox="0 0 720 220" role="img" aria-hidden="true" class="chart-svg">
-          <g class="axis"><line x1="200" y1="30" x2="200" y2="190"/></g>
-          <g transform="translate(0,40)"><text x="190" y="20" text-anchor="end" class="t-label">top model alone</text><rect x="200" y="4" width="440" height="24" rx="4" class="bar-muted"/><text x="650" y="21" class="t-num">$2.40</text></g>
-          <g transform="translate(0,95)"><text x="190" y="20" text-anchor="end" class="t-label">routed, cheapest that passes</text><rect x="200" y="4" width="35" height="24" rx="4" class="bar-accent"/><text x="245" y="21" class="t-num">$0.19</text></g>
-          <g transform="translate(0,150)"><text x="190" y="20" text-anchor="end" class="t-label">your own device</text><rect x="200" y="4" width="3" height="24" rx="2" class="bar-muted"/><text x="213" y="21" class="t-num">$0</text></g>
-          <text x="200" y="212" class="t-tiny">example, one task, six calls · an answer check decides which model passes</text>
-        </svg>
-      </figure>
-    </section>
-
-    <section id="price">
-      <h2>Free on your own device. Paid only where a person works or a machine serves others.</h2>
-      <table class="price" aria-label="How it is paid for">
-        <thead><tr><th>Level</th><th>What it is</th><th>Who pays</th></tr></thead>
-        <tbody>
-          <tr><td>Free, always</td><td>A model on your own computer or phone, set up by the agent's guide. Nothing leaves it.</td><td>Nobody</td></tr>
-          <tr><td>Free, while it lasts</td><td>Your own free-tier provider keys, tracked with their limits and fall-through.</td><td>The provider's free tier</td></tr>
-          <tr><td>Metered</td><td>Credits at the provider's list price, a 5% loading fee when you top up.</td><td>You</td></tr>
-          <tr><td>A person's work</td><td>Priced by the professional, paid on verification, split as the people involved agreed.</td><td>Whoever asked</td></tr>
-          <tr><td>Earn</td><td>Lend a spare machine: 90% of what it earns is yours.</td><td>The person using it</td></tr>
-        </tbody>
-      </table>
-      <p class="note">No pooled free accounts, ever. Each person's keys, each person's balance, each person's receipt.</p>
-    </section>
-
-    <section id="open">
-      <h2>How it is built, for the reader who asks.</h2>
-      <div class="open">
-        <p>Underneath, every request lives in what we call a room: you, your agent, the people you bring in, and a record that cannot be edited. Nothing acts without an approval; the receipt is built from the record, never from a summary. Your data stays in your space and no one else's can read it.</p>
-        <p>The same code will ship as a free self-hosted edition. Until then, early access opens by invitation, in the order people asked.</p>
+      <div class="phone" aria-label="An example conversation">
+        <div class="msg">
+          <div class="bubble me">I need a scooter in Canggu by 3 pm.</div>
+          <div class="bubble bot"><small>Your agent</small>Three rental shops within 2 km have one. Made at Kuta Rentals can bring it for 80k a day, deposit 500k, held until you return it. Want that?</div>
+          <div class="bubble me">Yes.</div>
+          <div class="bubble person"><small>Made · Kuta Rentals</small>On my way, 20 minutes. Honda Scoopy, helmet included.</div>
+        </div>
+        <div class="receipt">
+          <div><span>Your agent</span><b>Free</b></div>
+          <div><span>Scooter, 1 day</span><b>80,000</b></div>
+          <div><span>Deposit, held</span><b>500,000</b></div>
+          <div><span>Platform</span><b>0</b></div>
+        </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="final" id="waitlist">
-      <h2>Join the waiting list.</h2>
-      <p class="intro">One line about what you need. A person replies, not a bot.</p>
-      <form class="wait" action="mailto:support@massrelay.ai" method="get" enctype="text/plain">
-        <input type="hidden" name="subject" value="Waiting list">
-        <label class="sr" for="wl-body">What you need</label>
-        <input id="wl-body" name="body" type="text" placeholder="I need … and I'd like …" required>
-        <button class="cta primary" type="submit">Join the waiting list</button>
-      </form>
-      <p class="fine">Opens your mail app addressed to support@massrelay.ai. No tracking, no third party.</p>
-    </section>
-  </main>
+  <section id="how">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Three ways it answers.</h2>
+        <p>Every request starts with your agent. It only brings in a person when the job needs one, and you decide before anyone is paid.</p>
+      </div>
+      <div class="grid3">
+        <div class="card way">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/><circle cx="12" cy="12" r="5"/></svg></div>
+          <h3>Your agent</h3>
+          <p>Plans, drafts, researches, books, reminds. Runs on your own device and keys if you want it to.</p>
+          <p class="price">Free</p>
+        </div>
+        <div class="card way">
+          <div class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
+          <h3>A person it finds</h3>
+          <p>A driver, a tutor, an accountant, a plumber. Verified, nearby when it matters, licensed when the law says so.</p>
+          <p class="price">Their price, shown first</p>
+        </div>
+        <div class="card way">
+          <div class="ico"><svg viewBox="0 0 24 24"><circle cx="8" cy="9" r="3"/><circle cx="16" cy="9" r="3"/><path d="M2 20c0-3 2.7-5 6-5s6 2 6 5M10 20c0-3 2.7-5 6-5s6 2 6 5"/></svg></div>
+          <h3>People together</h3>
+          <p>A dinner, a trip, a project. Everyone sees what was decided and what it cost, and the bill splits itself.</p>
+          <p class="price">Shared, on one receipt</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <footer>
-    <span>© 2026 MassRelay</span>
-    <span><a href="mailto:support@massrelay.ai">support@massrelay.ai</a> · <a href="mailto:security@massrelay.ai">security@massrelay.ai</a></span>
-  </footer>
-</div>
+  <section>
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>What people ask for.</h2>
+        <p>Any need, in plain words. These are the common ones.</p>
+      </div>
+      <div class="needs">
+        <div class="need"><span class="k">HEALTH</span><span class="ask">“Help me lose 5 kg without guessing.”</span><span class="how">Your agent plans and tracks, free. A dietitian reviews it only if you ask.</span></div>
+        <div class="need"><span class="k">MONEY</span><span class="ask">“Get the books done and signed.”</span><span class="how">Your agent prepares; a licensed accountant signs, at a price you saw first.</span></div>
+        <div class="need"><span class="k">LEARNING</span><span class="ask">“Find a tutor who finishes what the app can’t.”</span><span class="how">Free lessons from your agent; a real tutor nearby when you want one.</span></div>
+        <div class="need"><span class="k">TIME</span><span class="ask">“Someone real, today.”</span><span class="how">A plumber, a courier, a driver. Three options, an accept window, done.</span></div>
+        <div class="need"><span class="k">CARE</span><span class="ask">“Look after my parent from far away.”</span><span class="how">A daily check-in call, free. A vetted carer when the family wants one.</span></div>
+        <div class="need"><span class="k">PEOPLE</span><span class="ask">“Meet people this week, not someday.”</span><span class="how">Your agent finds who is around and free. No one is paid; you just meet.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Free, then paid, then your city.</h2>
+        <p>The same three steps for everyone and every need.</p>
+      </div>
+      <div class="ladder">
+        <div class="step">
+          <div class="n">Step 1</div>
+          <h3>Free</h3>
+          <p>Your agent, on your device or ours. Guides to set it up for what you need.</p>
+          <ul><li>No card to start</li><li>Your own keys if you have them</li><li>Nothing sold, nothing tracked</li></ul>
+        </div>
+        <div class="step accent">
+          <div class="n">Step 2</div>
+          <h3>Paid, only for a person</h3>
+          <p>When a job needs a human, you see the price before you say yes. One receipt names who did what.</p>
+          <ul><li>Price first, always</li><li>Money held until it is done</li><li>Split a bill with friends in one tap</li></ul>
+        </div>
+        <div class="step">
+          <div class="n">Step 3</div>
+          <h3>Your city’s demand</h3>
+          <p>See what people near you are asking for. If nobody offers it yet, be the first.</p>
+          <ul><li>Shown only above ten askers</li><li>Never a name, never a location</li><li>Providers find real demand, not ads</li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap grid2">
+      <div>
+        <h2>Rising this week, where you are.</h2>
+        <p class="lead" style="margin-top:14px">Demand becomes visible once ten people have asked for the same thing in the same place. Nobody is named. Providers see where they are needed, and the first to answer gets the work.</p>
+        <p class="hero-note">Sample numbers. Live when the city has ten askers.</p>
+      </div>
+      <div class="trend" aria-label="Sample trending needs">
+        <div class="head"><b>Bali · Canggu</b><span>last 7 days · sample</span></div>
+        <div class="bar"><div><div class="l"><span>Scooter rental, same day</span><b>41 asked</b></div><i style="--w:92%"></i></div></div>
+        <div class="bar"><div><div class="l"><span>Driver for the day</span><b>18 asked</b></div><i style="--w:44%"></i></div></div>
+        <div class="bar"><div><div class="l"><span>Surf coach, beginner</span><b>12 asked</b></div><i style="--w:30%"></i></div></div>
+        <div class="bar"><div><div class="l"><span>Laundry pick-up</span><b>11 asked</b></div><i style="--w:27%"></i></div></div>
+        <div class="foot">No supply yet for “scooter rental, same day” — be the first.</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Built in the open.</h2>
+        <p>No customers yet, so no quotes. Only numbers you can check.</p>
+      </div>
+      <div class="facts">
+        <div class="card"><div class="num">811</div><div class="label">features tracked, 495 built, every one with its test</div></div>
+        <div class="card"><div class="num">112</div><div class="label">open-source projects compared, row by row, on their real code</div></div>
+        <div class="card"><div class="num">0</div><div class="label">markup on model prices. The platform fee is a visible line, never hidden in a token price</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="room">
+        <div>
+          <h2 style="font-size:28px">Underneath: a room.</h2>
+          <p>People, their agents and a shared record in one place. Every answer, every decision and every payment stays in the room, so nothing is lost and nothing is hidden. It is the one idea under everything above, and you never have to think about it.</p>
+        </div>
+        <div>
+          <div class="avatars"><span class="av">A</span><span class="av">B</span><span class="av bot">AI</span><span class="av">M</span></div>
+          <div class="receipt" style="margin-top:16px">
+            <div><span>Decided</span><b>Thursday, 3 pm</b></div>
+            <div><span>Paid by</span><b>Alice, Bob</b></div>
+            <div><span>Done by</span><b>Made (verified)</b></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>For builders.</h2>
+        <p>The same machine, open where it should be.</p>
+      </div>
+      <div class="grid3">
+        <div class="card"><span class="tag">Router</span><h3 style="margin-top:12px">Route any model by rule</h3><p>Your keys or ours, one metered line, no markup. Cheapest above a quality floor, or fastest, or best under a budget.</p></div>
+        <div class="card"><span class="tag">Harness</span><h3 style="margin-top:12px">Agents that answer to rules</h3><p>Every consequential action passes a gate and leaves an audit line. Budgets slow down before they stop.</p></div>
+        <div class="card"><span class="tag">Open source</span><h3 style="margin-top:12px">Run it yourself</h3><p>The community edition on your own box. The compose file, the migrations, the tests. Nothing you cannot read.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap" style="max-width:760px">
+      <div class="sec-head"><h2>Questions.</h2></div>
+      <details><summary>What does it cost?</summary><p>Your agent is free. You pay only when a real person does a job for you, at the price you saw before saying yes. Our fee is a separate visible line, never hidden in a model price.</p></details>
+      <details><summary>Who are the people it finds?</summary><p>Verified providers, nearby when the job is physical, licensed when the law requires it. Their completed jobs are counted from receipts, not from star ratings.</p></details>
+      <details><summary>Can I run it myself?</summary><p>Yes. The community edition runs on your own machine with your own model keys. The hosted version adds the people, the payments and the receipts.</p></details>
+      <details><summary>What do you see about me?</summary><p>Demand is shown only as counts, and only above ten askers in a place. Your conversations, your facts and your money stay in your room under your rules.</p></details>
+      <details><summary>When?</summary><p>Soon. Join the waiting list and you will be first to try it, free.</p></details>
+    </div>
+  </section>
+
+  <section class="close" id="waitlist">
+    <div class="wrap">
+      <h2>Be first.</h2>
+      <p class="lead">Join the waiting list. One email when it opens, nothing else.</p>
+      <div class="hero-ctas" style="justify-content:center">
+        <a class="btn primary" href="mailto:support@massrelay.ai?subject=Waiting%20list&body=Please%20add%20me%20to%20the%20waiting%20list.%0A%0ACity%3A%20%0AWhat%20I%20need%20first%3A%20">Join the waiting list</a>
+      </div>
+      <p class="hero-note">Tell us your city and the first thing you need. It shapes where we open first.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <span>MassRelay · massrelay.ai</span>
+  <span><a href="mailto:support@massrelay.ai">support@massrelay.ai</a> · <a href="https://github.com/nicholasandreasujitno/massrelay-site">source of this page</a></span>
+</footer>
+
 <script>
-(function(){var r=document.documentElement,b=document.getElementById('theme'),k='massrelay-theme';function set(t){if(t==='dark'){r.setAttribute('data-theme','dark');b.setAttribute('aria-pressed','true');b.querySelector('span').textContent='Light'}else{r.removeAttribute('data-theme');b.setAttribute('aria-pressed','false');b.querySelector('span').textContent='Dark'}try{localStorage.setItem(k,t)}catch(e){}}
-try{var saved=localStorage.getItem(k);if(saved==='dark')set('dark')}catch(e){}
-b.addEventListener('click',function(){set(r.getAttribute('data-theme')==='dark'?'light':'dark')});})();
+  (function(){
+    var root=document.documentElement, btn=document.getElementById('theme'), key='massrelay-theme';
+    function apply(t){ if(t==='dark'){root.setAttribute('data-theme','dark'); btn.textContent='Light';} else {root.removeAttribute('data-theme'); btn.textContent='Dark';} }
+    var saved=null; try{ saved=localStorage.getItem(key); }catch(e){}
+    apply(saved==='dark'?'dark':'light');
+    btn.addEventListener('click',function(){ var next=root.getAttribute('data-theme')==='dark'?'light':'dark'; apply(next); try{ localStorage.setItem(key,next); }catch(e){} });
+  })();
 </script>
 </body>
 </html>
