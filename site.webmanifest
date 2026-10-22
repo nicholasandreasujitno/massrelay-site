@@ -1,0 +1,10 @@
+{
+  "name": "massrelay.ai",
+  "short_name": "massrelay.ai",
+  "description": "Your assistant first, free. A real person when it matters, at a price you see first. One receipt. Coming soon, join the waiting list.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#F7F8FA",
+  "theme_color": "#F7F8FA",
+  "lang": "en"
+}
