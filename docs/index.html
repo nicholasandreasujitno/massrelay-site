@@ -29,13 +29,13 @@
   <div class="wrap nav">
     <a class="brand" href="/"><span class="word">MassRelay</span></a>
     <nav class="menu" aria-label="Main">
+      <a class="link" href="/rooms/">Rooms</a>
       <a class="link" href="/how-it-works/">How it works</a>
-      <a class="link" href="/#for">Who it is for</a>
-      <span class="sep" aria-hidden="true"></span><a class="link" href="/adoption/">Databank</a>
-      <a class="link" href="/services/">Consulting</a>
-      <a class="link" href="/docs/" aria-current="page">Docs</a>
+      <a class="link" href="/for/">Who it is for</a>
+      <a class="link" href="/docs/" aria-current="page">Developers</a>
+      <a class="link" href="/resources/">Resources</a>
       <button class="btn ghost sm" id="theme" type="button" aria-label="Switch light and dark">Dark</button>
-      <a class="btn primary sm" href="mailto:support@massrelay.ai?subject=Waiting%20list&amp;body=Please%20add%20me%20to%20the%20waiting%20list.%0A%0ACity%3A%20%0AWhat%20I%20need%20first%3A%20">Join the waiting list</a>
+      <a class="btn primary sm" href="/#join">Join the waiting list</a>
     </nav>
   </div>
 </header>
@@ -43,8 +43,9 @@
 <main id="main">
 <div class="wrap page-head">
   <p class="crumbs"><a href="/">Home</a> / Docs</p>
-  <h1>Developer documentation</h1>
+  <h1>The router: one endpoint, the SDK you already use.</h1>
   <p class="lead">Call the router with the SDK you already use. The chapters are written by hand; the reference is generated from the contract, so it cannot disagree with it.</p>
+  <div class="banner-ill"><svg class="ill ill-banner" viewBox="0 0 1200 480" role="img" aria-label="A solid rail with three stops beneath it runs into a rounded window and leaves as a dotted route that ends in a stamped receipt" data-ill="banner-rail"><path class="ln" vector-effect="non-scaling-stroke" d="M20,250H370"/><path class="ln" vector-effect="non-scaling-stroke" d="M110,250V288"/><path class="f-green" transform="translate(3 3)" d="M99,300a11,11 0 1,0 22,0a11,11 0 1,0 -22,0Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M99,300a11,11 0 1,0 22,0a11,11 0 1,0 -22,0Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M200,250V288"/><path class="f-green" transform="translate(3 3)" d="M189,300a11,11 0 1,0 22,0a11,11 0 1,0 -22,0Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M189,300a11,11 0 1,0 22,0a11,11 0 1,0 -22,0Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M290,250V288"/><path class="f-green" transform="translate(3 3)" d="M279,300a11,11 0 1,0 22,0a11,11 0 1,0 -22,0Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M279,300a11,11 0 1,0 22,0a11,11 0 1,0 -22,0Z"/><path class="f-sky" transform="translate(3 3)" d="M394,130H646Q670,130 670,154V326Q670,350 646,350H394Q370,350 370,326V154Q370,130 394,130Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M394,130H646Q670,130 670,154V326Q670,350 646,350H394Q370,350 370,326V154Q370,130 394,130Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M370,174H670"/><path class="f-ink" d="M389,152a5,5 0 1,0 10,0a5,5 0 1,0 -10,0Z"/><path class="f-ink" d="M407,152a5,5 0 1,0 10,0a5,5 0 1,0 -10,0Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M478,234L506,258L478,282M520,282H556"/><path class="ln route" vector-effect="non-scaling-stroke" d="M670,250C760,250 790,170 880,170C940,170 960,230 1000,234"/><path class="ln" vector-effect="non-scaling-stroke" d="M1000,110H1140V300l-3.9,6l-3.9,-6l-3.9,6l-3.9,-6l-3.9,6l-3.9,-6l-3.9,6l-3.9,-6l-3.9,6l-3.9,-6l-3.9,6l-3.9,-6l-3.9,6l-3.9,-6l-3.9,6l-3.9,-6l-3.9,6l-3.9,-6l-3.9,6l-3.9,-6l-3.9,6l-3.9,-6l-3.9,6l-3.9,-6l-3.9,6l-3.9,-6l-3.9,6l-3.9,-6l-3.9,6l-3.9,-6l-3.9,6l-3.9,-6l-3.9,6l-3.9,-6l-3.9,6l-3.9,-6Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M1012,126H1128M1012,139H1093M1012,152H1128"/><path class="f-clay" transform="translate(3 3)" d="M1096,290a32,32 0 1,0 64,0a32,32 0 1,0 -64,0Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M1096,290a32,32 0 1,0 64,0a32,32 0 1,0 -64,0Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M1113.6,290.6L1124.8,301.2L1143.4,279.8"/></svg></div>
 </div>
 <section style="padding-top:24px"><div class="wrap">
     <div class="grid3">
@@ -67,10 +68,11 @@
 </div></section>
 </main>
 <footer class="foot">
+  <div class="wrap fcols"><div class="fcol"><p class="fh">Product</p><a href="/rooms/">Rooms</a><a href="/how-it-works/">How it works</a><a href="/how-it-works/#all-scenarios">Scenarios</a><a href="/for/">Who it is for</a></div><div class="fcol"><p class="fh">Developers</p><a href="/docs/">Docs</a><a href="/docs/">The router API</a><a href="/registry/">Registry</a><a href="https://github.com/nicholasandreasujitno/massrelay-site">Source of this page</a></div><div class="fcol"><p class="fh">Resources</p><a href="/adoption/">What AI is for</a><a href="/adoption/laws/">Laws</a><a href="/services/">Consulting</a><a href="mailto:support@massrelay.ai">Contact</a></div></div>
   <div class="wrap">
     <span><span class="word">MassRelay</span> · massrelay.ai</span>
     <span><a href="mailto:support@massrelay.ai">Contact</a> · <a href="https://github.com/nicholasandreasujitno/massrelay-site">Source of this page</a></span>
-    <span class="stamp" title="Product version, site version, build">v0.4.0 · site 1 · 7c50d1733</span>
+    <span class="stamp" title="Product version, site version, build">v0.4.0 · site 1 · 2de7d5203</span>
   </div>
 </footer>
 

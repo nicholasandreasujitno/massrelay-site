@@ -29,153 +29,167 @@
   <div class="wrap nav">
     <a class="brand" href="/"><span class="word">MassRelay</span></a>
     <nav class="menu" aria-label="Main">
+      <a class="link" href="/rooms/">Rooms</a>
       <a class="link" href="/how-it-works/">How it works</a>
-      <a class="link" href="/#for">Who it is for</a>
-      <span class="sep" aria-hidden="true"></span><a class="link" href="/adoption/">Databank</a>
-      <a class="link" href="/services/">Consulting</a>
-      <a class="link" href="/docs/">Docs</a>
+      <a class="link" href="/for/">Who it is for</a>
+      <a class="link" href="/docs/">Developers</a>
+      <a class="link" href="/resources/">Resources</a>
       <button class="btn ghost sm" id="theme" type="button" aria-label="Switch light and dark">Dark</button>
-      <a class="btn primary sm" href="mailto:support@massrelay.ai?subject=Waiting%20list&amp;body=Please%20add%20me%20to%20the%20waiting%20list.%0A%0ACity%3A%20%0AWhat%20I%20need%20first%3A%20">Join the waiting list</a>
+      <a class="btn primary sm" href="/#join">Join the waiting list</a>
     </nav>
   </div>
 </header>
 
 <main id="main">
-<section class="hero">
-  <div class="wrap grid2">
-    <div>
+<section class="h-hero band-paper" id="top">
+  <div class="wrap h-hero-grid">
+    <div class="h-hero-copy">
       <span class="mascot"><img src="/brand/character/wave.webp" alt="The courier, a small charcoal figure with a clay satchel, waving" width="640" height="640" decoding="async"></span>
-      <h1>Ask, and it gets done.</h1>
-      <p class="lead" style="margin-top:18px">Your assistant does what it can, free. When a real person is needed, you see the price first and pay once. One receipt.</p>
-      <div class="ctas"><a class="btn primary" href="mailto:support@massrelay.ai?subject=Waiting%20list&amp;body=Please%20add%20me%20to%20the%20waiting%20list.%0A%0ACity%3A%20%0AWhat%20I%20need%20first%3A%20">Join the waiting list</a><a class="btn" href="/how-it-works/">See how it works</a></div>
+      <h1>Your assistant talks to theirs. Directly.</h1>
+      <p class="lead">Ask for a scooter, a plumber, a table for nine. Yours finds the right shop, books with the shop's own assistant, and shows the price before you say yes. One receipt, both sides.</p>
+      <div class="ctas"><a class="btn primary" href="#join">Join the waiting list</a><a class="btn" href="#player" data-play>Play an example</a></div>
       <p class="note">Coming soon. Free to start on your own device.</p>
     </div>
-    <div class="phone" role="img" aria-label="An example conversation">
-      <div class="msg">
-        <div class="bubble me">I need a scooter in Canggu by 3 pm.</div>
-        <div class="bubble bot"><small>Your assistant</small>Three rental shops within 2 km have one. Made at Kuta Rentals can bring it for 80k a day, deposit 500k, held until you return it. Want that?</div>
-        <div class="bubble me">Yes.</div>
-        <div class="bubble person"><small>Made, Kuta Rentals</small>On my way, 20 minutes. Honda Scoopy, helmet included.</div>
+    <div class="player example" id="player" aria-label="A scripted example request">
+      <div class="chips" role="group" aria-label="Pick an example" hidden><button type="button" data-id="scooter" aria-pressed="true">Scooter</button><button type="button" data-id="plumber" aria-pressed="false">Plumber</button><button type="button" data-id="tutor" aria-pressed="false">Tutor</button><button type="button" data-id="dinner" aria-pressed="false">Dinner</button></div>
+      <details class="scn" data-id="scooter" open>
+        <summary>Scooter: I need a scooter in Canggu by 3 pm.</summary>
+        <p class="ask">I need a scooter in Canggu by 3 pm.</p>
+        <div class="pwrap"><svg class="ill proute" viewBox="0 0 2 100" preserveAspectRatio="none" aria-hidden="true"><line class="ln route" x1="1" y1="0" x2="1" y2="100" vector-effect="non-scaling-stroke"/></svg><ol class="psteps"><li><span class="stopdot" aria-hidden="true"></span>Reads your calendar</li><li><span class="stopdot" aria-hidden="true"></span>Asks three rental front rooms</li><li><span class="stopdot" aria-hidden="true"></span>Kuta Rentals' assistant answers</li><li><span class="stopdot" aria-hidden="true"></span>Price before you decide</li></ol></div>
+        <div class="result"><p class="price"><b>80,000 / day</b></p><p>Deposit 500,000, held until you return it</p><p>Scoopy, helmet, at your door 14:40</p>
+          <button class="say" type="button" hidden>Say yes?</button>
+          <dl class="rcpt"><dt class="rh">Receipt</dt><div><dt>Scooter, 1 day</dt><dd>80,000</dd></div><div><dt>Deposit, held</dt><dd>500,000</dd></div></dl>
+        </div>
+      </details>
+      <details class="scn" data-id="plumber">
+        <summary>Plumber: Kitchen tap leaking, can someone come tonight?</summary>
+        <p class="ask">Kitchen tap leaking, can someone come tonight?</p>
+        <div class="pwrap"><svg class="ill proute" viewBox="0 0 2 100" preserveAspectRatio="none" aria-hidden="true"><line class="ln route" x1="1" y1="0" x2="1" y2="100" vector-effect="non-scaling-stroke"/></svg><ol class="psteps"><li><span class="stopdot" aria-hidden="true"></span>Checks who is licensed and nearby</li><li><span class="stopdot" aria-hidden="true"></span>Asks two</li><li><span class="stopdot" aria-hidden="true"></span>One can come at 19:00</li><li><span class="stopdot" aria-hidden="true"></span>Price shown</li></ol></div>
+        <div class="result"><p class="price"><b>250,000 call-out</b></p><p>Parts at cost</p>
+          <button class="say" type="button" hidden>Say yes?</button>
+          <dl class="rcpt"><dt class="rh">Receipt</dt><div><dt>Call-out</dt><dd>250,000</dd></div></dl>
+        </div>
+      </details>
+      <details class="scn" data-id="tutor">
+        <summary>Tutor: Spanish, two evenings a week, online.</summary>
+        <p class="ask">Spanish, two evenings a week, online.</p>
+        <div class="pwrap"><svg class="ill proute" viewBox="0 0 2 100" preserveAspectRatio="none" aria-hidden="true"><line class="ln route" x1="1" y1="0" x2="1" y2="100" vector-effect="non-scaling-stroke"/></svg><ol class="psteps"><li><span class="stopdot" aria-hidden="true"></span>Finds tutors with published receipts</li><li><span class="stopdot" aria-hidden="true"></span>Asks for Tuesday and Thursday</li><li><span class="stopdot" aria-hidden="true"></span>One answers</li><li><span class="stopdot" aria-hidden="true"></span>Price per hour</li></ol></div>
+        <div class="result"><p class="price"><b>150,000 / hour</b></p><p>First lesson free</p>
+          <button class="say" type="button" hidden>Say yes?</button>
+          <dl class="rcpt"><dt class="rh">Receipt</dt><div><dt>Lesson, 1 hour</dt><dd>150,000</dd></div></dl>
+        </div>
+      </details>
+      <details class="scn" data-id="dinner">
+        <summary>Dinner: Book brunch for the run club after Sunday's run.</summary>
+        <p class="ask">Book brunch for the run club after Sunday's run.</p>
+        <div class="pwrap"><svg class="ill proute" viewBox="0 0 2 100" preserveAspectRatio="none" aria-hidden="true"><line class="ln route" x1="1" y1="0" x2="1" y2="100" vector-effect="non-scaling-stroke"/></svg><ol class="psteps"><li><span class="stopdot" aria-hidden="true"></span>Counts the yeses in the room</li><li><span class="stopdot" aria-hidden="true"></span>Asks the warung's assistant</li><li><span class="stopdot" aria-hidden="true"></span>Table for 9 at 8:30</li><li><span class="stopdot" aria-hidden="true"></span>Split rule applied</li></ol></div>
+        <div class="result"><p class="price"><b>45,000 each</b></p><p>9 ways</p>
+          <button class="say" type="button" hidden>Say yes?</button>
+          <dl class="rcpt"><dt class="rh">Receipt</dt><div><dt>Brunch for 9</dt><dd>405,000</dd></div><div><dt>Your share</dt><dd>45,000</dd></div></dl>
+        </div>
+      </details>
+      <p class="lab">Example, scripted. Prices illustrative.</p>
+      <svg class="ill ill-tear" viewBox="0 0 360 12" role="img" aria-label="Torn paper edge" data-ill="spot-tear"><path class="f-surface" d="M0,1L4,9L8,1L12,9L16,1L20,9L24,1L28,9L32,1L36,9L40,1L44,9L48,1L52,9L56,1L60,9L64,1L68,9L72,1L76,9L80,1L84,9L88,1L92,9L96,1L100,9L104,1L108,9L112,1L116,9L120,1L124,9L128,1L132,9L136,1L140,9L144,1L148,9L152,1L156,9L160,1L164,9L168,1L172,9L176,1L180,9L184,1L188,9L192,1L196,9L200,1L204,9L208,1L212,9L216,1L220,9L224,1L228,9L232,1L236,9L240,1L244,9L248,1L252,9L256,1L260,9L264,1L268,9L272,1L276,9L280,1L284,9L288,1L292,9L296,1L300,9L304,1L308,9L312,1L316,9L320,1L324,9L328,1L332,9L336,1L340,9L344,1L348,9L352,1L356,9L360,1V0H0Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M0,1L4,9L8,1L12,9L16,1L20,9L24,1L28,9L32,1L36,9L40,1L44,9L48,1L52,9L56,1L60,9L64,1L68,9L72,1L76,9L80,1L84,9L88,1L92,9L96,1L100,9L104,1L108,9L112,1L116,9L120,1L124,9L128,1L132,9L136,1L140,9L144,1L148,9L152,1L156,9L160,1L164,9L168,1L172,9L176,1L180,9L184,1L188,9L192,1L196,9L200,1L204,9L208,1L212,9L216,1L220,9L224,1L228,9L232,1L236,9L240,1L244,9L248,1L252,9L256,1L260,9L264,1L268,9L272,1L276,9L280,1L284,9L288,1L292,9L296,1L300,9L304,1L308,9L312,1L316,9L320,1L324,9L328,1L332,9L336,1L340,9L344,1L348,9L352,1L356,9L360,1"/></svg>
+    </div>
+  </div>
+  <div class="wrap hero-scene" aria-hidden="true"><svg class="ill ill-scene" viewBox="0 0 1200 200" role="img" aria-label="A dotted route runs low across the page from a stop at the left, past two small speech bubbles, your assistant and theirs, to a stamped stop at the right" data-ill="scene-hero-route"><path class="ln route draw" vector-effect="non-scaling-stroke" pathLength="1" d="M60,150C90,153.7 180,173.3 240,172C300,170.7 360,143.3 420,142C480,140.7 543.3,167 600,164C656.7,161 701.7,132 760,124C818.3,116 886.7,124.7 950,116C1013.3,107.3 1108.3,79.3 1140,72"/><g class="stop" style="--i:0"><path class="f-clay" transform="translate(3 3)" d="M52,150a8,8 0 1,0 16,0a8,8 0 1,0 -16,0Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M52,150a8,8 0 1,0 16,0a8,8 0 1,0 -16,0Z"/></g><g class="stop" style="--i:1"><path class="f-clay" transform="translate(3 3)" d="M414,142a6,6 0 1,0 12,0a6,6 0 1,0 -12,0Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M414,142a6,6 0 1,0 12,0a6,6 0 1,0 -12,0Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M390,92H418Q434,92 434,108V112Q434,128 418,128H412L420,142L400,128H390Q374,128 374,112V108Q374,92 390,92Z"/><path class="f-ink" d="M400.5,110a3.5,3.5 0 1,0 7,0a3.5,3.5 0 1,0 -7,0Z"/></g><g class="stop" style="--i:2"><path class="f-clay" transform="translate(3 3)" d="M754,124a6,6 0 1,0 12,0a6,6 0 1,0 -12,0Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M754,124a6,6 0 1,0 12,0a6,6 0 1,0 -12,0Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M762,74H790Q806,74 806,90V94Q806,110 790,110H780L760,124L768,110H762Q746,110 746,94V90Q746,74 762,74Z"/><path class="f-ink" d="M772.5,92a3.5,3.5 0 1,0 7,0a3.5,3.5 0 1,0 -7,0Z"/></g><g class="stop" style="--i:3"><path class="f-clay" transform="translate(3 3)" d="M1118,72a22,22 0 1,0 44,0a22,22 0 1,0 -44,0Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M1118,72a22,22 0 1,0 44,0a22,22 0 1,0 -44,0Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M1130.1,72.4L1137.8,79.7L1150.6,65"/></g></svg></div>
+</section>
+<section class="h-relay band-paper2" aria-labelledby="h-relay">
+  <div class="wrap">
+    <div class="shead"><div><h2 id="h-relay">One request, hand to hand.</h2><p class="lead">Your assistant asks the shop's own assistant, not a marketplace. The shop keeps its system and its price. Nothing is paid until you say yes, and both sides hold the same receipt.</p></div></div>
+    <div class="banner-ill relay-ill"><svg class="ill ill-banner" viewBox="0 0 1200 480" role="img" aria-label="A satchel rides a dotted route past a hand holding a card, two speech bubbles and a shop awning to a stamped receipt" data-ill="banner-relay"><g transform="translate(1080 316)"><g transform="translate(-1080 -316)"><g transform="translate(0 352) rotate(-6) scale(1.5 1.5)"><g transform="translate(46 -34) rotate(8)"><path class="f-clay" transform="translate(3.4 2.6)" d="M-21,-30H21Q24,-30 24,-27V7Q24,10 21,10H-21Q-24,10 -24,7V-27Q-24,-30 -21,-30Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M-21,-30H21Q24,-30 24,-27V7Q24,10 21,10H-21Q-24,10 -24,7V-27Q-24,-30 -21,-30Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M-17,-14.8H16M-17,-3.6H4.8"/></g><path class="ln" vector-effect="non-scaling-stroke" d="M-30,-16H1M1,16H-30"/><path class="f-surface" d="M10,-14C14,-16 18,-17 22,-17C23,-28 33,-33 40,-25C42,-22 42,-18 40,-15C56,-15 70,-9 70,1C70,12 59,17 45,17L10,15Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M10,-14C14,-16 18,-17 22,-17C23,-28 33,-33 40,-25C42,-22 42,-18 40,-15C56,-15 70,-9 70,1C70,12 59,17 45,17L10,15Z"/><path class="f-surface" d="M3,-19H7Q10,-19 10,-16V16Q10,19 7,19H3Q0,19 0,16V-16Q0,-19 3,-19Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M3,-19H7Q10,-19 10,-16V16Q10,19 7,19H3Q0,19 0,16V-16Q0,-19 3,-19Z"/></g><path class="f-green" transform="translate(3 3)" d="M332,352a8,8 0 1,0 16,0a8,8 0 1,0 -16,0Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M332,352a8,8 0 1,0 16,0a8,8 0 1,0 -16,0Z"/><path class="f-green" transform="translate(3 3)" d="M612,300a8,8 0 1,0 16,0a8,8 0 1,0 -16,0Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M612,300a8,8 0 1,0 16,0a8,8 0 1,0 -16,0Z"/><path class="f-green" transform="translate(3 3)" d="M842,336a8,8 0 1,0 16,0a8,8 0 1,0 -16,0Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M842,336a8,8 0 1,0 16,0a8,8 0 1,0 -16,0Z"/><path class="f-sky" transform="translate(3 3)" d="M342,220H460Q476,220 476,236V290Q476,306 460,306H360L340,320L348,306H342Q326,306 326,290V236Q326,220 342,220Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M342,220H460Q476,220 476,236V290Q476,306 460,306H360L340,320L348,306H342Q326,306 326,290V236Q326,220 342,220Z"/><path class="f-ink" d="M397.5,263a3.5,3.5 0 1,0 7,0a3.5,3.5 0 1,0 -7,0Z"/><path class="f-sky" transform="translate(3 3)" d="M500,168H618Q634,168 634,184V238Q634,254 618,254H612L620,268L600,254H500Q484,254 484,238V184Q484,168 500,168Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M500,168H618Q634,168 634,184V238Q634,254 618,254H612L620,268L600,254H500Q484,254 484,238V184Q484,168 500,168Z"/><path class="f-ink" d="M555.5,211a3.5,3.5 0 1,0 7,0a3.5,3.5 0 1,0 -7,0Z"/><path class="f-ochre" transform="translate(3 3)" d="M770,158H930V198a13.3,11.1 0 0,1 -26.7,0a13.3,11.1 0 0,1 -26.7,0a13.3,11.1 0 0,1 -26.7,0a13.3,11.1 0 0,1 -26.7,0a13.3,11.1 0 0,1 -26.7,0a13.3,11.1 0 0,1 -26.7,0Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M770,158H930V198a13.3,11.1 0 0,1 -26.7,0a13.3,11.1 0 0,1 -26.7,0a13.3,11.1 0 0,1 -26.7,0a13.3,11.1 0 0,1 -26.7,0a13.3,11.1 0 0,1 -26.7,0a13.3,11.1 0 0,1 -26.7,0Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M796.7,158V198M823.3,158V198M850,158V198M876.7,158V198M903.3,158V198"/><path class="ln" vector-effect="non-scaling-stroke" d="M778,198V286M922,198V286M758,286H942"/><path class="ln" vector-effect="non-scaling-stroke" d="M790,286V250H910V286"/><path class="ln" vector-effect="non-scaling-stroke" d="M1024,64H1148V240l-3.9,6l-3.9,-6l-3.9,6l-3.9,-6l-3.9,6l-3.9,-6l-3.9,6l-3.9,-6l-3.9,6l-3.9,-6l-3.9,6l-3.9,-6l-3.9,6l-3.9,-6l-3.9,6l-3.9,-6l-3.9,6l-3.9,-6l-3.9,6l-3.9,-6l-3.9,6l-3.9,-6l-3.9,6l-3.9,-6l-3.9,6l-3.9,-6l-3.9,6l-3.9,-6l-3.9,6l-3.9,-6l-3.9,6l-3.9,-6Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M1036,80H1136M1036,93H1105M1036,106H1136"/><path class="f-clay" transform="translate(3 3)" d="M1106,220a30,30 0 1,0 60,0a30,30 0 1,0 -60,0Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M1106,220a30,30 0 1,0 60,0a30,30 0 1,0 -60,0Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M1122.5,220.6L1133,230.5L1150.4,210.4"/></g><path id="relay-route" class="ln route" vector-effect="non-scaling-stroke" d="M-930,40C-898.3,39.3 -818.3,45.3 -740,36C-661.7,26.7 -545,-13.3 -460,-16C-375,-18.7 -306.7,17.3 -230,20C-153.3,22.7 -38.3,3.3 0,0"/><g class="satchel"><path class="f-clay" transform="translate(3 3)" d="M-10,-6H10Q14,-6 14,-2V8Q14,12 10,12H-10Q-14,12 -14,8V-2Q-14,-6 -10,-6Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M-10,-6H10Q14,-6 14,-2V8Q14,12 10,12H-10Q-14,12 -14,8V-2Q-14,-6 -10,-6Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M-14,0H14M-9,-6C-9,-17 9,-17 9,-6"/><path class="f-ink" d="M-2.2,4a2.2,2.2 0 1,0 4.4,0a2.2,2.2 0 1,0 -4.4,0Z"/><animateMotion id="relay-go" dur="6s" begin="indefinite" repeatCount="indefinite" rotate="0"><mpath href="#relay-route"/></animateMotion></g></g></svg></div>
+    <ol class="stops"><li>You</li><li>Your assistant</li><li>Their assistant</li><li>The shop</li><li>Receipt</li></ol>
+    <p><a class="more" href="/docs/">For developers: the same route is an API</a></p>
+  </div>
+</section>
+<section class="h-room band-paper" aria-labelledby="h-room">
+  <div class="wrap h-split">
+    <div>
+      <h2 id="h-room">Everyone sees what was decided, and what it cost.</h2>
+      <p class="lead">A dinner, a trip, a club, a shop and its accountant: a room holds the people, their assistants, the money and the record. The bill splits itself.</p>
+      <div class="mock room-mock example">
+        <p class="mh"><b>Sunday run club</b><span class="badge">Example room</span></p>
+        <p class="chairs" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></p>
+        <p class="plan">Run then brunch, Sunday 7:00</p>
+        <p class="bot"><small>The room's assistant</small>9 said yes. Table for 9 at Warung Sari, 8:30. Split 9 ways: 45,000 each.</p>
+        <p class="mfoot"><span>Illustrative prices</span><span class="btn sm primary" aria-hidden="true">Accept</span></p>
       </div>
-<div class="rcard" aria-label="An example receipt">
-  <div class="rh">Receipt</div>
-  <div class="l"><span>Your assistant</span><b>Free</b></div>
-
-  <div class="l"><span>Scooter, 1 day</span><b>80,000</b></div>
-
-  <div class="l"><span>Deposit, held</span><b>500,000</b></div>
-
-  <div class="l"><span>Platform</span><b>0</b></div>
-
-  <div class="rf">An example of the receipt card. The numbers are illustrative.</div>
-</div>
-
+      <p><a class="more" href="/rooms/">See public rooms</a></p>
+    </div>
+    <div class="spot-lg"><svg class="ill ill-spot" viewBox="0 0 240 180" role="img" aria-label="A round table seen from above with six chairs around it and a stamped receipt in the middle" data-ill="spot-table"><path class="f-sky" transform="translate(3 3)" d="M66,90a54,54 0 1,0 108,0a54,54 0 1,0 -108,0Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M66,90a54,54 0 1,0 108,0a54,54 0 1,0 -108,0Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M182.2,65.1A67,67 0 0,1 182.2,114.9M172.6,131.5A67,67 0 0,1 129.6,156.3M110.4,156.3A67,67 0 0,1 67.4,131.5M57.8,114.9A67,67 0 0,1 57.8,65.1M67.4,48.5A67,67 0 0,1 110.4,23.7M129.6,23.7A67,67 0 0,1 172.6,48.5"/><path class="f-surface" transform="translate(3 3)" d="M100,58H140V114l-4,6l-4,-6l-4,6l-4,-6l-4,6l-4,-6l-4,6l-4,-6l-4,6l-4,-6Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M100,58H140V114l-4,6l-4,-6l-4,6l-4,-6l-4,6l-4,-6l-4,6l-4,-6l-4,6l-4,-6Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M112,74H128M112,87H118"/><path class="f-clay" transform="translate(3 3)" d="M121,110a11,11 0 1,0 22,0a11,11 0 1,0 -22,0Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M121,110a11,11 0 1,0 22,0a11,11 0 1,0 -22,0Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M127.1,110.2L130.9,113.9L137.3,106.5"/></svg></div>
+  </div>
+</section>
+<section class="h-front band-paper2" aria-labelledby="h-front">
+  <div class="wrap">
+    <div class="shead"><div><h2 id="h-front">Your front room brings the work to you.</h2><p class="lead">List what you do and your price. Assistants find you and book you directly. You keep your own system, your customer and your price.</p></div><div class="spot-slot"><svg class="ill ill-spot" viewBox="0 0 240 180" role="img" aria-label="A shop front: a striped awning over a counter with a bell, three cards pinned on the board behind" data-ill="spot-front-room"><path class="ln" vector-effect="non-scaling-stroke" d="M62,62H178Q182,62 182,66V98Q182,102 178,102H62Q58,102 58,98V66Q58,62 62,62Z"/><path class="f-sky" transform="translate(3 3)" d="M71,68H93Q96,68 96,71V91Q96,94 93,94H71Q68,94 68,91V71Q68,68 71,68Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M71,68H93Q96,68 96,71V91Q96,94 93,94H71Q68,94 68,91V71Q68,68 71,68Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M75,77.9H88M75,85.2H84.8"/><path class="f-sky" transform="translate(3 3)" d="M109,68H131Q134,68 134,71V91Q134,94 131,94H109Q106,94 106,91V71Q106,68 109,68Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M109,68H131Q134,68 134,71V91Q134,94 131,94H109Q106,94 106,91V71Q106,68 109,68Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M113,77.9H126M113,85.2H122.8"/><path class="f-sky" transform="translate(3 3)" d="M147,68H169Q172,68 172,71V91Q172,94 169,94H147Q144,94 144,91V71Q144,68 147,68Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M147,68H169Q172,68 172,71V91Q172,94 169,94H147Q144,94 144,91V71Q144,68 147,68Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M151,77.9H164M151,85.2H160.8"/><path class="f-ochre" transform="translate(3 3)" d="M36,16H204V44a14,11.7 0 0,1 -28,0a14,11.7 0 0,1 -28,0a14,11.7 0 0,1 -28,0a14,11.7 0 0,1 -28,0a14,11.7 0 0,1 -28,0a14,11.7 0 0,1 -28,0Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M36,16H204V44a14,11.7 0 0,1 -28,0a14,11.7 0 0,1 -28,0a14,11.7 0 0,1 -28,0a14,11.7 0 0,1 -28,0a14,11.7 0 0,1 -28,0a14,11.7 0 0,1 -28,0Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M64,16V44M92,16V44M120,16V44M148,16V44M176,16V44"/><path class="ln" vector-effect="non-scaling-stroke" d="M42,44V160M198,44V160"/><path class="ln" vector-effect="non-scaling-stroke" d="M52,160V136H188V160"/><path class="ln" vector-effect="non-scaling-stroke" d="M28,160H212"/><g transform="translate(150 136) scale(0.8 0.8)"><path class="f-clay" transform="translate(3.8 3.8)" d="M-18,0C-18,-20 -10,-26 0,-26C10,-26 18,-20 18,0Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M-18,0C-18,-20 -10,-26 0,-26C10,-26 18,-20 18,0Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M-24,0H24M0,-26V-31"/><path class="f-ink" d="M-3,-33a3,3 0 1,0 6,0a3,3 0 1,0 -6,0Z"/></g></svg></div></div>
+    <div class="front-grid">
+      <div class="mock example">
+        <p class="mh"><b>Kuta Rentals</b><span class="badge">Example front room</span></p>
+        <dl class="svc"><div><dt>Scooter, per day</dt><dd>80,000</dd></div><div><dt>Delivery</dt><dd>20,000</dd></div></dl>
+        <div class="incoming"><p>A visitor's assistant asks: one scooter, Canggu, by 3 pm</p><p class="acts"><span class="btn sm primary" aria-hidden="true">Accept</span><span class="btn sm" aria-hidden="true">Decline</span></p></div>
+        <p class="mfoot"><span>Illustrative prices</span></p>
+      </div>
+      <span class="mascot lg"><img src="/brand/character/working.webp" alt="The courier at a small desk, writing a receipt" width="640" height="640" loading="lazy" decoding="async"></span>
+      <div class="mock example rc">
+        <p class="mh"><b>Receipt</b><span class="badge">Example, illustrative</span></p>
+        <dl class="svc"><div><dt>Scooter, 1 day</dt><dd>80,000</dd></div><div><dt>Delivery</dt><dd>20,000</dd></div><div><dt>To Kuta Rentals</dt><dd>100,000</dd></div></dl>
+        <svg class="ill ill-tear" viewBox="0 0 360 12" role="img" aria-label="Torn paper edge" data-ill="spot-tear"><path class="f-surface" d="M0,1L4,9L8,1L12,9L16,1L20,9L24,1L28,9L32,1L36,9L40,1L44,9L48,1L52,9L56,1L60,9L64,1L68,9L72,1L76,9L80,1L84,9L88,1L92,9L96,1L100,9L104,1L108,9L112,1L116,9L120,1L124,9L128,1L132,9L136,1L140,9L144,1L148,9L152,1L156,9L160,1L164,9L168,1L172,9L176,1L180,9L184,1L188,9L192,1L196,9L200,1L204,9L208,1L212,9L216,1L220,9L224,1L228,9L232,1L236,9L240,1L244,9L248,1L252,9L256,1L260,9L264,1L268,9L272,1L276,9L280,1L284,9L288,1L292,9L296,1L300,9L304,1L308,9L312,1L316,9L320,1L324,9L328,1L332,9L336,1L340,9L344,1L348,9L352,1L356,9L360,1V0H0Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M0,1L4,9L8,1L12,9L16,1L20,9L24,1L28,9L32,1L36,9L40,1L44,9L48,1L52,9L56,1L60,9L64,1L68,9L72,1L76,9L80,1L84,9L88,1L92,9L96,1L100,9L104,1L108,9L112,1L116,9L120,1L124,9L128,1L132,9L136,1L140,9L144,1L148,9L152,1L156,9L160,1L164,9L168,1L172,9L176,1L180,9L184,1L188,9L192,1L196,9L200,1L204,9L208,1L212,9L216,1L220,9L224,1L228,9L232,1L236,9L240,1L244,9L248,1L252,9L256,1L260,9L264,1L268,9L272,1L276,9L280,1L284,9L288,1L292,9L296,1L300,9L304,1L308,9L312,1L316,9L320,1L324,9L328,1L332,9L336,1L340,9L344,1L348,9L352,1L356,9L360,1"/></svg>
+      </div>
+    </div>
+    <p class="ctas"><a class="btn primary" href="#join" data-role="offer">Reserve your front room</a></p>
+  </div>
+</section>
+<section class="h-find band-paper" aria-labelledby="h-find">
+  <div class="wrap">
+    <div class="shead"><div><h2 id="h-find">Say what you need, or what you do.</h2><p class="lead">A need or an offer you make public can be read by anyone, and by any assistant.</p></div><div class="spot-slot"><svg class="ill ill-spot" viewBox="0 0 240 180" role="img" aria-label="A cork board with four pinned cards, one hanging askew and one stamped" data-ill="spot-board"><path class="f-ochre" transform="translate(3 3)" d="M36,22H204Q210,22 210,28V152Q210,158 204,158H36Q30,158 30,152V28Q30,22 36,22Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M36,22H204Q210,22 210,28V152Q210,158 204,158H36Q30,158 30,152V28Q30,22 36,22Z"/><path class="f-sky" transform="translate(3 3)" d="M51,38H107Q110,38 110,41V79Q110,82 107,82H51Q48,82 48,79V41Q48,38 51,38Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M51,38H107Q110,38 110,41V79Q110,82 107,82H51Q48,82 48,79V41Q48,38 51,38Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M55,54.7H102M55,67H85.2"/><path class="f-clay" d="M75,42a4,4 0 1,0 8,0a4,4 0 1,0 -8,0Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M75,42a4,4 0 1,0 8,0a4,4 0 1,0 -8,0Z"/><g transform="translate(162 62) rotate(12)"><path class="f-sky" transform="translate(3.6 2.3)" d="M-27,-20H27Q30,-20 30,-17V19Q30,22 27,22H-27Q-30,22 -30,19V-17Q-30,-20 -27,-20Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M-27,-20H27Q30,-20 30,-17V19Q30,22 27,22H-27Q-30,22 -30,19V-17Q-30,-20 -27,-20Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M-23,-4H22M-23,7.7H6"/></g><path class="f-clay" d="M146,46a4,4 0 1,0 8,0a4,4 0 1,0 -8,0Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M146,46a4,4 0 1,0 8,0a4,4 0 1,0 -8,0Z"/><path class="f-sky" transform="translate(3 3)" d="M55,98H111Q114,98 114,101V139Q114,142 111,142H55Q52,142 52,139V101Q52,98 55,98Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M55,98H111Q114,98 114,101V139Q114,142 111,142H55Q52,142 52,139V101Q52,98 55,98Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M59,114.7H106M59,127H89.2"/><path class="f-clay" d="M79,102a4,4 0 1,0 8,0a4,4 0 1,0 -8,0Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M79,102a4,4 0 1,0 8,0a4,4 0 1,0 -8,0Z"/><path class="f-sky" transform="translate(3 3)" d="M131,104H189Q192,104 192,107V145Q192,148 189,148H131Q128,148 128,145V107Q128,104 131,104Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M131,104H189Q192,104 192,107V145Q192,148 189,148H131Q128,148 128,145V107Q128,104 131,104Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M135,120.7H184M135,133H166.4"/><path class="f-clay" d="M156,108a4,4 0 1,0 8,0a4,4 0 1,0 -8,0Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M156,108a4,4 0 1,0 8,0a4,4 0 1,0 -8,0Z"/><path class="f-clay" transform="translate(3 3)" d="M167,136a11,11 0 1,0 22,0a11,11 0 1,0 -22,0Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M167,136a11,11 0 1,0 22,0a11,11 0 1,0 -22,0Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M173.1,136.2L176.9,139.9L183.3,132.5"/></svg></div></div>
+    <div class="goals"><a class="goal" href="/scenarios/find-a-rental/"><svg class="ill ill-icon" viewBox="0 0 24 24" role="img" aria-label="A step-through scooter" data-ill="icon-ride"><path class="ln ic" vector-effect="non-scaling-stroke" d="M3,17.5a2.5,2.5 0 1,0 5,0a2.5,2.5 0 1,0 -5,0ZM16,17.5a2.5,2.5 0 1,0 5,0a2.5,2.5 0 1,0 -5,0Z"/><path class="ln ic" vector-effect="non-scaling-stroke" d="M8,17.5H14.5L17.5,6.5M15.5,6.5H19.5M17.8,9.5L20,9.5M3.5,14L7.5,14"/><path class="f-clay" transform="translate(1.5 1.5)" d="M3,12.5H9.5V14H3Z"/><path class="ln ic" vector-effect="non-scaling-stroke" d="M3,12.5H9.5V14H3Z"/></svg><span>Get a ride</span></a><a class="goal" href="/scenarios/language-teacher-and-pupils/"><svg class="ill ill-icon" viewBox="0 0 24 24" role="img" aria-label="An open book with a bookmark" data-ill="icon-learn"><path class="f-ochre" transform="translate(1.5 1.5)" d="M14.5,5V12L16,10.6L17.5,12V5"/><path class="ln ic" vector-effect="non-scaling-stroke" d="M14.5,5V12L16,10.6L17.5,12V5"/><path class="ln ic" vector-effect="non-scaling-stroke" d="M3,6C6,4.6 9.5,4.8 12,7C14.5,4.8 18,4.6 21,6V19C18,17.6 14.5,17.8 12,20C9.5,17.8 6,17.6 3,19ZM12,7V20"/></svg><span>Learn a language</span></a><a class="goal" href="/scenarios/neighbourhood-errand/"><svg class="ill ill-icon" viewBox="0 0 24 24" role="img" aria-label="A tap with a drop and a wrench" data-ill="icon-fix"><path class="ln ic" vector-effect="non-scaling-stroke" d="M4,7H11C13.2,7 14.5,8.3 14.5,10.5V12M7.5,7V4.5M5.5,4.5H9.5"/><path class="f-sky" transform="translate(1.5 1.5)" d="M14.5,15C13.4,16.4 13,17.1 13,17.8A1.5,1.5 0 0,0 16,17.8C16,17.1 15.6,16.4 14.5,15Z"/><path class="ln ic" vector-effect="non-scaling-stroke" d="M14.5,15C13.4,16.4 13,17.1 13,17.8A1.5,1.5 0 0,0 16,17.8C16,17.1 15.6,16.4 14.5,15Z"/><path class="ln ic" vector-effect="non-scaling-stroke" d="M4,21L11,14M11,14C10.2,12.3 11,10.4 12.8,10.1L11.8,11.8L13,13L14.7,12C14.4,13.8 12.6,14.6 11,14"/></svg><span>Fix the house</span></a><a class="goal" href="/scenarios/affinity-run-club/"><svg class="ill ill-icon" viewBox="0 0 24 24" role="img" aria-label="Three chairs around a round table" data-ill="icon-club"><path class="f-sky" transform="translate(1.5 1.5)" d="M7,12a5,5 0 1,0 10,0a5,5 0 1,0 -10,0Z"/><path class="ln ic" vector-effect="non-scaling-stroke" d="M7,12a5,5 0 1,0 10,0a5,5 0 1,0 -10,0Z"/><path class="ln ic" vector-effect="non-scaling-stroke" d="M8.6,3.6A9,9 0 0,1 15.4,3.6M20.1,14.7A9,9 0 0,1 16.6,19.6M7.4,19.6A9,9 0 0,1 3.9,14.7"/></svg><span>Run a club</span></a><a class="goal" href="/scenarios/hiring-intro/"><svg class="ill ill-icon" viewBox="0 0 24 24" role="img" aria-label="A chair with a card on its seat" data-ill="icon-hire"><path class="ln ic" vector-effect="non-scaling-stroke" d="M7,20.5V5.5C7,4.4 7.9,3.5 9,3.5M7,13H18V20.5"/><path class="f-clay" transform="translate(1.5 1.5)" d="M9.5,10H16.5V13H9.5Z"/><path class="ln ic" vector-effect="non-scaling-stroke" d="M9.5,10H16.5V13H9.5Z"/></svg><span>Find a hire</span></a><a class="goal" href="/scenarios/food-and-beverage-owner/"><svg class="ill ill-icon" viewBox="0 0 24 24" role="img" aria-label="A ledger with a coin on its cover" data-ill="icon-books"><path class="ln ic" vector-effect="non-scaling-stroke" d="M6.5,3H17.5Q19,3 19,4.5V19.5Q19,21 17.5,21H6.5Q5,21 5,19.5V4.5Q5,3 6.5,3Z"/><path class="ln ic" vector-effect="non-scaling-stroke" d="M8,3V21M10.5,7.5H16M10.5,10.5H14.5"/><path class="f-ochre" transform="translate(1.5 1.5)" d="M11.4,16a2.6,2.6 0 1,0 5.2,0a2.6,2.6 0 1,0 -5.2,0Z"/><path class="ln ic" vector-effect="non-scaling-stroke" d="M11.4,16a2.6,2.6 0 1,0 5.2,0a2.6,2.6 0 1,0 -5.2,0Z"/></svg><span>Keep the books</span></a></div>
+    <div class="board example">
+      <p class="mh"><b>Open needs</b><span class="badge">Examples</span></p>
+      <ul><li>Tutor, Tuesdays, Denpasar, 150,000/hour</li><li>Plumber tonight, Seminyak</li><li>Bookkeeper, monthly, remote</li></ul>
+      <p class="mfoot"><span>Illustrative examples</span><span><a href="#join" data-role="offer">Post yours</a> · <a href="/registry/">As JSON</a></span></p>
     </div>
   </div>
 </section>
-<section class="doors"><div class="wrap">
-    <a class="door product" href="/how-it-works/"><span class="mascot"><img src="/brand/character/working.webp" alt="The courier at a small desk, writing a receipt" width="640" height="640" loading="lazy" decoding="async"></span><h2>Ask, and it gets done.</h2><p><b>The product.</b> Your assistant does what it can, free. A person when one is needed, people together when it is shared, one receipt either way.</p><span class="btn">How it works</span></a>
-    <a class="door bank" href="/adoption/"><span class="mascot"><img src="/brand/character/reading.webp" alt="The courier reading a sheet of paper" width="640" height="640" loading="lazy" decoding="async"></span><h2>What AI is for, in every field.</h2><p><b>The databank.</b> 319 named adoptions in 51 fields and 40 countries, each with its source; the law in 22 jurisdictions; and the consulting that builds your own assistant for your field.</p><span class="btn">Search the databank</span></a>
-  </div></section>
-<section>
+<section class="h-open band-ink" aria-labelledby="h-open">
   <div class="wrap">
-    <div class="sec-head"><h2>Three ways it answers.</h2><p>Every request starts with your assistant. It only brings in a person when the job needs one, and you decide before anyone is paid.</p></div>
-    <div class="grid3">
-      <div class="card"><h3>Your assistant</h3><p>Plans, drafts, researches, books, reminds. Runs on your own device and keys if you want it to.</p><p class="price">Free</p></div>
-      <div class="card"><h3>A person it finds</h3><p>A driver, a tutor, an accountant, a plumber. Verified, nearby when it matters, licensed when the law says so.</p><p class="price">Their price, shown first</p></div>
-      <div class="card"><h3>People together</h3><p>A dinner, a trip, a project. Everyone sees what was decided and what it cost, and the bill splits itself.</p><p class="price">Shared, on one receipt</p></div>
+    <div class="shead"><div><h2 id="h-open">Only numbers you can check.</h2></div><div class="spot-slot"><svg class="ill ill-spot" viewBox="0 0 240 180" role="img" aria-label="A torn receipt with a stamp on its corner, and three linked chain links beside it" data-ill="spot-receipt-stamp"><path class="f-surface" transform="translate(3 3)" d="M44,20H144V150l-3.8,6l-3.8,-6l-3.8,6l-3.8,-6l-3.8,6l-3.8,-6l-3.8,6l-3.8,-6l-3.8,6l-3.8,-6l-3.8,6l-3.8,-6l-3.8,6l-3.8,-6l-3.8,6l-3.8,-6l-3.8,6l-3.8,-6l-3.8,6l-3.8,-6l-3.8,6l-3.8,-6l-3.8,6l-3.8,-6l-3.8,6l-3.8,-6Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M44,20H144V150l-3.8,6l-3.8,-6l-3.8,6l-3.8,-6l-3.8,6l-3.8,-6l-3.8,6l-3.8,-6l-3.8,6l-3.8,-6l-3.8,6l-3.8,-6l-3.8,6l-3.8,-6l-3.8,6l-3.8,-6l-3.8,6l-3.8,-6l-3.8,6l-3.8,-6l-3.8,6l-3.8,-6l-3.8,6l-3.8,-6l-3.8,6l-3.8,-6Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M56,36H132M56,49H107M56,62H132M56,75H107M56,88H132"/><path class="f-ochre" transform="translate(3 3)" d="M110,132a22,22 0 1,0 44,0a22,22 0 1,0 -44,0Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M110,132a22,22 0 1,0 44,0a22,22 0 1,0 -44,0Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M122.1,132.4L129.8,139.7L142.6,125"/><g transform="translate(186 50) rotate(70)"><path class="f-clay" transform="translate(3.8 -1.8)" d="M-8,-9H8Q17,-9 17,0V0Q17,9 8,9H-8Q-17,9 -17,0V0Q-17,-9 -8,-9Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M-8,-9H8Q17,-9 17,0V0Q17,9 8,9H-8Q-17,9 -17,0V0Q-17,-9 -8,-9Z"/><path class="f-paper" d="M-6,-3H6Q9,-3 9,0V0Q9,3 6,3H-6Q-9,3 -9,0V0Q-9,-3 -6,-3Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M-6,-3H6Q9,-3 9,0V0Q9,3 6,3H-6Q-9,3 -9,0V0Q-9,-3 -6,-3Z"/></g><g transform="translate(186 82) rotate(110)"><path class="f-clay" transform="translate(1.8 -3.8)" d="M-8,-9H8Q17,-9 17,0V0Q17,9 8,9H-8Q-17,9 -17,0V0Q-17,-9 -8,-9Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M-8,-9H8Q17,-9 17,0V0Q17,9 8,9H-8Q-17,9 -17,0V0Q-17,-9 -8,-9Z"/><path class="f-paper" d="M-6,-3H6Q9,-3 9,0V0Q9,3 6,3H-6Q-9,3 -9,0V0Q-9,-3 -6,-3Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M-6,-3H6Q9,-3 9,0V0Q9,3 6,3H-6Q-9,3 -9,0V0Q-9,-3 -6,-3Z"/></g><g transform="translate(186 114) rotate(70)"><path class="f-clay" transform="translate(3.8 -1.8)" d="M-8,-9H8Q17,-9 17,0V0Q17,9 8,9H-8Q-17,9 -17,0V0Q-17,-9 -8,-9Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M-8,-9H8Q17,-9 17,0V0Q17,9 8,9H-8Q-17,9 -17,0V0Q-17,-9 -8,-9Z"/><path class="f-paper" d="M-6,-3H6Q9,-3 9,0V0Q9,3 6,3H-6Q-9,3 -9,0V0Q-9,-3 -6,-3Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M-6,-3H6Q9,-3 9,0V0Q9,3 6,3H-6Q-9,3 -9,0V0Q-9,-3 -6,-3Z"/></g></svg></div></div>
+    <div class="facts4">
+      <p><b>673</b><span>built of 918 features tracked, in one public list</span></p>
+      <p><b>TBC</b><span>pricing, announced before launch</span></p>
+      <p><b>1</b><span>receipt per request, hash-chained</span></p>
+      <p><b>Open</b><span>source, runs on your own machine</span></p>
+    </div>
+    <p><a class="more" href="/how-it-works/">How it works, every step</a></p>
+  </div>
+</section>
+<section class="h-join band-clay" id="join" aria-labelledby="h-join">
+  <div class="wrap h-join-grid">
+    <span class="mascot lg"><img src="/brand/character/celebrating.webp" alt="The courier jumping with both arms up" width="640" height="640" loading="lazy" decoding="async"></span>
+    <div>
+      <h2 id="h-join">Be first.</h2>
+      <p class="lead">One email when it opens, nothing else. Your city and your first need decide where we open.</p>
+      <!--email_off-->
+      <form class="join" id="join-form" data-to="support@massrelay.ai" data-subject="Waiting list">
+        <label><span>City</span><input name="city" autocomplete="address-level2" required></label>
+        <label><span>I want to</span><select name="role"><option value="ask">ask</option><option value="offer">offer</option><option value="host">host a room</option></select></label>
+        <label><span>First need</span><input name="need" required></label>
+        <button class="btn primary" type="submit">Join the waiting list</button>
+      </form>
+      <noscript><p><a class="btn" href="mailto:support@massrelay.ai?subject=Waiting%20list&amp;body=City%3A%20%0AI%20want%20to%20(ask%2C%20offer%20or%20host%20a%20room)%3A%20%0AFirst%20need%3A%20">Join the waiting list by email</a></p></noscript>
+      <pre class="echo" hidden aria-live="polite"></pre>
+      <p class="note">Or write to support@massrelay.ai with the same three lines.</p>
+      <!--/email_off-->
     </div>
   </div>
 </section>
-<section>
-  <div class="wrap">
-    <div class="sec-head"><h2>One loop under every request.</h2><p>Six steps, the same for every person, company and assistant. Nothing is a special case.</p></div>
-    <ol class="panels" style="list-style:none;margin:0;padding:0">
-    <li class="panel"><h3>Event</h3><p>Something happened: a message, a delivery on a channel, a schedule, a read from a connected tool.</p><p class="ex">&quot;I need a scooter by 3 pm.&quot;</p></li>
-
-    <li class="panel"><h3>Fact</h3><p>What is known, with its source, who may see it, how long it holds and who consented. A change is a new row; the past stays.</p><p class="ex">Wants a scooter in Canggu, today.</p></li>
-
-    <li class="panel"><h3>Goal</h3><p>What a person or a company wants: a kind, a window, a place band, a budget band and a result that can be checked.</p><p class="ex">A scooter, under 100k, before 3 pm.</p></li>
-
-    <li class="panel"><h3>Plan and route</h3><p>Steps, and for each step a route: a model, a connected tool, the browser, a person inside the organisation, a person outside, a partner, or a call you consented to.</p><p class="ex">Ask three shops; one person delivers.</p></li>
-
-    <li class="panel"><h3>Proposal</h3><p>The one unit of action, between people and assistants alike. It is approved, run automatically under a policy you can read, or refused.</p><p class="ex">&quot;Made can bring it for 80k. Accept?&quot;</p></li>
-
-    <li class="panel"><h3>Receipt</h3><p>The verified outcome, and the only measure of success: what was asked, who did it, what it cost. It is what a profile shows.</p><p class="ex">Scooter, 1 day, 80,000, deposit held.</p></li>
-
-    </ol>
-    <p class="ctas"><a class="btn" href="/how-it-works/">How it works, with every combination</a></p>
-  </div>
-</section>
-<section id="for">
-  <div class="wrap">
-    <div class="sec-head"><h2>Who it is for.</h2><p>Pick the one closest to you. Each page shows the scenarios that fit and what is built so far.</p></div>
-    <div class="grid3">
-<a class="card" href="/for/small-business-owner/"><h3>Small-business owner</h3><p>Run the shop. Let the assistant run the follow-ups.</p></a>
-
-<a class="card" href="/for/professional-or-teacher/"><h3>Professional or teacher</h3><p>Be found for what you do, and paid when it is done.</p></a>
-
-<a class="card" href="/for/team-lead/"><h3>Team lead</h3><p>Goals that reach the people who do them.</p></a>
-
-<a class="card" href="/for/developer-or-self-hoster/"><h3>Developer or self-hoster</h3><p>Run it yourself. Check every receipt.</p></a>
-
-<a class="card" href="/for/community-host/"><h3>Community host</h3><p>Bring people together without running the spreadsheet.</p></a>
-
-    </div>
-  </div>
-</section>
-<section id="scenarios">
-  <div class="wrap">
-    <div class="sec-head"><h2>Three of fourteen scenarios.</h2><p>Each scenario page shows the steps, the limits it keeps and what exists today.</p></div>
-    <div class="grid3">
-<a class="card" href="/scenarios/food-and-beverage-owner/"><span class="tag partial">Partly built</span><h3>Food and beverage owner, revenue goal</h3><p>You will set a revenue goal and your assistant will run the plan, hand steps to your salespeople and report the result from your own sheet.</p></a>
-
-<a class="card" href="/scenarios/language-teacher-and-pupils/"><span class="tag partial">Partly built</span><h3>Language teacher and the pupils</h3><p>A teacher will be found on the directory, parents will get a room per pupil, and progress will arrive as receipts.</p></a>
-
-<a class="card" href="/scenarios/ecommerce-support/"><span class="tag built">Built</span><h3>E-commerce support</h3><p>Customers write on Instagram or WhatsApp, the assistant answers within what it may share, and a refund is an approve-only proposal.</p></a>
-
-    </div>
-    <p class="ctas"><a class="btn" href="/how-it-works/#all-scenarios">All fourteen scenarios</a></p>
-  </div>
-</section>
-<section>
-  <div class="wrap">
-    <div class="sec-head"><h2>Built in the open.</h2><p>No customers yet, so no quotes. Only numbers you can check.</p></div>
-    <div class="facts">
-      <div class="card"><div class="num" style="font:600 40px var(--serif)">916</div><p>features tracked in one list, 671 of them built</p></div>
-      <div class="card"><div class="num" style="font:600 40px var(--serif)">15</div><p>scenarios written down, each tied to the tracker rows it needs and marked built, partly built or coming</p></div>
-      <div class="card"><div class="num" style="font:600 40px var(--serif)">0</div><p>markup on model prices. The platform fee is a visible line, never hidden in a token price</p></div>
-    </div>
-    <p class="ctas"><a class="btn" href="/adoption/">What AI is for, field by field: 51 fields researched</a> <a class="btn" href="/services/">Consulting: your assistant, built for your field</a></p>
-  </div>
-</section>
-<section>
-  <div class="wrap" style="max-width:760px">
-    <div class="sec-head"><h2>Questions.</h2></div>
-    <details><summary>What does it cost?</summary><p>Your assistant is free. You pay only when a real person does a job for you, at the price you saw before saying yes. Our fee is a separate visible line, never hidden in a model price.</p></details>
-    <details><summary>Who are the people it finds?</summary><p>Verified providers, nearby when the job is physical, licensed when the law requires it. Their completed jobs are counted from receipts, not from star ratings.</p></details>
-    <details><summary>Can I run it myself?</summary><p>Yes. The community edition runs on your own machine with your own model keys. The hosted version adds the people, the payments and the receipts.</p></details>
-    <details><summary>What do you see about me?</summary><p>Your conversations, your facts and your money stay in your room under your rules. Nothing is shown to others unless you set it to be.</p></details>
-    <details><summary>When?</summary><p>Soon. Join the waiting list and you will be first to try it, free.</p></details>
-  </div>
-</section>
-
-<section class="close" id="waitlist">
-  <div class="wrap">
-    <span class="mascot"><img src="/brand/character/celebrating.webp" alt="The courier jumping with both arms up" width="640" height="640" loading="lazy" decoding="async"></span>
-    <h2>Be first.</h2>
-    <p class="lead">Join the waiting list. One email when it opens, nothing else.</p>
-    <div class="ctas"><a class="btn primary" href="mailto:support@massrelay.ai?subject=Waiting%20list&amp;body=Please%20add%20me%20to%20the%20waiting%20list.%0A%0ACity%3A%20%0AWhat%20I%20need%20first%3A%20">Join the waiting list</a></div>
-    <p class="note">Tell us your city and the first thing you need. It shapes where we open first.</p>
-  </div>
-</section>
-
+<script src="/home.js" defer></script>
 </main>
 <footer class="foot">
+  <div class="wrap fcols"><div class="fcol"><p class="fh">Product</p><a href="/rooms/">Rooms</a><a href="/how-it-works/">How it works</a><a href="/how-it-works/#all-scenarios">Scenarios</a><a href="/for/">Who it is for</a></div><div class="fcol"><p class="fh">Developers</p><a href="/docs/">Docs</a><a href="/docs/">The router API</a><a href="/registry/">Registry</a><a href="https://github.com/nicholasandreasujitno/massrelay-site">Source of this page</a></div><div class="fcol"><p class="fh">Resources</p><a href="/adoption/">What AI is for</a><a href="/adoption/laws/">Laws</a><a href="/services/">Consulting</a><a href="mailto:support@massrelay.ai">Contact</a></div></div>
   <div class="wrap">
     <span><span class="word">MassRelay</span> · massrelay.ai</span>
     <span><a href="mailto:support@massrelay.ai">Contact</a> · <a href="https://github.com/nicholasandreasujitno/massrelay-site">Source of this page</a></span>
-    <span class="stamp" title="Product version, site version, build">v0.4.0 · site 1 · 7c50d1733</span>
+    <span class="stamp" title="Product version, site version, build">v0.4.0 · site 1 · 2de7d5203</span>
   </div>
 </footer>
 
