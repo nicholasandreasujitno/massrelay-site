@@ -32,12 +32,11 @@
   <div class="wrap nav">
     <a class="brand" href="/"><svg class="mark" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M3.5 20V11A4.25 4.25 0 0 1 12 11V20"/><path class="arch2" d="M12 11A4.25 4.25 0 0 1 20.5 11V20"/></svg><span class="word">MassRelay</span></a>
     <nav class="menu" aria-label="Main">
-      <a class="link" href="/rooms/">Shared rooms</a>
-      <a class="link" href="/how-it-works/">How it works</a>
-      <a class="link" href="/for/">Who it is for</a>
-      <a class="link" href="/pricing/">Pricing</a>
-      <a class="link" href="/docs/">Developers</a>
-      <a class="link" href="/adoption/">AI by field</a>
+      <div class="dd"><a class="link" href="/">Assistant</a><div class="dd-menu"><a class="sub" href="/">For people</a><a class="sub" href="/rooms/">Rooms</a><a class="sub" href="/how-it-works/">How it works</a><a class="sub" href="/for/">Who it is for</a></div></div>
+      <a class="link" href="/company/">For companies</a>
+      <div class="dd"><a class="link" href="/pricing/">Pricing</a><div class="dd-menu"><a class="sub" href="/pricing/">For people and teams</a><a class="sub" href="/pricing/developers/">For developers</a></div></div>
+      <div class="dd"><a class="link" href="/router/">Developers</a><div class="dd-menu"><a class="sub" href="/router/">Router</a><a class="sub" href="/docs/">Docs</a><a class="sub" href="/pricing/developers/">Developer pricing</a><a class="sub" href="/docs/self-hosted-integration/">Run it yourself</a></div></div>
+      <div class="dd"><a class="link" href="/fields/">AI by field</a><div class="dd-menu"><a class="sub" href="/fields/">The field guide</a><a class="sub" href="/fields/cases/">Cases</a><a class="sub" href="/fields/laws/">AI laws</a><a class="sub" href="/custom-assistant/">Custom assistant</a></div></div>
       <button class="btn ghost sm" id="theme" type="button" aria-label="Switch light and dark">Dark</button>
       <a class="btn primary sm" href="/#join">Join the waiting list</a>
     </nav>
@@ -56,7 +55,7 @@
       <p class="note"><a class="more" href="/company/">Running a company? See company examples →</a></p>
     </div>
     <div class="player example" id="player" aria-label="A scripted example request">
-      <div class="chips" role="group" aria-label="Pick an example" hidden><button type="button" data-id="meetup" aria-pressed="true">Meetup</button><button type="button" data-id="scooter" aria-pressed="false">Scooter</button><button type="button" data-id="plumber" aria-pressed="false">Plumber</button><button type="button" data-id="tutor" aria-pressed="false">Tutor</button><button type="button" data-id="dinner" aria-pressed="false">Dinner</button></div>
+      <div class="chips" role="group" aria-label="Pick an example" hidden><button type="button" data-id="meetup" aria-pressed="true">Meetup</button><button type="button" data-id="dinner" aria-pressed="false">Dinner</button><button type="button" data-id="tutor" aria-pressed="false">Tutor</button><button type="button" data-id="plumber" aria-pressed="false">Plumber</button><button type="button" data-id="scooter" aria-pressed="false">Scooter</button></div>
       <details class="scn" data-id="meetup" open>
         <summary>Meetup: Meet some new people this weekend?</summary>
         <p class="ask">Meet some new people this weekend?</p>
@@ -66,22 +65,13 @@
           <dl class="rcpt"><dt class="rh">Receipt</dt><div><dt>Dinner for 6</dt><dd>900,000</dd></div><div><dt>Your share</dt><dd>150,000</dd></div></dl>
         </div>
       </details>
-      <details class="scn" data-id="scooter">
-        <summary>Scooter: I need a scooter by 3 pm.</summary>
-        <p class="ask">I need a scooter by 3 pm.</p>
-        <div class="pwrap"><svg class="ill proute" viewBox="0 0 2 100" preserveAspectRatio="none" aria-hidden="true"><line class="ln route" x1="1" y1="0" x2="1" y2="100" vector-effect="non-scaling-stroke"/></svg><ol class="psteps"><li><span class="stopdot" aria-hidden="true"></span>Reads your calendar</li><li><span class="stopdot" aria-hidden="true"></span>Asks three independent shops</li><li><span class="stopdot" aria-hidden="true"></span>Kuta Rentals' assistant answers</li><li><span class="stopdot" aria-hidden="true"></span>Price before you decide</li></ol></div>
-        <div class="result"><p class="price"><b>80,000 / day</b></p><p>Deposit 500,000, held until return</p><p>Scoopy, helmet, at your door 14:40</p>
+      <details class="scn" data-id="dinner">
+        <summary>Dinner: Book brunch for the run club after Sunday's run.</summary>
+        <p class="ask">Book brunch for the run club after Sunday's run.</p>
+        <div class="pwrap"><svg class="ill proute" viewBox="0 0 2 100" preserveAspectRatio="none" aria-hidden="true"><line class="ln route" x1="1" y1="0" x2="1" y2="100" vector-effect="non-scaling-stroke"/></svg><ol class="psteps"><li><span class="stopdot" aria-hidden="true"></span>Counts the yeses in the room</li><li><span class="stopdot" aria-hidden="true"></span>Asks the warung's assistant</li><li><span class="stopdot" aria-hidden="true"></span>Table for 9 at 8:30</li><li><span class="stopdot" aria-hidden="true"></span>Split rule applied</li></ol></div>
+        <div class="result"><p class="price"><b>45,000 each</b></p><p>9 ways</p>
           <button class="say" type="button" hidden>Say yes?</button>
-          <dl class="rcpt"><dt class="rh">Receipt</dt><div><dt>Scooter, 1 day</dt><dd>80,000</dd></div><div><dt>Deposit, held</dt><dd>500,000</dd></div></dl>
-        </div>
-      </details>
-      <details class="scn" data-id="plumber">
-        <summary>Plumber: Kitchen tap leaking, can someone come tonight?</summary>
-        <p class="ask">Kitchen tap leaking, can someone come tonight?</p>
-        <div class="pwrap"><svg class="ill proute" viewBox="0 0 2 100" preserveAspectRatio="none" aria-hidden="true"><line class="ln route" x1="1" y1="0" x2="1" y2="100" vector-effect="non-scaling-stroke"/></svg><ol class="psteps"><li><span class="stopdot" aria-hidden="true"></span>Checks who is licensed and nearby</li><li><span class="stopdot" aria-hidden="true"></span>Asks two</li><li><span class="stopdot" aria-hidden="true"></span>One can come at 19:00</li><li><span class="stopdot" aria-hidden="true"></span>Price shown</li></ol></div>
-        <div class="result"><p class="price"><b>250,000 call-out</b></p><p>Parts at cost</p>
-          <button class="say" type="button" hidden>Say yes?</button>
-          <dl class="rcpt"><dt class="rh">Receipt</dt><div><dt>Call-out</dt><dd>250,000</dd></div></dl>
+          <dl class="rcpt"><dt class="rh">Receipt</dt><div><dt>Brunch for 9</dt><dd>405,000</dd></div><div><dt>Your share</dt><dd>45,000</dd></div></dl>
         </div>
       </details>
       <details class="scn" data-id="tutor">
@@ -93,13 +83,22 @@
           <dl class="rcpt"><dt class="rh">Receipt</dt><div><dt>Lesson, 1 hour</dt><dd>150,000</dd></div></dl>
         </div>
       </details>
-      <details class="scn" data-id="dinner">
-        <summary>Dinner: Book brunch for the run club after Sunday's run.</summary>
-        <p class="ask">Book brunch for the run club after Sunday's run.</p>
-        <div class="pwrap"><svg class="ill proute" viewBox="0 0 2 100" preserveAspectRatio="none" aria-hidden="true"><line class="ln route" x1="1" y1="0" x2="1" y2="100" vector-effect="non-scaling-stroke"/></svg><ol class="psteps"><li><span class="stopdot" aria-hidden="true"></span>Counts the yeses in the room</li><li><span class="stopdot" aria-hidden="true"></span>Asks the warung's assistant</li><li><span class="stopdot" aria-hidden="true"></span>Table for 9 at 8:30</li><li><span class="stopdot" aria-hidden="true"></span>Split rule applied</li></ol></div>
-        <div class="result"><p class="price"><b>45,000 each</b></p><p>9 ways</p>
+      <details class="scn" data-id="plumber">
+        <summary>Plumber: Kitchen tap leaking, can someone come tonight?</summary>
+        <p class="ask">Kitchen tap leaking, can someone come tonight?</p>
+        <div class="pwrap"><svg class="ill proute" viewBox="0 0 2 100" preserveAspectRatio="none" aria-hidden="true"><line class="ln route" x1="1" y1="0" x2="1" y2="100" vector-effect="non-scaling-stroke"/></svg><ol class="psteps"><li><span class="stopdot" aria-hidden="true"></span>Checks who is licensed and nearby</li><li><span class="stopdot" aria-hidden="true"></span>Asks two</li><li><span class="stopdot" aria-hidden="true"></span>One can come at 19:00</li><li><span class="stopdot" aria-hidden="true"></span>Price shown</li></ol></div>
+        <div class="result"><p class="price"><b>250,000 call-out</b></p><p>Parts at cost</p>
           <button class="say" type="button" hidden>Say yes?</button>
-          <dl class="rcpt"><dt class="rh">Receipt</dt><div><dt>Brunch for 9</dt><dd>405,000</dd></div><div><dt>Your share</dt><dd>45,000</dd></div></dl>
+          <dl class="rcpt"><dt class="rh">Receipt</dt><div><dt>Call-out</dt><dd>250,000</dd></div></dl>
+        </div>
+      </details>
+      <details class="scn" data-id="scooter">
+        <summary>Scooter: I need a scooter by 3 pm.</summary>
+        <p class="ask">I need a scooter by 3 pm.</p>
+        <div class="pwrap"><svg class="ill proute" viewBox="0 0 2 100" preserveAspectRatio="none" aria-hidden="true"><line class="ln route" x1="1" y1="0" x2="1" y2="100" vector-effect="non-scaling-stroke"/></svg><ol class="psteps"><li><span class="stopdot" aria-hidden="true"></span>Reads your calendar</li><li><span class="stopdot" aria-hidden="true"></span>Asks three independent shops</li><li><span class="stopdot" aria-hidden="true"></span>Kuta Rentals' assistant answers</li><li><span class="stopdot" aria-hidden="true"></span>Price before you decide</li></ol></div>
+        <div class="result"><p class="price"><b>80,000 / day</b></p><p>Deposit 500,000, held until return</p><p>Scoopy, helmet, at your door 14:40</p>
+          <button class="say" type="button" hidden>Say yes?</button>
+          <dl class="rcpt"><dt class="rh">Receipt</dt><div><dt>Scooter, 1 day</dt><dd>80,000</dd></div><div><dt>Deposit, held</dt><dd>500,000</dd></div></dl>
         </div>
       </details>
       <p class="lab">Example, scripted. Prices illustrative.</p>
@@ -168,7 +167,7 @@
   <div class="wrap">
     <div class="shead"><div><h2 id="h-open">Only numbers you can check.</h2></div><div class="spot-slot"><svg class="ill ill-spot" viewBox="0 0 240 180" role="img" aria-label="A torn receipt with a stamp on its corner, and three linked chain links beside it" data-ill="spot-receipt-stamp"><path class="f-surface" transform="translate(3 3)" d="M44,20H144V150l-3.8,6l-3.8,-6l-3.8,6l-3.8,-6l-3.8,6l-3.8,-6l-3.8,6l-3.8,-6l-3.8,6l-3.8,-6l-3.8,6l-3.8,-6l-3.8,6l-3.8,-6l-3.8,6l-3.8,-6l-3.8,6l-3.8,-6l-3.8,6l-3.8,-6l-3.8,6l-3.8,-6l-3.8,6l-3.8,-6l-3.8,6l-3.8,-6Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M44,20H144V150l-3.8,6l-3.8,-6l-3.8,6l-3.8,-6l-3.8,6l-3.8,-6l-3.8,6l-3.8,-6l-3.8,6l-3.8,-6l-3.8,6l-3.8,-6l-3.8,6l-3.8,-6l-3.8,6l-3.8,-6l-3.8,6l-3.8,-6l-3.8,6l-3.8,-6l-3.8,6l-3.8,-6l-3.8,6l-3.8,-6l-3.8,6l-3.8,-6Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M56,36H132M56,49H107M56,62H132M56,75H107M56,88H132"/><path class="f-ochre" transform="translate(3 3)" d="M110,132a22,22 0 1,0 44,0a22,22 0 1,0 -44,0Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M110,132a22,22 0 1,0 44,0a22,22 0 1,0 -44,0Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M122.1,132.4L129.8,139.7L142.6,125"/><g transform="translate(186 50) rotate(70)"><path class="f-clay" transform="translate(3.8 -1.8)" d="M-8,-9H8Q17,-9 17,0V0Q17,9 8,9H-8Q-17,9 -17,0V0Q-17,-9 -8,-9Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M-8,-9H8Q17,-9 17,0V0Q17,9 8,9H-8Q-17,9 -17,0V0Q-17,-9 -8,-9Z"/><path class="f-paper" d="M-6,-3H6Q9,-3 9,0V0Q9,3 6,3H-6Q-9,3 -9,0V0Q-9,-3 -6,-3Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M-6,-3H6Q9,-3 9,0V0Q9,3 6,3H-6Q-9,3 -9,0V0Q-9,-3 -6,-3Z"/></g><g transform="translate(186 82) rotate(110)"><path class="f-clay" transform="translate(1.8 -3.8)" d="M-8,-9H8Q17,-9 17,0V0Q17,9 8,9H-8Q-17,9 -17,0V0Q-17,-9 -8,-9Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M-8,-9H8Q17,-9 17,0V0Q17,9 8,9H-8Q-17,9 -17,0V0Q-17,-9 -8,-9Z"/><path class="f-paper" d="M-6,-3H6Q9,-3 9,0V0Q9,3 6,3H-6Q-9,3 -9,0V0Q-9,-3 -6,-3Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M-6,-3H6Q9,-3 9,0V0Q9,3 6,3H-6Q-9,3 -9,0V0Q-9,-3 -6,-3Z"/></g><g transform="translate(186 114) rotate(70)"><path class="f-clay" transform="translate(3.8 -1.8)" d="M-8,-9H8Q17,-9 17,0V0Q17,9 8,9H-8Q-17,9 -17,0V0Q-17,-9 -8,-9Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M-8,-9H8Q17,-9 17,0V0Q17,9 8,9H-8Q-17,9 -17,0V0Q-17,-9 -8,-9Z"/><path class="f-paper" d="M-6,-3H6Q9,-3 9,0V0Q9,3 6,3H-6Q-9,3 -9,0V0Q-9,-3 -6,-3Z"/><path class="ln" vector-effect="non-scaling-stroke" d="M-6,-3H6Q9,-3 9,0V0Q9,3 6,3H-6Q-9,3 -9,0V0Q-9,-3 -6,-3Z"/></g></svg></div></div>
     <div class="facts4">
-      <p><b>685</b><span>of 942 planned features are built. The list is public.</span></p>
+      <p><b>688</b><span>of 948 planned features are built. The list is public.</span></p>
       <p><b>0%</b><span>platform fee on what you book or earn</span></p>
       <p><b>1</b><span>receipt per request, hash-chained</span></p>
       <p><b>Open</b><span>source, runs on your own machine</span></p>
@@ -199,11 +198,11 @@
 <script src="/home.js" defer></script>
 </main>
 <footer class="foot">
-  <div class="wrap fcols"><div class="fcol"><p class="fh">Product</p><a href="/rooms/">Shared rooms</a><a href="/how-it-works/">How it works</a><a href="/how-it-works/#all-scenarios">Scenarios</a><a href="/for/">Who it is for</a><a href="/pricing/">Pricing</a></div><div class="fcol"><p class="fh">Developers</p><a href="/docs/">Docs</a><a href="/docs/">The router API</a><a href="/registry/">Registry</a><a href="https://github.com/nicholasandreasujitno/massrelay-site">Source of this page</a></div><div class="fcol"><p class="fh">Resources</p><a href="/adoption/">AI by field</a><a href="/adoption/laws/">AI laws</a><a href="/services/">Custom assistant</a><a href="/resources/">All resources</a><a href="mailto:support@massrelay.ai">Contact</a></div></div>
+  <div class="wrap fcols"><div class="fcol"><p class="fh">Assistant</p><a href="/">For people</a><a href="/company/">For companies</a><a href="/rooms/">Rooms</a><a href="/how-it-works/">How it works</a><a href="/how-it-works/#all-scenarios">Scenarios</a><a href="/for/">Who it is for</a><a href="/pricing/">Pricing</a></div><div class="fcol"><p class="fh">Developers</p><a href="/router/">Router</a><a href="/docs/">Docs</a><a href="/pricing/developers/">Developer pricing</a><a href="/registry/">Registry</a><a href="/docs/self-hosted-integration/">Run it yourself</a><a href="/pricing/developers/#rent">Rent out a model or GPUs</a></div><div class="fcol"><p class="fh">AI by field</p><a href="/fields/">The field guide</a><a href="/fields/cases/">Cases</a><a href="/fields/laws/">AI laws</a><a href="/custom-assistant/">Custom assistant</a><a href="/resources/">All resources</a></div><div class="fcol"><p class="fh">About</p><a href="/security/">Security</a><a href="/privacy/">Privacy</a><a href="mailto:support@massrelay.ai">Contact</a><a href="https://github.com/nicholasandreasujitno/massrelay-site">Source of this page</a></div></div>
   <div class="wrap">
     <span><span class="word">MassRelay</span> · massrelay.ai</span>
     <span><a href="mailto:support@massrelay.ai">Contact</a> · <a href="https://github.com/nicholasandreasujitno/massrelay-site">Source of this page</a></span>
-    <span class="stamp" title="Product version, site version, build">v0.4.0 · site 1 · bde2cd885</span>
+    <span class="stamp" title="Product version, site version, build">v0.4.0 · site 1 · b569b7ae4</span>
   </div>
 </footer>
 
