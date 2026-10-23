@@ -55,7 +55,7 @@
 <pre><code>npm install @massrelay/sdk</code></pre>
 <h2 id="three-lines">Three lines</h2>
 <pre><code>import { createClient } from &quot;@massrelay/sdk&quot;;
-const mr = createClient({ baseUrl: &quot;https://relay.massrelay.ai&quot;, apiKey: process.env.MASSRELAY_KEY });
+const mr = createClient({ baseUrl: &quot;https://api.massrelay.ai&quot;, apiKey: process.env.MASSRELAY_KEY });
 const credits = await mr.get(&quot;/v1/credits&quot;); // typed from the contract</code></pre>
 <p>A path with a parameter takes it in <code>path</code>: <code>mr.get(&quot;/v1/generation/{id}&quot;, { path: { id } })</code>. A <code>POST</code> takes the typed body as its second argument. The key is sent only in the <code>Authorization</code> header, never in a URL or a body.</p>
 <h2 id="errors">Errors</h2>
@@ -70,7 +70,7 @@ const credits = await mr.get(&quot;/v1/credits&quot;); // typed from the contrac
   <div class="wrap">
     <span><span class="word">MassRelay</span> · massrelay.ai</span>
     <span><a href="mailto:support@massrelay.ai">Contact</a> · <a href="https://github.com/nicholasandreasujitno/massrelay-site">Source of this page</a></span>
-    <span class="stamp" title="Product version, site version, build">v0.4.0 · site 1 · 2e7a04bbf</span>
+    <span class="stamp" title="Product version, site version, build">v0.4.0 · site 1 · 1aafc0089</span>
   </div>
 </footer>
 

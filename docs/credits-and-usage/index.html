@@ -437,7 +437,7 @@
 <p>When a budget runs out the router first lowers autonomy or files a request for help; a hard stop comes after. When a request does stop for money it answers 402; see Errors.</p>
 <h2 id="for-a-key-holder-four-doors-under-v1">For a key holder: four doors under <code>/v1</code></h2>
 <p>These doors take the relay key itself as the bearer, exactly as the completion doors do, and only read. A revoked, expired or unknown key is refused with the same 401 as everywhere else. They read the key's own ledgers: a decision of another key or another workspace is a 404, never a 403. Each costs one request against the key's rate limit.</p>
-<pre><code>curl https://relay.massrelay.ai/v1/key -H &quot;Authorization: Bearer mrk_&lt;prefix&gt;_&lt;secret&gt;&quot;</code></pre>
+<pre><code>curl https://api.massrelay.ai/v1/key -H &quot;Authorization: Bearer mrk_&lt;prefix&gt;_&lt;secret&gt;&quot;</code></pre>
 <section class="card ref" id="ref-get-v1-key">
   <h3><span class="tag built">GET</span> <code>/v1/key</code></h3>
   <p>Who may call: relay key (bearer).</p>
@@ -836,7 +836,7 @@
 }</code></pre>
 </section>
 <p>The rollup of the key's ledger rows for a period: requests, tokens and cost. <code>from</code> and <code>to</code> take an ISO date or datetime (default: this UTC calendar month); <code>end_user</code> narrows to one end-user tag; <code>group_by=end_user</code> returns one row per tag.</p>
-<pre><code>curl &quot;https://relay.massrelay.ai/v1/usage?group_by=end_user&quot; -H &quot;Authorization: Bearer mrk_&lt;prefix&gt;_&lt;secret&gt;&quot;</code></pre>
+<pre><code>curl &quot;https://api.massrelay.ai/v1/usage?group_by=end_user&quot; -H &quot;Authorization: Bearer mrk_&lt;prefix&gt;_&lt;secret&gt;&quot;</code></pre>
 <h2 id="rate-limit-headers">Rate-limit headers</h2>
 <p>Every <code>/v1</code> answer whose request reached the rate limiter carries the state of the limit that binds that key, read from the same evaluation that admitted the request (a header never costs a second slot).</p>
 <p>| header | meaning | |---|---| | <code>X-RateLimit-Limit</code> | requests per minute of the binding limit (the key's, or its workspace's if that is tighter) | | <code>X-RateLimit-Remaining</code> | whole requests still admitted right now without being queued | | <code>X-RateLimit-Reset</code> | seconds, rounded up, until one more request would be admitted without queueing (0 while some remain) | | <code>Retry-After</code> | on a 429 only: seconds to wait, rounded up |</p>
@@ -849,7 +849,7 @@
   <div class="wrap">
     <span><span class="word">MassRelay</span> · massrelay.ai</span>
     <span><a href="mailto:support@massrelay.ai">Contact</a> · <a href="https://github.com/nicholasandreasujitno/massrelay-site">Source of this page</a></span>
-    <span class="stamp" title="Product version, site version, build">v0.4.0 · site 1 · 2e7a04bbf</span>
+    <span class="stamp" title="Product version, site version, build">v0.4.0 · site 1 · 1aafc0089</span>
   </div>
 </footer>
 

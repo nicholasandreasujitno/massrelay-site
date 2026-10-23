@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://relay.massrelay.ai",
+      "url": "https://api.massrelay.ai",
       "description": "production"
     },
     {

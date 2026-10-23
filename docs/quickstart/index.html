@@ -54,17 +54,17 @@
 <h2 id="what-you-need">What you need</h2>
 <ul>
 <li>A relay key. Today a signed-in workspace creates one on the Keys page of the console. A sign-up that gives a key in one flow is coming (KEY-1b).</li>
-<li>The base URL: <code>https://relay.massrelay.ai/v1</code>. Staging is <code>https://relay-stag.massrelay.ai/v1</code>.</li>
+<li>The base URL: <code>https://api.massrelay.ai/v1</code>. Staging is <code>https://relay-stag.massrelay.ai/v1</code>.</li>
 </ul>
 <h2 id="curl">curl</h2>
-<pre><code>curl https://relay.massrelay.ai/v1/chat/completions \
+<pre><code>curl https://api.massrelay.ai/v1/chat/completions \
   -H &quot;Authorization: Bearer $RELAY_KEY&quot; \
   -H &quot;Content-Type: application/json&quot; \
   -d '{&quot;messages&quot;:[{&quot;role&quot;:&quot;user&quot;,&quot;content&quot;:&quot;Say hello in one sentence.&quot;}]}'</code></pre>
 <p>The <code>model</code> field is optional: when it is absent the key's routing picks the model. Every answer carries an id of the form <code>chatcmpl-&lt;decisionId&gt;</code>; keep it, because the explain door reads it back (see Routing).</p>
 <h2 id="the-openai-sdks">The OpenAI SDKs</h2>
 <pre><code>from openai import OpenAI
-client = OpenAI(base_url=&quot;https://relay.massrelay.ai/v1&quot;, api_key=&quot;YOUR_RELAY_KEY&quot;)
+client = OpenAI(base_url=&quot;https://api.massrelay.ai/v1&quot;, api_key=&quot;YOUR_RELAY_KEY&quot;)
 reply = client.chat.completions.create(
     model=&quot;MODEL_ID_FROM_GET_V1_MODELS&quot;,
     messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Say hello in one sentence.&quot;}],
@@ -73,7 +73,7 @@ print(reply.choices[0].message.content)</code></pre>
 <p>The same base URL serves <code>POST /v1/responses</code> for code written against the responses format.</p>
 <h2 id="the-anthropic-sdk">The Anthropic SDK</h2>
 <pre><code>import anthropic
-client = anthropic.Anthropic(base_url=&quot;https://relay.massrelay.ai&quot;, api_key=&quot;YOUR_RELAY_KEY&quot;)
+client = anthropic.Anthropic(base_url=&quot;https://api.massrelay.ai&quot;, api_key=&quot;YOUR_RELAY_KEY&quot;)
 msg = client.messages.create(
     model=&quot;MODEL_ID_FROM_GET_V1_MODELS&quot;,
     max_tokens=256,
@@ -484,7 +484,7 @@ print(msg.content[0].text)</code></pre>
   <div class="wrap">
     <span><span class="word">MassRelay</span> · massrelay.ai</span>
     <span><a href="mailto:support@massrelay.ai">Contact</a> · <a href="https://github.com/nicholasandreasujitno/massrelay-site">Source of this page</a></span>
-    <span class="stamp" title="Product version, site version, build">v0.4.0 · site 1 · 2e7a04bbf</span>
+    <span class="stamp" title="Product version, site version, build">v0.4.0 · site 1 · 1aafc0089</span>
   </div>
 </footer>
 
