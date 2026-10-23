@@ -5,21 +5,24 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
-<meta name="theme-color" content="#F7F8FA">
+<meta name="theme-color" content="#FAF7F0" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#16140F" media="(prefers-color-scheme: dark)">
 <meta name="generator" content="massrelay-site 0.4.0+site1">
 <title>Who adopted what, and where · massrelay.ai</title>
-<meta name="description" content="319 named AI and automation adoptions in 40 countries, each with its source. Filter by region, sector, kind, maturity and effort.">
+<meta name="description" content="320 named AI and automation adoptions in 40 countries, each with its source. Filter by region, sector, kind, maturity and effort.">
 <meta property="og:title" content="Who adopted what, and where · massrelay.ai">
-<meta property="og:description" content="319 named AI and automation adoptions in 40 countries, each with its source. Filter by region, sector, kind, maturity and effort.">
+<meta property="og:description" content="320 named AI and automation adoptions in 40 countries, each with its source. Filter by region, sector, kind, maturity and effort.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://massrelay.ai/adoption/cases/">
-<meta property="og:image" content="https://massrelay.ai/brand/banners/og-the-databank.png">
+<meta property="og:image" content="https://massrelay.ai/brand/og/og-adoption.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="The courier taking one card from a wall of paper cards">
+<meta property="og:image:alt" content="What AI is for, field by field. A drawing from massrelay.ai.">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://massrelay.ai/adoption/cases/">
 <link rel="icon" href="/brand/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/brand/icons/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/brand/icons/apple-touch-180.png">
 <link rel="manifest" href="/site.webmanifest">
 <link rel="stylesheet" href="/site.css">
 </head>
@@ -27,13 +30,14 @@
 <a class="skip" href="#main">Skip to content</a>
 <header class="top">
   <div class="wrap nav">
-    <a class="brand" href="/"><span class="word">MassRelay</span></a>
+    <a class="brand" href="/"><svg class="mark" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M3.5 20V11A4.25 4.25 0 0 1 12 11V20"/><path class="arch2" d="M12 11A4.25 4.25 0 0 1 20.5 11V20"/></svg><span class="word">MassRelay</span></a>
     <nav class="menu" aria-label="Main">
-      <a class="link" href="/rooms/">Rooms</a>
+      <a class="link" href="/rooms/">Shared rooms</a>
       <a class="link" href="/how-it-works/">How it works</a>
       <a class="link" href="/for/">Who it is for</a>
+      <a class="link" href="/pricing/">Pricing</a>
       <a class="link" href="/docs/">Developers</a>
-      <a class="link" href="/resources/">Resources</a>
+      <a class="link" href="/adoption/" aria-current="page">AI by field</a>
       <button class="btn ghost sm" id="theme" type="button" aria-label="Switch light and dark">Dark</button>
       <a class="btn primary sm" href="/#join">Join the waiting list</a>
     </nav>
@@ -41,15 +45,15 @@
 </header>
 
 <main id="main">
-<nav class="subnav" aria-label="What AI is for"><div class="wrap"><a href="/adoption/">What AI is for</a><a href="/adoption/cases/" aria-current="page">Cases</a><a href="/adoption/laws/">Laws</a><a href="/services/">Consulting</a></div></nav>
+<nav class="subnav" aria-label="What AI is for"><div class="wrap"><a href="/adoption/">AI by field</a><a href="/adoption/cases/" aria-current="page">Cases</a><a href="/adoption/laws/">AI laws</a><a href="/services/">Custom assistant</a></div></nav>
 <div class="wrap cases-head">
   <div class="cases-intro">
     <h1>Who adopted what, and where.</h1>
-    <p class="lead">319 named adoptions across 51 sectors and 40 countries. Every line links the page we read. Filter it to the companies that look like yours.</p>
+    <p class="lead">320 named adoptions across 51 sectors and 40 countries. Every line links the page we read. Filter it to the companies that look like yours.</p>
     <div class="counters" aria-live="polite">
-      <p><b data-count="319" id="k-rows">319</b><span>adoptions shown</span></p>
+      <p><b data-count="320" id="k-rows">320</b><span>adoptions shown</span></p>
       <p><b data-count="40" id="k-countries">40</b><span>countries</span></p>
-      <p><b data-count="230" id="k-independent">230</b><span>with an independent source</span></p>
+      <p><b data-count="231" id="k-independent">231</b><span>with an independent source</span></p>
     </div>
   </div>
   <figure class="globe-wrap">
@@ -71,33 +75,33 @@
         <label class="chip"><input type="checkbox" value="europe"><span>Europe</span> <b class="n" data-n="region:europe">53</b></label>
         <label class="chip"><input type="checkbox" value="north-america"><span>North America</span> <b class="n" data-n="region:north-america">51</b></label>
         <label class="chip"><input type="checkbox" value="latin-america"><span>Latin America</span> <b class="n" data-n="region:latin-america">8</b></label>
-        <label class="chip"><input type="checkbox" value="global"><span>Global</span> <b class="n" data-n="region:global">12</b></label>
+        <label class="chip"><input type="checkbox" value="global"><span>Global</span> <b class="n" data-n="region:global">13</b></label>
       </fieldset>
       <fieldset class="chips" data-dim="kind"><legend>Kind</legend>
         <label class="chip"><input type="checkbox" value="ai"><span>AI</span> <b class="n" data-n="kind:ai">232</b></label>
         <label class="chip"><input type="checkbox" value="automation"><span>Automation</span> <b class="n" data-n="kind:automation">29</b></label>
-        <label class="chip"><input type="checkbox" value="platform"><span>Platform</span> <b class="n" data-n="kind:platform">44</b></label>
+        <label class="chip"><input type="checkbox" value="platform"><span>Platform</span> <b class="n" data-n="kind:platform">45</b></label>
         <label class="chip"><input type="checkbox" value="iot"><span>Sensors and IoT</span> <b class="n" data-n="kind:iot">14</b></label>
       </fieldset>
       <fieldset class="chips" data-dim="maturity"><legend>Maturity</legend>
         <label class="chip"><input type="checkbox" value="announced"><span>Announced</span> <b class="n" data-n="maturity:announced">19</b></label>
         <label class="chip"><input type="checkbox" value="pilot"><span>Pilot</span> <b class="n" data-n="maturity:pilot">53</b></label>
-        <label class="chip"><input type="checkbox" value="live"><span>Live</span> <b class="n" data-n="maturity:live">186</b></label>
+        <label class="chip"><input type="checkbox" value="live"><span>Live</span> <b class="n" data-n="maturity:live">187</b></label>
         <label class="chip"><input type="checkbox" value="scaled"><span>At scale</span> <b class="n" data-n="maturity:scaled">61</b></label>
       </fieldset>
       <fieldset class="chips" data-dim="effort"><legend>Effort</legend>
-        <label class="chip"><input type="checkbox" value="low"><span>Low effort</span> <b class="n" data-n="effort:low">58</b></label>
+        <label class="chip"><input type="checkbox" value="low"><span>Low effort</span> <b class="n" data-n="effort:low">59</b></label>
         <label class="chip"><input type="checkbox" value="medium"><span>Medium effort</span> <b class="n" data-n="effort:medium">133</b></label>
         <label class="chip"><input type="checkbox" value="high"><span>High effort</span> <b class="n" data-n="effort:high">128</b></label>
       </fieldset>
       <fieldset class="chips" data-dim="source"><legend>Source</legend>
-        <label class="chip"><input type="checkbox" value="independent"><span>Independent source</span> <b class="n" data-n="source:independent">230</b></label>
+        <label class="chip"><input type="checkbox" value="independent"><span>Independent source</span> <b class="n" data-n="source:independent">231</b></label>
         <label class="chip"><input type="checkbox" value="vendor"><span>Vendor only</span> <b class="n" data-n="source:vendor">89</b></label>
       </fieldset>
       <fieldset class="chips" data-dim="function"><legend>Business function</legend>
         <label class="chip"><input type="checkbox" value="operations"><span>Operations</span> <b class="n" data-n="function:operations">186</b></label>
         <label class="chip"><input type="checkbox" value="customer-service"><span>Customer service</span> <b class="n" data-n="function:customer-service">89</b></label>
-        <label class="chip"><input type="checkbox" value="marketing-and-sales"><span>Marketing &amp; sales</span> <b class="n" data-n="function:marketing-and-sales">57</b></label>
+        <label class="chip"><input type="checkbox" value="marketing-and-sales"><span>Marketing &amp; sales</span> <b class="n" data-n="function:marketing-and-sales">58</b></label>
         <label class="chip"><input type="checkbox" value="risk-and-compliance"><span>Risk &amp; compliance</span> <b class="n" data-n="function:risk-and-compliance">49</b></label>
         <label class="chip"><input type="checkbox" value="field-work"><span>Field work</span> <b class="n" data-n="function:field-work">47</b></label>
         <label class="chip"><input type="checkbox" value="finance"><span>Finance</span> <b class="n" data-n="function:finance">35</b></label>
@@ -118,7 +122,7 @@
         <label class="chip"><input type="checkbox" value="sport-fitness-and-personal"><span>Sport, fitness &amp; personal</span> <b class="n" data-n="group:sport-fitness-and-personal">19</b></label>
         <label class="chip"><input type="checkbox" value="logistics-transport-and-trade"><span>Logistics, transport &amp; trade</span> <b class="n" data-n="group:logistics-transport-and-trade">16</b></label>
         <label class="chip"><input type="checkbox" value="manufacturing-and-industry"><span>Manufacturing &amp; industry</span> <b class="n" data-n="group:manufacturing-and-industry">7</b></label>
-        <label class="chip"><input type="checkbox" value="media-creative-and-marketing-agencies"><span>Media, creative &amp; marketing agencies</span> <b class="n" data-n="group:media-creative-and-marketing-agencies">13</b></label>
+        <label class="chip"><input type="checkbox" value="media-creative-and-marketing-agencies"><span>Media, creative &amp; marketing agencies</span> <b class="n" data-n="group:media-creative-and-marketing-agencies">14</b></label>
         <label class="chip"><input type="checkbox" value="construction-and-property"><span>Construction &amp; property</span> <b class="n" data-n="group:construction-and-property">16</b></label>
         <label class="chip"><input type="checkbox" value="community-and-civic"><span>Community &amp; civic</span> <b class="n" data-n="group:community-and-civic">6</b></label>
         <label class="chip"><input type="checkbox" value="retail-f-and-b-and-e-commerce"><span>Retail, F&amp;B &amp; e-commerce</span> <b class="n" data-n="group:retail-f-and-b-and-e-commerce">8</b></label>
@@ -128,34 +132,34 @@
   <div class="board">
     <div class="charts">
       <figure class="bars" data-dim="region"><figcaption>By region</figcaption>
-        <div class="bar"><span class="bl">Southeast Asia</span><span class="bt"><i data-bar="region:southeast-asia" style="--s:0.414"></i></span><b data-n="region:southeast-asia">132</b></div>
+        <div class="bar"><span class="bl">Southeast Asia</span><span class="bt"><i data-bar="region:southeast-asia" style="--s:0.412"></i></span><b data-n="region:southeast-asia">132</b></div>
         <div class="bar"><span class="bl">East Asia</span><span class="bt"><i data-bar="region:east-asia" style="--s:0.078"></i></span><b data-n="region:east-asia">25</b></div>
         <div class="bar"><span class="bl">South Asia</span><span class="bt"><i data-bar="region:south-asia" style="--s:0.053"></i></span><b data-n="region:south-asia">17</b></div>
         <div class="bar"><span class="bl">Oceania</span><span class="bt"><i data-bar="region:oceania" style="--s:0.028"></i></span><b data-n="region:oceania">9</b></div>
         <div class="bar"><span class="bl">Middle East</span><span class="bt"><i data-bar="region:middle-east" style="--s:0.028"></i></span><b data-n="region:middle-east">9</b></div>
         <div class="bar"><span class="bl">Africa</span><span class="bt"><i data-bar="region:africa" style="--s:0.028"></i></span><b data-n="region:africa">9</b></div>
         <div class="bar"><span class="bl">Europe</span><span class="bt"><i data-bar="region:europe" style="--s:0.166"></i></span><b data-n="region:europe">53</b></div>
-        <div class="bar"><span class="bl">North America</span><span class="bt"><i data-bar="region:north-america" style="--s:0.160"></i></span><b data-n="region:north-america">51</b></div>
+        <div class="bar"><span class="bl">North America</span><span class="bt"><i data-bar="region:north-america" style="--s:0.159"></i></span><b data-n="region:north-america">51</b></div>
         <div class="bar"><span class="bl">Latin America</span><span class="bt"><i data-bar="region:latin-america" style="--s:0.025"></i></span><b data-n="region:latin-america">8</b></div>
-        <div class="bar"><span class="bl">Global</span><span class="bt"><i data-bar="region:global" style="--s:0.038"></i></span><b data-n="region:global">12</b></div>
+        <div class="bar"><span class="bl">Global</span><span class="bt"><i data-bar="region:global" style="--s:0.041"></i></span><b data-n="region:global">13</b></div>
       </figure>
       <figure class="bars" data-dim="function"><figcaption>By business function</figcaption>
-        <div class="bar"><span class="bl">Operations</span><span class="bt"><i data-bar="function:operations" style="--s:0.583"></i></span><b data-n="function:operations">186</b></div>
-        <div class="bar"><span class="bl">Customer service</span><span class="bt"><i data-bar="function:customer-service" style="--s:0.279"></i></span><b data-n="function:customer-service">89</b></div>
-        <div class="bar"><span class="bl">Marketing &amp; sales</span><span class="bt"><i data-bar="function:marketing-and-sales" style="--s:0.179"></i></span><b data-n="function:marketing-and-sales">57</b></div>
-        <div class="bar"><span class="bl">Risk &amp; compliance</span><span class="bt"><i data-bar="function:risk-and-compliance" style="--s:0.154"></i></span><b data-n="function:risk-and-compliance">49</b></div>
+        <div class="bar"><span class="bl">Operations</span><span class="bt"><i data-bar="function:operations" style="--s:0.581"></i></span><b data-n="function:operations">186</b></div>
+        <div class="bar"><span class="bl">Customer service</span><span class="bt"><i data-bar="function:customer-service" style="--s:0.278"></i></span><b data-n="function:customer-service">89</b></div>
+        <div class="bar"><span class="bl">Marketing &amp; sales</span><span class="bt"><i data-bar="function:marketing-and-sales" style="--s:0.181"></i></span><b data-n="function:marketing-and-sales">58</b></div>
+        <div class="bar"><span class="bl">Risk &amp; compliance</span><span class="bt"><i data-bar="function:risk-and-compliance" style="--s:0.153"></i></span><b data-n="function:risk-and-compliance">49</b></div>
         <div class="bar"><span class="bl">Field work</span><span class="bt"><i data-bar="function:field-work" style="--s:0.147"></i></span><b data-n="function:field-work">47</b></div>
-        <div class="bar"><span class="bl">Finance</span><span class="bt"><i data-bar="function:finance" style="--s:0.110"></i></span><b data-n="function:finance">35</b></div>
+        <div class="bar"><span class="bl">Finance</span><span class="bt"><i data-bar="function:finance" style="--s:0.109"></i></span><b data-n="function:finance">35</b></div>
         <div class="bar"><span class="bl">Product &amp; R&amp;D</span><span class="bt"><i data-bar="function:product-and-r-and-d" style="--s:0.069"></i></span><b data-n="function:product-and-r-and-d">22</b></div>
       </figure>
       <figure class="bars" data-dim="maturity"><figcaption>By maturity</figcaption>
-        <div class="bar"><span class="bl">Announced</span><span class="bt"><i data-bar="maturity:announced" style="--s:0.060"></i></span><b data-n="maturity:announced">19</b></div>
+        <div class="bar"><span class="bl">Announced</span><span class="bt"><i data-bar="maturity:announced" style="--s:0.059"></i></span><b data-n="maturity:announced">19</b></div>
         <div class="bar"><span class="bl">Pilot</span><span class="bt"><i data-bar="maturity:pilot" style="--s:0.166"></i></span><b data-n="maturity:pilot">53</b></div>
-        <div class="bar"><span class="bl">Live</span><span class="bt"><i data-bar="maturity:live" style="--s:0.583"></i></span><b data-n="maturity:live">186</b></div>
+        <div class="bar"><span class="bl">Live</span><span class="bt"><i data-bar="maturity:live" style="--s:0.584"></i></span><b data-n="maturity:live">187</b></div>
         <div class="bar"><span class="bl">At scale</span><span class="bt"><i data-bar="maturity:scaled" style="--s:0.191"></i></span><b data-n="maturity:scaled">61</b></div>
       </figure>
     </div>
-    <p class="showing" aria-live="polite"><b id="k-showing">319</b> of 319 adoptions. Open a line for its outcome, how to adopt it and the source.</p>
+    <p class="showing" aria-live="polite"><b id="k-showing">320</b> of 320 adoptions. Open a line for its outcome, how to adopt it and the source.</p>
     <div class="table-wrap">
     <table class="cases-t" id="cases">
       <caption class="sr">Adoptions in the ledger</caption>
@@ -2394,6 +2398,13 @@
         <td data-k="sector">tourism / rental (N77)</td><td data-k="where">FR</td><td data-k="year" class="num">2020</td>
         <td data-k="maturity"><span class="pill m-pilot">Pilot</span></td><td data-k="effort">high</td>
       </tr>
+      <tr data-id="SA-OTH-11h" data-f="region:global group:media-creative-and-marketing-agencies kind:platform maturity:live effort:low function:marketing-and-sales source:independent" data-c="US" data-q="whop (marketplace), brands and agencies posting campaigns, clippers (individuals), united states and global brands run clipping campaigns on a marketplace: the brand posts source material and a reward per 1,000 views, clippers post short cuts on tiktok / reels / shorts, the platform reads the view counts and pays out per verified thousand up to a per-video cap marketing (m73) whop content rewards (campaign marketplace: reward rate per 1,000 views, minimum payout before review, per-video maximum); clipping tools (opus, vyro)" data-year="2026">
+        <td class="what"><details><summary><b>Whop (marketplace), brands and agencies posting campaigns, clippers (individuals), United States and global</b><span>Brands run clipping campaigns on a marketplace: the brand posts source material and a reward per 1,000 views, clippers post short cuts on TikTok / Reels / Shorts, the platform reads the view counts and pays out per verified thousand up to a per-video cap</span></summary>
+          <dl><dt>Problem</dt><dd>distribution without an ad budget: paying strangers per verified view instead of per impression; view fraud and unreviewed clips</dd><dt>Technology</dt><dd>Whop Content Rewards (campaign marketplace: reward rate per 1,000 views, minimum payout before review, per-video maximum); clipping tools (Opus, Vyro)</dd><dt>Outcome</dt><dd>median USD 1.00 per 1,000 verified views across 50 campaigns (Foundry, Sep 2026; range 0.05–3.00)</dd><dt>How to adopt</dt><dd>Needs a platform account with API access for the view read and a funded hold. The brand sets the rate, the cap and the date; clippers arrive through the public call.</dd><dt>Risks</dt><dd>View fraud; platform terms; 'quick money' positioning (refused: STRATEGY §5a angle 6); payouts need the processor rail (SE-1).</dd></dl>
+          <p class="src"><a href="https://docs.whop.com/manage-your-business/growth-marketing/content-rewards" rel="noopener noreferrer">Read the source</a> · vendor (Whop's own documentation); corroborated by a secondary analysis of 50 campaigns (builtbyfoundry.io, September 2026: median USD 1.00 per 1,000 views, range 0.05–3.00)</p></details></td>
+        <td data-k="sector">marketing (M73)</td><td data-k="where">US</td><td data-k="year" class="num">2026</td>
+        <td data-k="maturity"><span class="pill m-live">Live</span></td><td data-k="effort">low</td>
+      </tr>
       </tbody>
     </table>
     </div>
@@ -2404,11 +2415,11 @@
 <script src="/explore.js" defer></script>
 </main>
 <footer class="foot">
-  <div class="wrap fcols"><div class="fcol"><p class="fh">Product</p><a href="/rooms/">Rooms</a><a href="/how-it-works/">How it works</a><a href="/how-it-works/#all-scenarios">Scenarios</a><a href="/for/">Who it is for</a></div><div class="fcol"><p class="fh">Developers</p><a href="/docs/">Docs</a><a href="/docs/">The router API</a><a href="/registry/">Registry</a><a href="https://github.com/nicholasandreasujitno/massrelay-site">Source of this page</a></div><div class="fcol"><p class="fh">Resources</p><a href="/adoption/">What AI is for</a><a href="/adoption/laws/">Laws</a><a href="/services/">Consulting</a><a href="mailto:support@massrelay.ai">Contact</a></div></div>
+  <div class="wrap fcols"><div class="fcol"><p class="fh">Product</p><a href="/rooms/">Shared rooms</a><a href="/how-it-works/">How it works</a><a href="/how-it-works/#all-scenarios">Scenarios</a><a href="/for/">Who it is for</a><a href="/pricing/">Pricing</a></div><div class="fcol"><p class="fh">Developers</p><a href="/docs/">Docs</a><a href="/docs/">The router API</a><a href="/registry/">Registry</a><a href="https://github.com/nicholasandreasujitno/massrelay-site">Source of this page</a></div><div class="fcol"><p class="fh">Resources</p><a href="/adoption/">AI by field</a><a href="/adoption/laws/">AI laws</a><a href="/services/">Custom assistant</a><a href="/resources/">All resources</a><a href="mailto:support@massrelay.ai">Contact</a></div></div>
   <div class="wrap">
     <span><span class="word">MassRelay</span> · massrelay.ai</span>
     <span><a href="mailto:support@massrelay.ai">Contact</a> · <a href="https://github.com/nicholasandreasujitno/massrelay-site">Source of this page</a></span>
-    <span class="stamp" title="Product version, site version, build">v0.4.0 · site 1 · 2de7d5203</span>
+    <span class="stamp" title="Product version, site version, build">v0.4.0 · site 1 · bde2cd885</span>
   </div>
 </footer>
 
