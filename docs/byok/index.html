@@ -35,7 +35,7 @@
       <div class="dd"><a class="link" href="/">Assistant</a><div class="dd-menu"><a class="sub" href="/">For people</a><a class="sub" href="/rooms/">Rooms</a><a class="sub" href="/how-it-works/">How it works</a><a class="sub" href="/for/">Who it is for</a></div></div>
       <a class="link" href="/company/">For companies</a>
       <div class="dd"><a class="link" href="/pricing/">Pricing</a><div class="dd-menu"><a class="sub" href="/pricing/">For people and teams</a><a class="sub" href="/pricing/developers/">For developers</a></div></div>
-      <div class="dd"><a class="link" href="/router/" aria-current="page">Developers</a><div class="dd-menu"><a class="sub" href="/router/">Router</a><a class="sub" href="/docs/">Docs</a><a class="sub" href="/pricing/developers/">Developer pricing</a><a class="sub" href="/docs/self-hosted-integration/">Run it yourself</a></div></div>
+      <div class="dd"><a class="link" href="/router/" aria-current="page">Developers</a><div class="dd-menu"><a class="sub" href="/router/">Router</a><a class="sub" href="/models/">Your own model</a><a class="sub" href="/docs/">Docs</a><a class="sub" href="/pricing/developers/">Developer pricing</a><a class="sub" href="/docs/self-hosted-integration/">Run it yourself</a></div></div>
       <div class="dd"><a class="link" href="/fields/">AI by field</a><div class="dd-menu"><a class="sub" href="/fields/">The field guide</a><a class="sub" href="/fields/cases/">Cases</a><a class="sub" href="/fields/laws/">AI laws</a><a class="sub" href="/custom-assistant/">Custom assistant</a></div></div>
       <button class="btn ghost sm" id="theme" type="button" aria-label="Switch light and dark">Dark</button>
       <a class="btn primary sm" href="/#join">Join the waiting list</a>
@@ -44,15 +44,25 @@
 </header>
 
 <main id="main">
-<div class="wrap page-head">
-  <p class="crumbs"><a href="/">Home</a> / <a href="/docs/">Docs</a> / Bring your own key</p>
-  <h1>Bring your own key</h1>
-  <p class="lead">Use your own provider keys through the router: your key stays yours, and the fee is a line you can see.</p>
-</div>
-<section style="padding-top:24px"><div class="wrap">
-<p>A workspace can store its own provider keys and route through them. The router uses your key to call the provider; the provider bills you directly, and the model price is not added to your balance.</p>
-<h2 id="what-the-router-keeps">What the router keeps</h2>
-<p>The router charges a request fee on traffic that runs on your own key or your own model. The rule, as built (PRICE-2):</p>
+<div class="docs">
+  <div class="docs-tabs"><div class="wrap"><a href="/docs/" aria-current="page">Guides</a><a href="/docs/reference/">API reference</a><a href="/docs/self-hosted-integration/">Run it yourself</a><a href="/docs/changelog/">Changelog</a><a class="dt-json" href="/docs/openapi.json">openapi.json</a></div></div>
+  <div class="docs-grid wrap">
+    <nav class="docs-side" aria-label="Documentation">
+      <label class="docs-search"><span class="sr">Search the docs</span><input type="search" id="docsq" placeholder="Search the docs" autocomplete="off"></label>
+      <ul id="docs-results" class="docs-results" hidden></ul>
+      <details class="dn-fold" open><summary>Pages</summary><p class="dn-g">Get started</p><ul><li><a href="/docs/quickstart/">Quickstart</a></li><li><a href="/docs/authentication/">Authentication</a></li><li><a href="/docs/models/">Models</a></li><li><a href="/docs/sdk/">The SDK</a></li></ul><p class="dn-g">Routing</p><ul><li><a href="/docs/routing/">Routing</a></li><li><a href="/docs/byok/" aria-current="page">Bring your own key</a></li><li><a href="/docs/your-model-and-node/">Your model and your node</a></li></ul><p class="dn-g">Usage and billing</p><ul><li><a href="/docs/credits-and-usage/">Credits and usage</a></li><li><a href="/docs/limits/">Limits</a></li></ul><p class="dn-g">Help</p><ul><li><a href="/docs/errors/">Errors</a></li><li><a href="/docs/differences/">How this differs</a></li><li><a href="/docs/changelog/">Changelog</a></li></ul><p class="dn-g">Run it yourself</p><ul><li><a href="/docs/self-hosted-integration/">Integrate against your own install</a></li></ul></details>
+    </nav>
+    <article class="docs-main">
+      <p class="crumbs"><a href="/">Home</a> / <a href="/docs/">Docs</a> / Bring your own key</p>
+      <h1>Bring your own key</h1>
+      <p class="lead">Use your own provider keys through the router: your key stays yours, and the fee is a line you can see.</p>
+<p>Use this page to route requests through your own provider keys and to see what the router charges for it. The router uses your key to call the provider; the provider bills you directly, and the model price is not added to your balance.</p>
+<h2 id="store-a-provider-key">Store a provider key</h2>
+<p>A workspace can store its own provider keys. A provider key is a credential object of the workspace: it is never shown again after it is stored and never printed in a log.</p>
+<h2 id="check-whose-key-pays">Check whose key pays</h2>
+<p>The <code>custody</code> entry on each model of <code>GET /v1/models</code> says whose key pays the provider for that route (see <a href="/docs/models/">Models</a>).</p>
+<h2 id="understand-the-request-fee">Understand the request fee</h2>
+<p>The router charges a request fee on traffic that runs on your own key or your own model. The rule:</p>
 <ul>
 <li>The fee is a separate line of the usage ledger, never folded into a price.</li>
 <li>A free allowance of requests per month comes first. The allowance is a count over the sealed ledger for the calendar month in UTC, so it starts again each month and cannot be overspent by a retry.</li>
@@ -60,19 +70,22 @@
 <li>Traffic that runs on the platform's own accounts carries no request fee; it carries the model price.</li>
 <li>A trial plan carries no request fee.</li>
 </ul>
-<p>The amounts, the allowance and the period are plan data. The usage page shows them before anything is charged, and the doors under the Credits and usage chapter show what was charged.</p>
-<h2 id="custody">Custody</h2>
-<p>The <code>custody</code> entry on each model of <code>GET /v1/models</code> says whose key pays the provider for that route. A provider key is a credential object of the workspace: it is never shown again after it is stored and never printed in a log.</p>
-<p>Signing in to a provider instead of pasting a key is coming (BYOK-OAUTH-1).</p>
-<p class="ctas"><a class="btn" href="/docs/routing/">Previous: Routing</a> <a class="btn" href="/docs/your-model-and-node/">Next: Your model and your node</a></p>
-</div></section>
+<p>The amounts, the allowance and the period are plan data. The usage page shows them before anything is charged, and the endpoints in <a href="/docs/credits-and-usage/">Credits and usage</a> show what was charged.</p>
+<h2 id="sign-in-instead-of-pasting-a-key">Sign in instead of pasting a key</h2>
+<p>Signing in to a provider instead of pasting a key is not available yet.</p>
+<nav class="docs-pager" aria-label="Previous and next"><a href="/docs/routing/"><small>Previous</small>Routing</a><a class="nx" href="/docs/your-model-and-node/"><small>Next</small>Your model and your node</a></nav>
+    </article>
+    <aside class="docs-toc" aria-label="On this page"><p>On this page</p><ul><li class="t2"><a href="#store-a-provider-key">Store a provider key</a></li><li class="t2"><a href="#check-whose-key-pays">Check whose key pays</a></li><li class="t2"><a href="#understand-the-request-fee">Understand the request fee</a></li><li class="t2"><a href="#sign-in-instead-of-pasting-a-key">Sign in instead of pasting a key</a></li></ul></aside>
+  </div>
+</div>
+<script src="/docs.js" defer></script>
 </main>
 <footer class="foot">
-  <div class="wrap fcols"><div class="fcol"><p class="fh">Assistant</p><a href="/">For people</a><a href="/company/">For companies</a><a href="/rooms/">Rooms</a><a href="/how-it-works/">How it works</a><a href="/how-it-works/#all-scenarios">Scenarios</a><a href="/for/">Who it is for</a><a href="/pricing/">Pricing</a></div><div class="fcol"><p class="fh">Developers</p><a href="/router/">Router</a><a href="/docs/">Docs</a><a href="/pricing/developers/">Developer pricing</a><a href="/registry/">Registry</a><a href="/docs/self-hosted-integration/">Run it yourself</a><a href="/pricing/developers/#rent">Rent out a model or GPUs</a></div><div class="fcol"><p class="fh">AI by field</p><a href="/fields/">The field guide</a><a href="/fields/cases/">Cases</a><a href="/fields/laws/">AI laws</a><a href="/custom-assistant/">Custom assistant</a><a href="/resources/">All resources</a></div><div class="fcol"><p class="fh">About</p><a href="/security/">Security</a><a href="/privacy/">Privacy</a><a href="mailto:support@massrelay.ai">Contact</a><a href="https://github.com/nicholasandreasujitno/massrelay-site">Source of this page</a></div></div>
+  <div class="wrap fcols"><div class="fcol"><p class="fh">Assistant</p><a href="/">For people</a><a href="/company/">For companies</a><a href="/rooms/">Rooms</a><a href="/how-it-works/">How it works</a><a href="/how-it-works/#all-scenarios">Scenarios</a><a href="/for/">Who it is for</a><a href="/pricing/">Pricing</a></div><div class="fcol"><p class="fh">Developers</p><a href="/router/">Router</a><a href="/docs/">Docs</a><a href="/pricing/developers/">Developer pricing</a><a href="/registry/">Registry</a><a href="/docs/self-hosted-integration/">Run it yourself</a><a href="/pricing/developers/#rent">Rent out a model or GPUs</a></div><div class="fcol"><p class="fh">AI by field</p><a href="/fields/">The field guide</a><a href="/fields/cases/">Cases</a><a href="/fields/laws/">AI laws</a><a href="/custom-assistant/">Custom assistant</a><a href="/resources/">All resources</a></div><div class="fcol"><p class="fh">About</p><a href="/security/">Security</a><a href="/privacy/">Privacy</a><a href="/dpa/">DPA</a><a href="mailto:support@massrelay.ai">Contact</a><a href="https://github.com/nicholasandreasujitno/massrelay-site">Source of this page</a></div></div>
   <div class="wrap">
     <span><span class="word">MassRelay</span> · massrelay.ai</span>
     <span><a href="mailto:support@massrelay.ai">Contact</a> · <a href="https://github.com/nicholasandreasujitno/massrelay-site">Source of this page</a></span>
-    <span class="stamp" title="Product version, site version, build">v0.4.0 · site 1 · 1aafc0089</span>
+    <span class="stamp" title="Product version, site version, build">v0.4.0 · site 1 · 27bbc6bc8</span>
   </div>
 </footer>
 

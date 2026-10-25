@@ -35,7 +35,7 @@
       <div class="dd"><a class="link" href="/">Assistant</a><div class="dd-menu"><a class="sub" href="/">For people</a><a class="sub" href="/rooms/">Rooms</a><a class="sub" href="/how-it-works/">How it works</a><a class="sub" href="/for/">Who it is for</a></div></div>
       <a class="link" href="/company/">For companies</a>
       <div class="dd"><a class="link" href="/pricing/">Pricing</a><div class="dd-menu"><a class="sub" href="/pricing/">For people and teams</a><a class="sub" href="/pricing/developers/">For developers</a></div></div>
-      <div class="dd"><a class="link" href="/router/" aria-current="page">Developers</a><div class="dd-menu"><a class="sub" href="/router/">Router</a><a class="sub" href="/docs/">Docs</a><a class="sub" href="/pricing/developers/">Developer pricing</a><a class="sub" href="/docs/self-hosted-integration/">Run it yourself</a></div></div>
+      <div class="dd"><a class="link" href="/router/" aria-current="page">Developers</a><div class="dd-menu"><a class="sub" href="/router/">Router</a><a class="sub" href="/models/">Your own model</a><a class="sub" href="/docs/">Docs</a><a class="sub" href="/pricing/developers/">Developer pricing</a><a class="sub" href="/docs/self-hosted-integration/">Run it yourself</a></div></div>
       <div class="dd"><a class="link" href="/fields/">AI by field</a><div class="dd-menu"><a class="sub" href="/fields/">The field guide</a><a class="sub" href="/fields/cases/">Cases</a><a class="sub" href="/fields/laws/">AI laws</a><a class="sub" href="/custom-assistant/">Custom assistant</a></div></div>
       <button class="btn ghost sm" id="theme" type="button" aria-label="Switch light and dark">Dark</button>
       <a class="btn primary sm" href="/#join">Join the waiting list</a>
@@ -44,33 +44,55 @@
 </header>
 
 <main id="main">
-<div class="wrap page-head">
-  <p class="crumbs"><a href="/">Home</a> / <a href="/docs/">Docs</a> / The SDK</p>
-  <h1>The SDK</h1>
-  <p class="lead">A typed TypeScript client generated from the contract, and the version rule that keeps it honest.</p>
-</div>
-<section style="padding-top:24px"><div class="wrap">
-<p><code>@massrelay/sdk</code> is a small typed client for the router's own doors. Its types are generated from the same contract as the reference pages, so a door that changes in the contract changes in the SDK, and a build that forgot to regenerate is caught by a check. Use the OpenAI or Anthropic SDK for chat if you prefer; this one is for the doors those SDKs do not have: credits, usage, the key, the policy and the route explanation.</p>
+<div class="docs">
+  <div class="docs-tabs"><div class="wrap"><a href="/docs/" aria-current="page">Guides</a><a href="/docs/reference/">API reference</a><a href="/docs/self-hosted-integration/">Run it yourself</a><a href="/docs/changelog/">Changelog</a><a class="dt-json" href="/docs/openapi.json">openapi.json</a></div></div>
+  <div class="docs-grid wrap">
+    <nav class="docs-side" aria-label="Documentation">
+      <label class="docs-search"><span class="sr">Search the docs</span><input type="search" id="docsq" placeholder="Search the docs" autocomplete="off"></label>
+      <ul id="docs-results" class="docs-results" hidden></ul>
+      <details class="dn-fold" open><summary>Pages</summary><p class="dn-g">Get started</p><ul><li><a href="/docs/quickstart/">Quickstart</a></li><li><a href="/docs/authentication/">Authentication</a></li><li><a href="/docs/models/">Models</a></li><li><a href="/docs/sdk/" aria-current="page">The SDK</a></li></ul><p class="dn-g">Routing</p><ul><li><a href="/docs/routing/">Routing</a></li><li><a href="/docs/byok/">Bring your own key</a></li><li><a href="/docs/your-model-and-node/">Your model and your node</a></li></ul><p class="dn-g">Usage and billing</p><ul><li><a href="/docs/credits-and-usage/">Credits and usage</a></li><li><a href="/docs/limits/">Limits</a></li></ul><p class="dn-g">Help</p><ul><li><a href="/docs/errors/">Errors</a></li><li><a href="/docs/differences/">How this differs</a></li><li><a href="/docs/changelog/">Changelog</a></li></ul><p class="dn-g">Run it yourself</p><ul><li><a href="/docs/self-hosted-integration/">Integrate against your own install</a></li></ul></details>
+    </nav>
+    <article class="docs-main">
+      <p class="crumbs"><a href="/">Home</a> / <a href="/docs/">Docs</a> / The SDK</p>
+      <h1>The SDK</h1>
+      <p class="lead">A typed TypeScript client generated from the contract, and the version rule that keeps it honest.</p>
+<p>Use this page to call the router's own endpoints from TypeScript with types. <code>@massrelay/sdk</code> is a small typed client generated from the same contract as the reference pages, so an endpoint that changes in the contract changes in the SDK, and a build that forgot to regenerate is caught by a check.</p>
+<p>For chat, use the OpenAI or Anthropic SDK (see <a href="/docs/quickstart/">Quickstart</a>). This one is for the endpoints those SDKs do not have: credits, usage, the key, the policy and the route explanation.</p>
 <h2 id="install">Install</h2>
-<pre><code>npm install @massrelay/sdk</code></pre>
-<h2 id="three-lines">Three lines</h2>
-<pre><code>import { createClient } from &quot;@massrelay/sdk&quot;;
-const mr = createClient({ baseUrl: &quot;https://api.massrelay.ai&quot;, apiKey: process.env.MASSRELAY_KEY });
-const credits = await mr.get(&quot;/v1/credits&quot;); // typed from the contract</code></pre>
+<div class="code"><div class="code-p" data-i="0"><div class="code-h"><span>curl</span><button type="button" class="copy" aria-label="Copy the curl example">Copy</button></div><pre><code class="lang-bash">npm install @massrelay/sdk</code></pre></div></div>
+<h2 id="make-a-call">Make a call</h2>
+<div class="code"><div class="code-p" data-i="0"><div class="code-h"><span>TypeScript</span><button type="button" class="copy" aria-label="Copy the TypeScript example">Copy</button></div><pre><code class="lang-typescript">import { createClient } from &quot;@massrelay/sdk&quot;;
+
+const mr = createClient({
+  baseUrl: &quot;https://api.massrelay.ai&quot;,
+  apiKey: process.env.MASSRELAY_KEY,
+});
+const credits = await mr.get(&quot;/v1/credits&quot;); // typed from the contract</code></pre></div></div>
 <p>A path with a parameter takes it in <code>path</code>: <code>mr.get(&quot;/v1/generation/{id}&quot;, { path: { id } })</code>. A <code>POST</code> takes the typed body as its second argument. The key is sent only in the <code>Authorization</code> header, never in a URL or a body.</p>
-<h2 id="errors">Errors</h2>
-<p>A non-2xx answer throws. <code>PaymentRequiredError</code> is a 402 (the same walls as in <a href="/docs/errors/">Errors</a>), <code>RateLimitedError</code> is a 429 and carries <code>retryAfterSeconds</code> when the server sent <code>Retry-After</code>, <code>UpgradeRequiredError</code> is a 426, and any other status is an <code>ApiError</code> with <code>status</code> and <code>body</code>.</p>
-<h2 id="the-version-rule">The version rule</h2>
-<p>Every request carries <code>X-MassRelay-Client: @massrelay/sdk/&lt;version&gt;; protocol=&lt;n&gt;</code>. The server publishes the protocol it speaks and the oldest it accepts at <code>GET /public/version</code>. A client older than the minimum is refused with <code>426 upgrade_required</code> before anything else happens, and the SDK raises <code>UpgradeRequiredError</code>: upgrade the package. A request with no such header (curl, or any other SDK) is never refused for its version.</p>
-<p class="ctas"><a class="btn" href="/docs/changelog/">Previous: Changelog</a> <a class="btn" href="/docs/self-hosted-integration/">Next: Integrate against your own install</a></p>
-</div></section>
+<h2 id="handle-errors">Handle errors</h2>
+<p>A non-2xx answer throws:</p>
+<ul>
+<li>**<code>PaymentRequiredError</code>** — a 402, the same walls as in <a href="/docs/errors/">Errors</a>.</li>
+<li>**<code>RateLimitedError</code>** — a 429. It carries <code>retryAfterSeconds</code> when the server sent <code>Retry-After</code>.</li>
+<li>**<code>UpgradeRequiredError</code>** — a 426.</li>
+<li>**<code>ApiError</code>** — any other status, with <code>status</code> and <code>body</code>.</li>
+</ul>
+<h2 id="keep-the-client-current">Keep the client current</h2>
+<p>Every request carries <code>X-MassRelay-Client: @massrelay/sdk/&lt;version&gt;; protocol=&lt;n&gt;</code>. The server publishes the protocol it speaks and the oldest it accepts at <code>GET /public/version</code>. A client older than the minimum is refused with <code>426 upgrade_required</code> before anything else happens, and the SDK raises <code>UpgradeRequiredError</code>: upgrade the package.</p>
+<div class="callout c-note" role="note"><b>Note</b> A request with no such header (curl, or any other SDK) is never refused for its version.</div>
+<nav class="docs-pager" aria-label="Previous and next"><a href="/docs/changelog/"><small>Previous</small>Changelog</a><a class="nx" href="/docs/self-hosted-integration/"><small>Next</small>Integrate against your own install</a></nav>
+    </article>
+    <aside class="docs-toc" aria-label="On this page"><p>On this page</p><ul><li class="t2"><a href="#install">Install</a></li><li class="t2"><a href="#make-a-call">Make a call</a></li><li class="t2"><a href="#handle-errors">Handle errors</a></li><li class="t2"><a href="#keep-the-client-current">Keep the client current</a></li></ul></aside>
+  </div>
+</div>
+<script src="/docs.js" defer></script>
 </main>
 <footer class="foot">
-  <div class="wrap fcols"><div class="fcol"><p class="fh">Assistant</p><a href="/">For people</a><a href="/company/">For companies</a><a href="/rooms/">Rooms</a><a href="/how-it-works/">How it works</a><a href="/how-it-works/#all-scenarios">Scenarios</a><a href="/for/">Who it is for</a><a href="/pricing/">Pricing</a></div><div class="fcol"><p class="fh">Developers</p><a href="/router/">Router</a><a href="/docs/">Docs</a><a href="/pricing/developers/">Developer pricing</a><a href="/registry/">Registry</a><a href="/docs/self-hosted-integration/">Run it yourself</a><a href="/pricing/developers/#rent">Rent out a model or GPUs</a></div><div class="fcol"><p class="fh">AI by field</p><a href="/fields/">The field guide</a><a href="/fields/cases/">Cases</a><a href="/fields/laws/">AI laws</a><a href="/custom-assistant/">Custom assistant</a><a href="/resources/">All resources</a></div><div class="fcol"><p class="fh">About</p><a href="/security/">Security</a><a href="/privacy/">Privacy</a><a href="mailto:support@massrelay.ai">Contact</a><a href="https://github.com/nicholasandreasujitno/massrelay-site">Source of this page</a></div></div>
+  <div class="wrap fcols"><div class="fcol"><p class="fh">Assistant</p><a href="/">For people</a><a href="/company/">For companies</a><a href="/rooms/">Rooms</a><a href="/how-it-works/">How it works</a><a href="/how-it-works/#all-scenarios">Scenarios</a><a href="/for/">Who it is for</a><a href="/pricing/">Pricing</a></div><div class="fcol"><p class="fh">Developers</p><a href="/router/">Router</a><a href="/docs/">Docs</a><a href="/pricing/developers/">Developer pricing</a><a href="/registry/">Registry</a><a href="/docs/self-hosted-integration/">Run it yourself</a><a href="/pricing/developers/#rent">Rent out a model or GPUs</a></div><div class="fcol"><p class="fh">AI by field</p><a href="/fields/">The field guide</a><a href="/fields/cases/">Cases</a><a href="/fields/laws/">AI laws</a><a href="/custom-assistant/">Custom assistant</a><a href="/resources/">All resources</a></div><div class="fcol"><p class="fh">About</p><a href="/security/">Security</a><a href="/privacy/">Privacy</a><a href="/dpa/">DPA</a><a href="mailto:support@massrelay.ai">Contact</a><a href="https://github.com/nicholasandreasujitno/massrelay-site">Source of this page</a></div></div>
   <div class="wrap">
     <span><span class="word">MassRelay</span> · massrelay.ai</span>
     <span><a href="mailto:support@massrelay.ai">Contact</a> · <a href="https://github.com/nicholasandreasujitno/massrelay-site">Source of this page</a></span>
-    <span class="stamp" title="Product version, site version, build">v0.4.0 · site 1 · 1aafc0089</span>
+    <span class="stamp" title="Product version, site version, build">v0.4.0 · site 1 · 27bbc6bc8</span>
   </div>
 </footer>
 

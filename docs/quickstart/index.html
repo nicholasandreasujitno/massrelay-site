@@ -35,7 +35,7 @@
       <div class="dd"><a class="link" href="/">Assistant</a><div class="dd-menu"><a class="sub" href="/">For people</a><a class="sub" href="/rooms/">Rooms</a><a class="sub" href="/how-it-works/">How it works</a><a class="sub" href="/for/">Who it is for</a></div></div>
       <a class="link" href="/company/">For companies</a>
       <div class="dd"><a class="link" href="/pricing/">Pricing</a><div class="dd-menu"><a class="sub" href="/pricing/">For people and teams</a><a class="sub" href="/pricing/developers/">For developers</a></div></div>
-      <div class="dd"><a class="link" href="/router/" aria-current="page">Developers</a><div class="dd-menu"><a class="sub" href="/router/">Router</a><a class="sub" href="/docs/">Docs</a><a class="sub" href="/pricing/developers/">Developer pricing</a><a class="sub" href="/docs/self-hosted-integration/">Run it yourself</a></div></div>
+      <div class="dd"><a class="link" href="/router/" aria-current="page">Developers</a><div class="dd-menu"><a class="sub" href="/router/">Router</a><a class="sub" href="/models/">Your own model</a><a class="sub" href="/docs/">Docs</a><a class="sub" href="/pricing/developers/">Developer pricing</a><a class="sub" href="/docs/self-hosted-integration/">Run it yourself</a></div></div>
       <div class="dd"><a class="link" href="/fields/">AI by field</a><div class="dd-menu"><a class="sub" href="/fields/">The field guide</a><a class="sub" href="/fields/cases/">Cases</a><a class="sub" href="/fields/laws/">AI laws</a><a class="sub" href="/custom-assistant/">Custom assistant</a></div></div>
       <button class="btn ghost sm" id="theme" type="button" aria-label="Switch light and dark">Dark</button>
       <a class="btn primary sm" href="/#join">Join the waiting list</a>
@@ -44,52 +44,136 @@
 </header>
 
 <main id="main">
-<div class="wrap page-head">
-  <p class="crumbs"><a href="/">Home</a> / <a href="/docs/">Docs</a> / Quickstart</p>
-  <h1>Quickstart</h1>
-  <p class="lead">Point the OpenAI or Anthropic SDK you already use at the router and make a first call.</p>
-</div>
-<section style="padding-top:24px"><div class="wrap">
-<p>The router speaks three wire formats: the OpenAI chat completions format, the OpenAI responses format and the Anthropic messages format. You keep your SDK and change two things: the base URL and the key.</p>
-<h2 id="what-you-need">What you need</h2>
-<ul>
-<li>A relay key. Today a signed-in workspace creates one on the Keys page of the console. A sign-up that gives a key in one flow is coming (KEY-1b).</li>
-<li>The base URL: <code>https://api.massrelay.ai/v1</code>. Staging is <code>https://relay-stag.massrelay.ai/v1</code>.</li>
-</ul>
-<h2 id="curl">curl</h2>
-<pre><code>curl https://api.massrelay.ai/v1/chat/completions \
+<div class="docs">
+  <div class="docs-tabs"><div class="wrap"><a href="/docs/" aria-current="page">Guides</a><a href="/docs/reference/">API reference</a><a href="/docs/self-hosted-integration/">Run it yourself</a><a href="/docs/changelog/">Changelog</a><a class="dt-json" href="/docs/openapi.json">openapi.json</a></div></div>
+  <div class="docs-grid wrap">
+    <nav class="docs-side" aria-label="Documentation">
+      <label class="docs-search"><span class="sr">Search the docs</span><input type="search" id="docsq" placeholder="Search the docs" autocomplete="off"></label>
+      <ul id="docs-results" class="docs-results" hidden></ul>
+      <details class="dn-fold" open><summary>Pages</summary><p class="dn-g">Get started</p><ul><li><a href="/docs/quickstart/" aria-current="page">Quickstart</a></li><li><a href="/docs/authentication/">Authentication</a></li><li><a href="/docs/models/">Models</a></li><li><a href="/docs/sdk/">The SDK</a></li></ul><p class="dn-g">Routing</p><ul><li><a href="/docs/routing/">Routing</a></li><li><a href="/docs/byok/">Bring your own key</a></li><li><a href="/docs/your-model-and-node/">Your model and your node</a></li></ul><p class="dn-g">Usage and billing</p><ul><li><a href="/docs/credits-and-usage/">Credits and usage</a></li><li><a href="/docs/limits/">Limits</a></li></ul><p class="dn-g">Help</p><ul><li><a href="/docs/errors/">Errors</a></li><li><a href="/docs/differences/">How this differs</a></li><li><a href="/docs/changelog/">Changelog</a></li></ul><p class="dn-g">Run it yourself</p><ul><li><a href="/docs/self-hosted-integration/">Integrate against your own install</a></li></ul></details>
+    </nav>
+    <article class="docs-main">
+      <p class="crumbs"><a href="/">Home</a> / <a href="/docs/">Docs</a> / Quickstart</p>
+      <h1>Quickstart</h1>
+      <p class="lead">Point the OpenAI or Anthropic SDK you already use at the router and make a first call.</p>
+<p>Use this page to send your first request through the router with the SDK you already have. The router speaks three wire formats: the OpenAI chat completions format, the OpenAI responses format and the Anthropic messages format, so you change only the base URL and the key.</p>
+<h2 id="get-a-relay-key">Get a relay key</h2>
+<p>A <b>relay key</b> is the API key the router issues to your workspace; every request carries it as a bearer token. Today a signed-in workspace creates one on the Keys page of the console. Signing up and receiving a key in one flow is not available yet: <a href="/#join">join the waiting list</a> and we send you access. See <a href="/docs/authentication/">Authentication</a> for scopes and key management.</p>
+<h2 id="set-the-base-url">Set the base URL</h2>
+<p>Use <code>https://api.massrelay.ai/v1</code> for production. Staging is <code>https://relay-stag.massrelay.ai/v1</code>.</p>
+<h2 id="make-your-first-request">Make your first request</h2>
+<p>The <code>model</code> field is optional. When it is absent, the key's routing picks the model. To choose one yourself, list the models your key may use with <code>GET /v1/models</code> (see <a href="/docs/models/">Models</a>).</p>
+<div class="code tabs" role="group"><div class="code-tabs" role="tablist"><button type="button" role="tab" data-i="0" aria-selected="true">curl</button><button type="button" role="tab" data-i="1" aria-selected="false">Python</button><button type="button" role="tab" data-i="2" aria-selected="false">TypeScript</button></div><div class="code-p" data-i="0"><div class="code-h"><span>curl</span><button type="button" class="copy" aria-label="Copy the curl example">Copy</button></div><pre><code class="lang-bash">curl https://api.massrelay.ai/v1/chat/completions \
   -H &quot;Authorization: Bearer $RELAY_KEY&quot; \
   -H &quot;Content-Type: application/json&quot; \
-  -d '{&quot;messages&quot;:[{&quot;role&quot;:&quot;user&quot;,&quot;content&quot;:&quot;Say hello in one sentence.&quot;}]}'</code></pre>
-<p>The <code>model</code> field is optional: when it is absent the key's routing picks the model. Every answer carries an id of the form <code>chatcmpl-&lt;decisionId&gt;</code>; keep it, because the explain door reads it back (see Routing).</p>
-<h2 id="the-openai-sdks">The OpenAI SDKs</h2>
-<pre><code>from openai import OpenAI
+  -d '{&quot;messages&quot;:[{&quot;role&quot;:&quot;user&quot;,&quot;content&quot;:&quot;Say hello in one sentence.&quot;}]}'</code></pre></div><div class="code-p" data-i="1"><div class="code-h"><span>Python</span><button type="button" class="copy" aria-label="Copy the Python example">Copy</button></div><pre><code class="lang-python">from openai import OpenAI
+
 client = OpenAI(base_url=&quot;https://api.massrelay.ai/v1&quot;, api_key=&quot;YOUR_RELAY_KEY&quot;)
 reply = client.chat.completions.create(
     model=&quot;MODEL_ID_FROM_GET_V1_MODELS&quot;,
     messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Say hello in one sentence.&quot;}],
 )
-print(reply.choices[0].message.content)</code></pre>
-<p>The same base URL serves <code>POST /v1/responses</code> for code written against the responses format.</p>
-<h2 id="the-anthropic-sdk">The Anthropic SDK</h2>
-<pre><code>import anthropic
+print(reply.choices[0].message.content)</code></pre></div><div class="code-p" data-i="2"><div class="code-h"><span>TypeScript</span><button type="button" class="copy" aria-label="Copy the TypeScript example">Copy</button></div><pre><code class="lang-typescript">import OpenAI from &quot;openai&quot;;
+
+const client = new OpenAI({
+  baseURL: &quot;https://api.massrelay.ai/v1&quot;,
+  apiKey: process.env.RELAY_KEY,
+});
+const reply = await client.chat.completions.create({
+  model: &quot;MODEL_ID_FROM_GET_V1_MODELS&quot;,
+  messages: [{ role: &quot;user&quot;, content: &quot;Say hello in one sentence.&quot; }],
+});
+console.log(reply.choices[0].message.content);</code></pre></div></div>
+<p>Every answer carries an id of the form <code>chatcmpl-&lt;decisionId&gt;</code>. Keep it: the explain endpoint reads it back (see <a href="/docs/routing/">Routing</a>).</p>
+<div class="callout c-tip" role="note"><b>Tip</b> The same base URL serves <code>POST /v1/responses</code> for code written against the responses format.</div>
+<h2 id="use-the-anthropic-sdk">Use the Anthropic SDK</h2>
+<p>The Anthropic SDK appends <code>/v1/messages</code> itself, so its base URL has no <code>/v1</code>.</p>
+<div class="code tabs" role="group"><div class="code-tabs" role="tablist"><button type="button" role="tab" data-i="0" aria-selected="true">Python</button><button type="button" role="tab" data-i="1" aria-selected="false">TypeScript</button></div><div class="code-p" data-i="0"><div class="code-h"><span>Python</span><button type="button" class="copy" aria-label="Copy the Python example">Copy</button></div><pre><code class="lang-python">import anthropic
+
 client = anthropic.Anthropic(base_url=&quot;https://api.massrelay.ai&quot;, api_key=&quot;YOUR_RELAY_KEY&quot;)
 msg = client.messages.create(
     model=&quot;MODEL_ID_FROM_GET_V1_MODELS&quot;,
     max_tokens=256,
     messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Say hello in one sentence.&quot;}],
 )
-print(msg.content[0].text)</code></pre>
-<p>The SDK appends <code>/v1/messages</code> to the base URL.</p>
-<h2 id="streaming">Streaming</h2>
-<p>Set <code>stream</code> to true on any of the three doors. The answer is then a server-sent event stream in the dialect of that door.</p>
-<h2 id="the-doors-of-this-chapter">The doors of this chapter</h2>
+print(msg.content[0].text)</code></pre></div><div class="code-p" data-i="1"><div class="code-h"><span>TypeScript</span><button type="button" class="copy" aria-label="Copy the TypeScript example">Copy</button></div><pre><code class="lang-typescript">import Anthropic from &quot;@anthropic-ai/sdk&quot;;
+
+const client = new Anthropic({
+  baseURL: &quot;https://api.massrelay.ai&quot;,
+  apiKey: process.env.RELAY_KEY,
+});
+const msg = await client.messages.create({
+  model: &quot;MODEL_ID_FROM_GET_V1_MODELS&quot;,
+  max_tokens: 256,
+  messages: [{ role: &quot;user&quot;, content: &quot;Say hello in one sentence.&quot; }],
+});
+console.log(msg.content[0].type === &quot;text&quot; ? msg.content[0].text : &quot;&quot;);</code></pre></div></div>
+<h2 id="stream-the-answer">Stream the answer</h2>
+<p>Set <code>stream</code> to true on any of the three endpoints. The answer is then a server-sent event stream in the format of that endpoint.</p>
+<h2 id="before-you-ship">Before you ship</h2>
+<ul>
+<li><b>Check your key</b> with <code>GET /v1/key</code>: it reads back the key's scopes and spend. See the <a href="/docs/reference/v1-key/">reference</a>.</li>
+<li><b>Handle errors.</b> Every error has the same JSON shape; a 429 carries <code>Retry-After</code>, so wait that long and retry. See <a href="/docs/errors/">Errors</a> and <a href="/docs/limits/">Limits</a>.</li>
+<li><b>Watch for changes.</b> Changes to the API are listed in the <a href="/docs/changelog/">Changelog</a>.</li>
+</ul>
+<h2 id="api-reference">API reference</h2>
 <section class="card ref" id="ref-post-v1-chat-completions">
-  <h3><span class="tag built">POST</span> <code>/v1/chat/completions</code></h3>
-  <p>Who may call: relay key (bearer).</p>
-  <p><b>Request schema</b></p>
-  <pre><code>{
-  &quot;description&quot;: &quot;Hand-written. Mirrors the public reference https://platform.openai.com/docs/api-reference/chat/create (read 2026-10-11), reduced to the fields this gateway reads: struct ChatBody in crates/mr-gateway/src/wire.rs. Every other field is accepted and not read (for example n, stop, top_p, seed are ignored). Fields the gateway does not read are not documented as honoured.&quot;,
+  <h3 id="ref-post-v1-chat-completions-head"><span class="method m-post">POST</span> <code>/v1/chat/completions</code></h3>
+  <p class="ref-auth"><b>Authentication</b> relay key (bearer)</p>
+  <h4 id="ref-post-v1-chat-completions-request">Request body</h4>
+  <table class="fields"><thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td><code>model</code></td><td>string</td><td>A model id or an alias from GET /v1/models. Optional: the key's routing decides when absent.</td></tr><tr><td><code>messages</code> <span class="req">required</span></td><td>array of object</td><td>Required and non-empty; an empty or missing list is a 400.</td></tr><tr><td><code>messages[].role</code></td><td>string</td><td>Who wrote the message: system, user, assistant or tool.</td></tr><tr><td><code>messages[].content</code></td><td>string or array</td><td>Text; the gateway reads the text of a message.</td></tr><tr><td><code>max_completion_tokens</code></td><td>number</td><td>Upper bound on the generated tokens, the newer OpenAI name for max_tokens. Send one of the two.</td></tr><tr><td><code>max_tokens</code></td><td>number</td><td>Upper bound on the tokens the model may generate for this answer. Send this or max_completion_tokens, not both.</td></tr><tr><td><code>temperature</code></td><td>number</td><td>Sampling temperature: lower is more deterministic, higher more varied. Usually between 0 and 2.</td></tr><tr><td><code>stream</code></td><td>boolean</td><td>Default false.</td></tr><tr><td><code>tools</code></td><td>array</td><td>Carried and forwarded verbatim upstream; never validated here.</td></tr><tr><td><code>response_format</code></td><td>object</td><td>Carried and forwarded verbatim upstream.</td></tr><tr><td><code>reasoning_effort</code></td><td>string</td><td>The o-series field; read as the request's effort.</td></tr></tbody></table>
+  <h4 id="ref-post-v1-chat-completions-example">Example request</h4>
+  <div class="code tabs" role="group"><div class="code-tabs" role="tablist"><button type="button" role="tab" data-i="0" aria-selected="true">curl</button><button type="button" role="tab" data-i="1" aria-selected="false">Python</button><button type="button" role="tab" data-i="2" aria-selected="false">TypeScript</button></div><div class="code-p" data-i="0"><div class="code-h"><span>curl</span><button type="button" class="copy" aria-label="Copy the curl example">Copy</button></div><pre><code class="lang-bash">curl -X POST https://api.massrelay.ai/v1/chat/completions \
+  -H &quot;Authorization: Bearer $RELAY_KEY&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{&quot;messages&quot;:[{&quot;role&quot;:&quot;user&quot;,&quot;content&quot;:&quot;Say hello in one sentence.&quot;}]}'</code></pre></div><div class="code-p" data-i="1"><div class="code-h"><span>Python</span><button type="button" class="copy" aria-label="Copy the Python example">Copy</button></div><pre><code class="lang-python">import os, requests
+
+r = requests.post(
+    &quot;https://api.massrelay.ai/v1/chat/completions&quot;,
+    headers={&quot;Authorization&quot;: f&quot;Bearer {os.environ['RELAY_KEY']}&quot;},
+    json={
+        &quot;messages&quot;: [
+            {
+                &quot;role&quot;: &quot;user&quot;,
+                &quot;content&quot;: &quot;Say hello in one sentence.&quot;
+            }
+        ]
+    },
+)
+r.raise_for_status()
+print(r.json())</code></pre></div><div class="code-p" data-i="2"><div class="code-h"><span>TypeScript</span><button type="button" class="copy" aria-label="Copy the TypeScript example">Copy</button></div><pre><code class="lang-typescript">const r = await fetch(&quot;https://api.massrelay.ai/v1/chat/completions&quot;, {
+  method: &quot;POST&quot;,
+  headers: { Authorization: `Bearer ${process.env.RELAY_KEY}`, &quot;Content-Type&quot;: &quot;application/json&quot; },
+  body: JSON.stringify({&quot;messages&quot;:[{&quot;role&quot;:&quot;user&quot;,&quot;content&quot;:&quot;Say hello in one sentence.&quot;}]}),
+});
+if (!r.ok) throw new Error(`${r.status} ${await r.text()}`);
+console.log(await r.json());</code></pre></div></div>
+  <h4 id="ref-post-v1-chat-completions-response">Response</h4>
+  <table class="fields"><thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td><code>id</code> <span class="req">required</span></td><td>string</td><td>chatcmpl-&lt;decisionId&gt;; the decision id is the key of GET /v1/route/explain/{decisionId}.</td></tr><tr><td><code>object</code> <span class="req">required</span></td><td>string</td><td>The kind of object returned, for example chat.completion. Always &quot;chat.completion&quot;.</td></tr><tr><td><code>created</code> <span class="req">required</span></td><td>integer</td><td>When the answer was created, in Unix seconds.</td></tr><tr><td><code>model</code> <span class="req">required</span></td><td>string</td><td>The model id. In a request it is optional: without it the key's routing chooses.</td></tr><tr><td><code>choices</code> <span class="req">required</span></td><td>array of object</td><td>The generated answers; one unless n asks for more.</td></tr><tr><td><code>choices[].index</code></td><td>integer</td><td>The position of this choice in the list.</td></tr><tr><td><code>choices[].message</code></td><td>object</td><td>The generated message: its role and content.</td></tr><tr><td><code>choices[].message.role</code></td><td>string</td><td>Who wrote the message: system, user, assistant or tool. Always &quot;assistant&quot;.</td></tr><tr><td><code>choices[].message.content</code></td><td>string</td><td>The text of the message.</td></tr><tr><td><code>choices[].finish_reason</code></td><td>string</td><td>Why generation stopped, for example stop or length.</td></tr><tr><td><code>usage</code> <span class="req">required</span></td><td>object</td><td>Tokens counted for this call.</td></tr><tr><td><code>usage.prompt_tokens</code></td><td>number</td><td>Tokens in the input.</td></tr><tr><td><code>usage.completion_tokens</code></td><td>number</td><td>Tokens generated.</td></tr><tr><td><code>usage.total_tokens</code></td><td>number</td><td>Input plus generated tokens.</td></tr></tbody></table>
+  <div class="code"><div class="code-p" data-i="0"><div class="code-h"><span>Example response (shape)</span><button type="button" class="copy" aria-label="Copy the JSON example">Copy</button></div><pre><code class="lang-json">{
+  &quot;id&quot;: &quot;chatcmpl-1f2e3d4c&quot;,
+  &quot;object&quot;: &quot;chat.completion&quot;,
+  &quot;created&quot;: 1761400000,
+  &quot;model&quot;: &quot;provider/model-id&quot;,
+  &quot;choices&quot;: [
+    {
+      &quot;index&quot;: 0,
+      &quot;message&quot;: {
+        &quot;role&quot;: &quot;assistant&quot;,
+        &quot;content&quot;: &quot;Hello there.&quot;
+      },
+      &quot;finish_reason&quot;: &quot;stop&quot;
+    }
+  ],
+  &quot;usage&quot;: {
+    &quot;prompt_tokens&quot;: 12,
+    &quot;completion_tokens&quot;: 6,
+    &quot;total_tokens&quot;: 18
+  }
+}</code></pre></div></div>
+  <h4 id="ref-post-v1-chat-completions-errors">Common errors</h4><ul class="ref-errs"><li><code>401</code> invalid_api_key</li><li><code>400</code> the body is not usable</li><li><code>402</code> out of credit or over a budget</li><li><code>413</code> the body is over the limit</li><li><code>403</code> insufficient_scope</li><li><code>429</code> over the request rate; read Retry-After</li></ul><p class="ref-note">Every error has the same JSON shape; see <a href="/docs/errors/">Errors</a> and <a href="/docs/limits/">Limits</a>.</p>
+  <details class="raw"><summary>Full schema (JSON)</summary><p><b>Request schema</b></p><pre><code>{
+  &quot;description&quot;: &quot;Every other field is accepted and not read (for example n, stop, top_p, seed are ignored). Fields the gateway does not read are not documented as honoured.&quot;,
   &quot;type&quot;: &quot;object&quot;,
   &quot;required&quot;: [
     &quot;messages&quot;
@@ -148,10 +232,8 @@ print(msg.content[0].text)</code></pre>
       &quot;description&quot;: &quot;The o-series field; read as the request's effort.&quot;
     }
   }
-}</code></pre>
-  <p><b>Response schema</b></p>
-  <pre><code>{
-  &quot;description&quot;: &quot;Hand-written. Mirrors the public reference https://platform.openai.com/docs/api-reference/chat/object (read 2026-10-11), reduced to the fields this gateway reads: struct chat_completion_body in crates/mr-gateway/src/wire.rs. Every other field is accepted and not read (streaming responses are server-sent events and are not described here). Fields the gateway does not read are not documented as honoured.&quot;,
+}</code></pre><p><b>Response schema</b></p><pre><code>{
+  &quot;description&quot;: &quot;Every other field is accepted and not read (streaming responses are server-sent events and are not described here). Fields the gateway does not read are not documented as honoured.&quot;,
   &quot;type&quot;: &quot;object&quot;,
   &quot;additionalProperties&quot;: true,
   &quot;required&quot;: [
@@ -216,15 +298,65 @@ print(msg.content[0].text)</code></pre>
       }
     }
   }
-}</code></pre>
-  <p>Every answer carries a decision id; <a href="/docs/reference/v1-route-explain-decisionid/">the explain door</a> returns why that model was chosen.</p>
+}</code></pre></details>
+  <p class="ref-note">Every answer carries a decision id; <a href="/docs/reference/v1-route-explain-decisionid/">the explain endpoint</a> returns why that model was chosen.</p>
 </section>
 <section class="card ref" id="ref-post-v1-responses">
-  <h3><span class="tag built">POST</span> <code>/v1/responses</code></h3>
-  <p>Who may call: relay key (bearer).</p>
-  <p><b>Request schema</b></p>
-  <pre><code>{
-  &quot;description&quot;: &quot;Hand-written. Mirrors the public reference https://platform.openai.com/docs/api-reference/responses/create (read 2026-10-11), reduced to the fields this gateway reads: struct ResponsesBody in crates/mr-gateway/src/wire.rs. Every other field is accepted and not read (tools and previous_response_id are not read on this surface). Fields the gateway does not read are not documented as honoured.&quot;,
+  <h3 id="ref-post-v1-responses-head"><span class="method m-post">POST</span> <code>/v1/responses</code></h3>
+  <p class="ref-auth"><b>Authentication</b> relay key (bearer)</p>
+  <h4 id="ref-post-v1-responses-request">Request body</h4>
+  <table class="fields"><thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td><code>model</code></td><td>string</td><td>The model id. In a request it is optional: without it the key's routing chooses.</td></tr><tr><td><code>input</code> <span class="req">required</span></td><td>string or array</td><td>Required: a string or a list of {role?, content} items (role defaults to user).</td></tr><tr><td><code>instructions</code></td><td>string</td><td>Becomes a leading system message; blank text contributes nothing.</td></tr><tr><td><code>max_output_tokens</code></td><td>number</td><td></td></tr><tr><td><code>temperature</code></td><td>number</td><td>Sampling temperature: lower is more deterministic, higher more varied. Usually between 0 and 2.</td></tr><tr><td><code>stream</code></td><td>boolean</td><td></td></tr><tr><td><code>reasoning</code></td><td>object</td><td>Only reasoning.effort is read.</td></tr><tr><td><code>reasoning.effort</code></td><td>string</td><td></td></tr></tbody></table>
+  <h4 id="ref-post-v1-responses-example">Example request</h4>
+  <div class="code tabs" role="group"><div class="code-tabs" role="tablist"><button type="button" role="tab" data-i="0" aria-selected="true">curl</button><button type="button" role="tab" data-i="1" aria-selected="false">Python</button><button type="button" role="tab" data-i="2" aria-selected="false">TypeScript</button></div><div class="code-p" data-i="0"><div class="code-h"><span>curl</span><button type="button" class="copy" aria-label="Copy the curl example">Copy</button></div><pre><code class="lang-bash">curl -X POST https://api.massrelay.ai/v1/responses \
+  -H &quot;Authorization: Bearer $RELAY_KEY&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{&quot;input&quot;:&quot;Say hello in one sentence.&quot;}'</code></pre></div><div class="code-p" data-i="1"><div class="code-h"><span>Python</span><button type="button" class="copy" aria-label="Copy the Python example">Copy</button></div><pre><code class="lang-python">import os, requests
+
+r = requests.post(
+    &quot;https://api.massrelay.ai/v1/responses&quot;,
+    headers={&quot;Authorization&quot;: f&quot;Bearer {os.environ['RELAY_KEY']}&quot;},
+    json={
+        &quot;input&quot;: &quot;Say hello in one sentence.&quot;
+    },
+)
+r.raise_for_status()
+print(r.json())</code></pre></div><div class="code-p" data-i="2"><div class="code-h"><span>TypeScript</span><button type="button" class="copy" aria-label="Copy the TypeScript example">Copy</button></div><pre><code class="lang-typescript">const r = await fetch(&quot;https://api.massrelay.ai/v1/responses&quot;, {
+  method: &quot;POST&quot;,
+  headers: { Authorization: `Bearer ${process.env.RELAY_KEY}`, &quot;Content-Type&quot;: &quot;application/json&quot; },
+  body: JSON.stringify({&quot;input&quot;:&quot;Say hello in one sentence.&quot;}),
+});
+if (!r.ok) throw new Error(`${r.status} ${await r.text()}`);
+console.log(await r.json());</code></pre></div></div>
+  <h4 id="ref-post-v1-responses-response">Response</h4>
+  <table class="fields"><thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td><code>id</code> <span class="req">required</span></td><td>string</td><td>resp_&lt;decisionId&gt;</td></tr><tr><td><code>object</code> <span class="req">required</span></td><td>string</td><td>The kind of object returned, for example chat.completion. Always &quot;response&quot;.</td></tr><tr><td><code>created_at</code></td><td>integer</td><td></td></tr><tr><td><code>model</code></td><td>string</td><td>The model id. In a request it is optional: without it the key's routing chooses.</td></tr><tr><td><code>status</code> <span class="req">required</span></td><td>string</td><td> Always &quot;completed&quot;.</td></tr><tr><td><code>output</code> <span class="req">required</span></td><td>array of object</td><td></td></tr><tr><td><code>output[].type</code></td><td>string</td><td> Always &quot;message&quot;.</td></tr><tr><td><code>output[].id</code></td><td>string</td><td>The answer's id.</td></tr><tr><td><code>output[].status</code></td><td>string</td><td></td></tr><tr><td><code>output[].role</code></td><td>string</td><td>Who wrote the message: system, user, assistant or tool. Always &quot;assistant&quot;.</td></tr><tr><td><code>output[].content</code></td><td>array of object</td><td>The text of the message.</td></tr><tr><td><code>output[].content[].type</code></td><td>string</td><td> Always &quot;output_text&quot;.</td></tr><tr><td><code>output[].content[].text</code></td><td>string</td><td></td></tr><tr><td><code>output[].content[].annotations</code></td><td>array</td><td></td></tr><tr><td><code>output_text</code> <span class="req">required</span></td><td>string</td><td></td></tr><tr><td><code>usage</code> <span class="req">required</span></td><td>object</td><td>Tokens counted for this call.</td></tr><tr><td><code>usage.input_tokens</code></td><td>number</td><td>Tokens in the input.</td></tr><tr><td><code>usage.output_tokens</code></td><td>number</td><td>Tokens generated.</td></tr><tr><td><code>usage.total_tokens</code></td><td>number</td><td>Input plus generated tokens.</td></tr></tbody></table>
+  <div class="code"><div class="code-p" data-i="0"><div class="code-h"><span>Example response (shape)</span><button type="button" class="copy" aria-label="Copy the JSON example">Copy</button></div><pre><code class="lang-json">{
+  &quot;id&quot;: &quot;resp_1f2e3d4c&quot;,
+  &quot;object&quot;: &quot;response&quot;,
+  &quot;created_at&quot;: 1761400000,
+  &quot;model&quot;: &quot;provider/model-id&quot;,
+  &quot;status&quot;: &quot;completed&quot;,
+  &quot;output&quot;: [
+    {
+      &quot;type&quot;: &quot;message&quot;,
+      &quot;role&quot;: &quot;assistant&quot;,
+      &quot;content&quot;: [
+        {
+          &quot;type&quot;: &quot;output_text&quot;,
+          &quot;text&quot;: &quot;Hello there.&quot;
+        }
+      ]
+    }
+  ],
+  &quot;output_text&quot;: &quot;Hello there.&quot;,
+  &quot;usage&quot;: {
+    &quot;input_tokens&quot;: 12,
+    &quot;output_tokens&quot;: 6,
+    &quot;total_tokens&quot;: 18
+  }
+}</code></pre></div></div>
+  <h4 id="ref-post-v1-responses-errors">Common errors</h4><ul class="ref-errs"><li><code>401</code> invalid_api_key</li><li><code>400</code> the body is not usable</li><li><code>402</code> out of credit or over a budget</li><li><code>413</code> the body is over the limit</li><li><code>403</code> insufficient_scope</li><li><code>429</code> over the request rate; read Retry-After</li></ul><p class="ref-note">Every error has the same JSON shape; see <a href="/docs/errors/">Errors</a> and <a href="/docs/limits/">Limits</a>.</p>
+  <details class="raw"><summary>Full schema (JSON)</summary><p><b>Request schema</b></p><pre><code>{
+  &quot;description&quot;: &quot;Every other field is accepted and not read (tools and previous_response_id are not read on this surface). Fields the gateway does not read are not documented as honoured.&quot;,
   &quot;type&quot;: &quot;object&quot;,
   &quot;required&quot;: [
     &quot;input&quot;
@@ -265,10 +397,8 @@ print(msg.content[0].text)</code></pre>
       &quot;description&quot;: &quot;Only reasoning.effort is read.&quot;
     }
   }
-}</code></pre>
-  <p><b>Response schema</b></p>
-  <pre><code>{
-  &quot;description&quot;: &quot;Hand-written. Mirrors the public reference https://platform.openai.com/docs/api-reference/responses/object (read 2026-10-11), reduced to the fields this gateway reads: struct responses_body in crates/mr-gateway/src/wire.rs. Every other field is accepted and not read (streaming is not described here). Fields the gateway does not read are not documented as honoured.&quot;,
+}</code></pre><p><b>Response schema</b></p><pre><code>{
+  &quot;description&quot;: &quot;Every other field is accepted and not read (streaming is not described here). Fields the gateway does not read are not documented as honoured.&quot;,
   &quot;type&quot;: &quot;object&quot;,
   &quot;additionalProperties&quot;: true,
   &quot;required&quot;: [
@@ -351,15 +481,64 @@ print(msg.content[0].text)</code></pre>
       }
     }
   }
-}</code></pre>
-  <p>Every answer carries a decision id; <a href="/docs/reference/v1-route-explain-decisionid/">the explain door</a> returns why that model was chosen.</p>
+}</code></pre></details>
+  <p class="ref-note">Every answer carries a decision id; <a href="/docs/reference/v1-route-explain-decisionid/">the explain endpoint</a> returns why that model was chosen.</p>
 </section>
 <section class="card ref" id="ref-post-v1-messages">
-  <h3><span class="tag built">POST</span> <code>/v1/messages</code></h3>
-  <p>Who may call: relay key (bearer).</p>
-  <p><b>Request schema</b></p>
-  <pre><code>{
-  &quot;description&quot;: &quot;Hand-written. Mirrors the public reference https://docs.anthropic.com/en/api/messages (read 2026-10-11), reduced to the fields this gateway reads: struct MessagesBody in crates/mr-gateway/src/wire.rs. Every other field is accepted and not read (for example top_p, top_k, stop_sequences, tools are not read on this surface). Fields the gateway does not read are not documented as honoured.&quot;,
+  <h3 id="ref-post-v1-messages-head"><span class="method m-post">POST</span> <code>/v1/messages</code></h3>
+  <p class="ref-auth"><b>Authentication</b> relay key (bearer)</p>
+  <h4 id="ref-post-v1-messages-request">Request body</h4>
+  <table class="fields"><thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td><code>model</code></td><td>string</td><td>The model id. In a request it is optional: without it the key's routing chooses.</td></tr><tr><td><code>messages</code> <span class="req">required</span></td><td>array of object</td><td></td></tr><tr><td><code>messages[].role</code></td><td>string</td><td>Who wrote the message: system, user, assistant or tool.</td></tr><tr><td><code>messages[].content</code></td><td>string or array</td><td>The text of the message.</td></tr><tr><td><code>system</code></td><td>string or array</td><td>A string, or a list of {type:text,text} blocks (joined). An empty list contributes nothing.</td></tr><tr><td><code>max_tokens</code></td><td>number</td><td>Upper bound on the tokens the model may generate for this answer. Send this or max_completion_tokens, not both.</td></tr><tr><td><code>temperature</code></td><td>number</td><td>Sampling temperature: lower is more deterministic, higher more varied. Usually between 0 and 2.</td></tr><tr><td><code>stream</code></td><td>boolean</td><td></td></tr><tr><td><code>thinking</code></td><td>string or object</td><td>This gateway reads a plain effort string, or an object with an effort field; it does not translate Anthropic's budget_tokens block.</td></tr></tbody></table>
+  <h4 id="ref-post-v1-messages-example">Example request</h4>
+  <div class="code tabs" role="group"><div class="code-tabs" role="tablist"><button type="button" role="tab" data-i="0" aria-selected="true">curl</button><button type="button" role="tab" data-i="1" aria-selected="false">Python</button><button type="button" role="tab" data-i="2" aria-selected="false">TypeScript</button></div><div class="code-p" data-i="0"><div class="code-h"><span>curl</span><button type="button" class="copy" aria-label="Copy the curl example">Copy</button></div><pre><code class="lang-bash">curl -X POST https://api.massrelay.ai/v1/messages \
+  -H &quot;Authorization: Bearer $RELAY_KEY&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{&quot;messages&quot;:[{&quot;role&quot;:&quot;user&quot;,&quot;content&quot;:&quot;Say hello in one sentence.&quot;}],&quot;max_tokens&quot;:256}'</code></pre></div><div class="code-p" data-i="1"><div class="code-h"><span>Python</span><button type="button" class="copy" aria-label="Copy the Python example">Copy</button></div><pre><code class="lang-python">import os, requests
+
+r = requests.post(
+    &quot;https://api.massrelay.ai/v1/messages&quot;,
+    headers={&quot;Authorization&quot;: f&quot;Bearer {os.environ['RELAY_KEY']}&quot;},
+    json={
+        &quot;messages&quot;: [
+            {
+                &quot;role&quot;: &quot;user&quot;,
+                &quot;content&quot;: &quot;Say hello in one sentence.&quot;
+            }
+        ],
+        &quot;max_tokens&quot;: 256
+    },
+)
+r.raise_for_status()
+print(r.json())</code></pre></div><div class="code-p" data-i="2"><div class="code-h"><span>TypeScript</span><button type="button" class="copy" aria-label="Copy the TypeScript example">Copy</button></div><pre><code class="lang-typescript">const r = await fetch(&quot;https://api.massrelay.ai/v1/messages&quot;, {
+  method: &quot;POST&quot;,
+  headers: { Authorization: `Bearer ${process.env.RELAY_KEY}`, &quot;Content-Type&quot;: &quot;application/json&quot; },
+  body: JSON.stringify({&quot;messages&quot;:[{&quot;role&quot;:&quot;user&quot;,&quot;content&quot;:&quot;Say hello in one sentence.&quot;}],&quot;max_tokens&quot;:256}),
+});
+if (!r.ok) throw new Error(`${r.status} ${await r.text()}`);
+console.log(await r.json());</code></pre></div></div>
+  <h4 id="ref-post-v1-messages-response">Response</h4>
+  <table class="fields"><thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td><code>id</code> <span class="req">required</span></td><td>string</td><td>msg_&lt;decisionId&gt;</td></tr><tr><td><code>type</code> <span class="req">required</span></td><td>string</td><td> Always &quot;message&quot;.</td></tr><tr><td><code>role</code> <span class="req">required</span></td><td>string</td><td>Who wrote the message: system, user, assistant or tool. Always &quot;assistant&quot;.</td></tr><tr><td><code>model</code> <span class="req">required</span></td><td>string</td><td>The model id. In a request it is optional: without it the key's routing chooses.</td></tr><tr><td><code>content</code> <span class="req">required</span></td><td>array of object</td><td>The text of the message.</td></tr><tr><td><code>content[].type</code></td><td>string</td><td> Always &quot;text&quot;.</td></tr><tr><td><code>content[].text</code></td><td>string</td><td></td></tr><tr><td><code>stop_reason</code> <span class="req">required</span></td><td>string</td><td></td></tr><tr><td><code>stop_sequence</code></td><td>null</td><td></td></tr><tr><td><code>usage</code> <span class="req">required</span></td><td>object</td><td>Tokens counted for this call.</td></tr><tr><td><code>usage.input_tokens</code></td><td>number</td><td>Tokens in the input.</td></tr><tr><td><code>usage.output_tokens</code></td><td>number</td><td>Tokens generated.</td></tr></tbody></table>
+  <div class="code"><div class="code-p" data-i="0"><div class="code-h"><span>Example response (shape)</span><button type="button" class="copy" aria-label="Copy the JSON example">Copy</button></div><pre><code class="lang-json">{
+  &quot;id&quot;: &quot;msg_1f2e3d4c&quot;,
+  &quot;type&quot;: &quot;message&quot;,
+  &quot;role&quot;: &quot;assistant&quot;,
+  &quot;model&quot;: &quot;provider/model-id&quot;,
+  &quot;content&quot;: [
+    {
+      &quot;type&quot;: &quot;text&quot;,
+      &quot;text&quot;: &quot;Hello there.&quot;
+    }
+  ],
+  &quot;stop_reason&quot;: &quot;end_turn&quot;,
+  &quot;stop_sequence&quot;: null,
+  &quot;usage&quot;: {
+    &quot;input_tokens&quot;: 12,
+    &quot;output_tokens&quot;: 6
+  }
+}</code></pre></div></div>
+  <h4 id="ref-post-v1-messages-errors">Common errors</h4><ul class="ref-errs"><li><code>401</code> invalid_api_key</li><li><code>400</code> the body is not usable</li><li><code>402</code> out of credit or over a budget</li><li><code>413</code> the body is over the limit</li><li><code>403</code> insufficient_scope</li><li><code>429</code> over the request rate; read Retry-After</li></ul><p class="ref-note">Every error has the same JSON shape; see <a href="/docs/errors/">Errors</a> and <a href="/docs/limits/">Limits</a>.</p>
+  <details class="raw"><summary>Full schema (JSON)</summary><p><b>Request schema</b></p><pre><code>{
+  &quot;description&quot;: &quot;Every other field is accepted and not read (for example top_p, top_k, stop_sequences, tools are not read on this surface). Fields the gateway does not read are not documented as honoured.&quot;,
   &quot;type&quot;: &quot;object&quot;,
   &quot;required&quot;: [
     &quot;messages&quot;
@@ -412,10 +591,8 @@ print(msg.content[0].text)</code></pre>
       ]
     }
   }
-}</code></pre>
-  <p><b>Response schema</b></p>
-  <pre><code>{
-  &quot;description&quot;: &quot;Hand-written. Mirrors the public reference https://docs.anthropic.com/en/api/messages (read 2026-10-11), reduced to the fields this gateway reads: struct messages_body in crates/mr-gateway/src/wire.rs. Every other field is accepted and not read (streaming is not described here). Fields the gateway does not read are not documented as honoured.&quot;,
+}</code></pre><p><b>Response schema</b></p><pre><code>{
+  &quot;description&quot;: &quot;Every other field is accepted and not read (streaming is not described here). Fields the gateway does not read are not documented as honoured.&quot;,
   &quot;type&quot;: &quot;object&quot;,
   &quot;additionalProperties&quot;: true,
   &quot;required&quot;: [
@@ -473,18 +650,22 @@ print(msg.content[0].text)</code></pre>
       }
     }
   }
-}</code></pre>
-  <p>Every answer carries a decision id; <a href="/docs/reference/v1-route-explain-decisionid/">the explain door</a> returns why that model was chosen.</p>
+}</code></pre></details>
+  <p class="ref-note">Every answer carries a decision id; <a href="/docs/reference/v1-route-explain-decisionid/">the explain endpoint</a> returns why that model was chosen.</p>
 </section>
-<p class="ctas"><a class="btn" href="/docs/authentication/">Next: Authentication</a></p>
-</div></section>
+<nav class="docs-pager" aria-label="Previous and next"><span></span><a class="nx" href="/docs/authentication/"><small>Next</small>Authentication</a></nav>
+    </article>
+    <aside class="docs-toc" aria-label="On this page"><p>On this page</p><ul><li class="t2"><a href="#get-a-relay-key">Get a relay key</a></li><li class="t2"><a href="#set-the-base-url">Set the base URL</a></li><li class="t2"><a href="#make-your-first-request">Make your first request</a></li><li class="t2"><a href="#use-the-anthropic-sdk">Use the Anthropic SDK</a></li><li class="t2"><a href="#stream-the-answer">Stream the answer</a></li><li class="t2"><a href="#before-you-ship">Before you ship</a></li><li class="t2"><a href="#api-reference">API reference</a></li><li class="t3"><a href="#ref-post-v1-chat-completions-head">POST /v1/chat/completions</a></li><li class="t3"><a href="#ref-post-v1-responses-head">POST /v1/responses</a></li><li class="t3"><a href="#ref-post-v1-messages-head">POST /v1/messages</a></li></ul></aside>
+  </div>
+</div>
+<script src="/docs.js" defer></script>
 </main>
 <footer class="foot">
-  <div class="wrap fcols"><div class="fcol"><p class="fh">Assistant</p><a href="/">For people</a><a href="/company/">For companies</a><a href="/rooms/">Rooms</a><a href="/how-it-works/">How it works</a><a href="/how-it-works/#all-scenarios">Scenarios</a><a href="/for/">Who it is for</a><a href="/pricing/">Pricing</a></div><div class="fcol"><p class="fh">Developers</p><a href="/router/">Router</a><a href="/docs/">Docs</a><a href="/pricing/developers/">Developer pricing</a><a href="/registry/">Registry</a><a href="/docs/self-hosted-integration/">Run it yourself</a><a href="/pricing/developers/#rent">Rent out a model or GPUs</a></div><div class="fcol"><p class="fh">AI by field</p><a href="/fields/">The field guide</a><a href="/fields/cases/">Cases</a><a href="/fields/laws/">AI laws</a><a href="/custom-assistant/">Custom assistant</a><a href="/resources/">All resources</a></div><div class="fcol"><p class="fh">About</p><a href="/security/">Security</a><a href="/privacy/">Privacy</a><a href="mailto:support@massrelay.ai">Contact</a><a href="https://github.com/nicholasandreasujitno/massrelay-site">Source of this page</a></div></div>
+  <div class="wrap fcols"><div class="fcol"><p class="fh">Assistant</p><a href="/">For people</a><a href="/company/">For companies</a><a href="/rooms/">Rooms</a><a href="/how-it-works/">How it works</a><a href="/how-it-works/#all-scenarios">Scenarios</a><a href="/for/">Who it is for</a><a href="/pricing/">Pricing</a></div><div class="fcol"><p class="fh">Developers</p><a href="/router/">Router</a><a href="/docs/">Docs</a><a href="/pricing/developers/">Developer pricing</a><a href="/registry/">Registry</a><a href="/docs/self-hosted-integration/">Run it yourself</a><a href="/pricing/developers/#rent">Rent out a model or GPUs</a></div><div class="fcol"><p class="fh">AI by field</p><a href="/fields/">The field guide</a><a href="/fields/cases/">Cases</a><a href="/fields/laws/">AI laws</a><a href="/custom-assistant/">Custom assistant</a><a href="/resources/">All resources</a></div><div class="fcol"><p class="fh">About</p><a href="/security/">Security</a><a href="/privacy/">Privacy</a><a href="/dpa/">DPA</a><a href="mailto:support@massrelay.ai">Contact</a><a href="https://github.com/nicholasandreasujitno/massrelay-site">Source of this page</a></div></div>
   <div class="wrap">
     <span><span class="word">MassRelay</span> · massrelay.ai</span>
     <span><a href="mailto:support@massrelay.ai">Contact</a> · <a href="https://github.com/nicholasandreasujitno/massrelay-site">Source of this page</a></span>
-    <span class="stamp" title="Product version, site version, build">v0.4.0 · site 1 · 1aafc0089</span>
+    <span class="stamp" title="Product version, site version, build">v0.4.0 · site 1 · 27bbc6bc8</span>
   </div>
 </footer>
 

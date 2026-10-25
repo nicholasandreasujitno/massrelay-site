@@ -9,9 +9,9 @@
 <meta name="theme-color" content="#16140F" media="(prefers-color-scheme: dark)">
 <meta name="generator" content="massrelay-site 0.4.0+site1">
 <title>/api/me/spending · Reference · massrelay.ai</title>
-<meta name="description" content="The GET door at /api/me/spending: who may call it and what it takes and returns.">
+<meta name="description" content="The GET endpoint at /api/me/spending: who may call it and what it takes and returns.">
 <meta property="og:title" content="/api/me/spending · Reference · massrelay.ai">
-<meta property="og:description" content="The GET door at /api/me/spending: who may call it and what it takes and returns.">
+<meta property="og:description" content="The GET endpoint at /api/me/spending: who may call it and what it takes and returns.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://massrelay.ai/docs/reference/api-me-spending/">
 <meta property="og:image" content="https://massrelay.ai/brand/og/og-docs.png">
@@ -35,7 +35,7 @@
       <div class="dd"><a class="link" href="/">Assistant</a><div class="dd-menu"><a class="sub" href="/">For people</a><a class="sub" href="/rooms/">Rooms</a><a class="sub" href="/how-it-works/">How it works</a><a class="sub" href="/for/">Who it is for</a></div></div>
       <a class="link" href="/company/">For companies</a>
       <div class="dd"><a class="link" href="/pricing/">Pricing</a><div class="dd-menu"><a class="sub" href="/pricing/">For people and teams</a><a class="sub" href="/pricing/developers/">For developers</a></div></div>
-      <div class="dd"><a class="link" href="/router/" aria-current="page">Developers</a><div class="dd-menu"><a class="sub" href="/router/">Router</a><a class="sub" href="/docs/">Docs</a><a class="sub" href="/pricing/developers/">Developer pricing</a><a class="sub" href="/docs/self-hosted-integration/">Run it yourself</a></div></div>
+      <div class="dd"><a class="link" href="/router/" aria-current="page">Developers</a><div class="dd-menu"><a class="sub" href="/router/">Router</a><a class="sub" href="/models/">Your own model</a><a class="sub" href="/docs/">Docs</a><a class="sub" href="/pricing/developers/">Developer pricing</a><a class="sub" href="/docs/self-hosted-integration/">Run it yourself</a></div></div>
       <div class="dd"><a class="link" href="/fields/">AI by field</a><div class="dd-menu"><a class="sub" href="/fields/">The field guide</a><a class="sub" href="/fields/cases/">Cases</a><a class="sub" href="/fields/laws/">AI laws</a><a class="sub" href="/custom-assistant/">Custom assistant</a></div></div>
       <button class="btn ghost sm" id="theme" type="button" aria-label="Switch light and dark">Dark</button>
       <a class="btn primary sm" href="/#join">Join the waiting list</a>
@@ -44,17 +44,98 @@
 </header>
 
 <main id="main">
-<div class="wrap page-head">
-  <p class="crumbs"><a href="/">Home</a> / <a href="/docs/">Docs</a> / <a href="/docs/reference/">Reference</a></p>
-  <h1>/api/me/spending</h1>
-</div>
-<section style="padding-top:24px"><div class="wrap">
+<div class="docs">
+  <div class="docs-tabs"><div class="wrap"><a href="/docs/">Guides</a><a href="/docs/reference/" aria-current="page">API reference</a><a href="/docs/self-hosted-integration/">Run it yourself</a><a href="/docs/changelog/">Changelog</a><a class="dt-json" href="/docs/openapi.json">openapi.json</a></div></div>
+  <div class="docs-grid wrap">
+    <nav class="docs-side" aria-label="Documentation">
+      <label class="docs-search"><span class="sr">Search the docs</span><input type="search" id="docsq" placeholder="Search the docs" autocomplete="off"></label>
+      <ul id="docs-results" class="docs-results" hidden></ul>
+      <details class="dn-fold" open><summary>Pages</summary><details class="rn"><summary>Router API (/v1)</summary><ul><li><a href="/docs/reference/v1-chat-completions/"><span class="method m-post">POST</span> <code>/v1/chat/completions</code></a></li><li><a href="/docs/reference/v1-credits/"><span class="method m-get">GET</span> <code>/v1/credits</code></a></li><li><a href="/docs/reference/v1-generation-id/"><span class="method m-get">GET</span> <code>/v1/generation/{id}</code></a></li><li><a href="/docs/reference/v1-key/"><span class="method m-get">GET</span> <code>/v1/key</code></a></li><li><a href="/docs/reference/v1-management-keys/"><span class="method m-get">GET</span> <code>/v1/management/keys</code></a></li><li><a href="/docs/reference/v1-management-keys/"><span class="method m-post">POST</span> <code>/v1/management/keys</code></a></li><li><a href="/docs/reference/v1-management-keys-id/"><span class="method m-get">GET</span> <code>/v1/management/keys/{id}</code></a></li><li><a href="/docs/reference/v1-management-keys-id/"><span class="method m-delete">DELETE</span> <code>/v1/management/keys/{id}</code></a></li><li><a href="/docs/reference/v1-management-keys-id/"><span class="method m-patch">PATCH</span> <code>/v1/management/keys/{id}</code></a></li><li><a href="/docs/reference/v1-messages/"><span class="method m-post">POST</span> <code>/v1/messages</code></a></li><li><a href="/docs/reference/v1-models/"><span class="method m-get">GET</span> <code>/v1/models</code></a></li><li><a href="/docs/reference/v1-policy/"><span class="method m-get">GET</span> <code>/v1/policy</code></a></li><li><a href="/docs/reference/v1-responses/"><span class="method m-post">POST</span> <code>/v1/responses</code></a></li><li><a href="/docs/reference/v1-route-explain-decisionid/"><span class="method m-get">GET</span> <code>/v1/route/explain/{decisionId}</code></a></li><li><a href="/docs/reference/v1-usage/"><span class="method m-get">GET</span> <code>/v1/usage</code></a></li></ul></details><details class="rn"><summary>Public (/public)</summary><ul><li><a href="/docs/reference/public-asks-aid/"><span class="method m-get">GET</span> <code>/public/asks/{aid}</code></a></li><li><a href="/docs/reference/public-demand/"><span class="method m-post">POST</span> <code>/public/demand</code></a></li><li><a href="/docs/reference/public-directory/"><span class="method m-get">GET</span> <code>/public/directory</code></a></li><li><a href="/docs/reference/public-models/"><span class="method m-get">GET</span> <code>/public/models</code></a></li><li><a href="/docs/reference/public-models-provider-model/"><span class="method m-get">GET</span> <code>/public/models/{provider}/{model}</code></a></li><li><a href="/docs/reference/public-packs-id/"><span class="method m-get">GET</span> <code>/public/packs/{id}</code></a></li><li><a href="/docs/reference/public-profiles-handle/"><span class="method m-get">GET</span> <code>/public/profiles/{handle}</code></a></li><li><a href="/docs/reference/public-receipts-id/"><span class="method m-get">GET</span> <code>/public/receipts/{id}</code></a></li><li><a href="/docs/reference/public-receipts-id-verify/"><span class="method m-get">GET</span> <code>/public/receipts/{id}/verify</code></a></li><li><a href="/docs/reference/public-report/"><span class="method m-post">POST</span> <code>/public/report</code></a></li><li><a href="/docs/reference/public-rooms-handle-front/"><span class="method m-get">GET</span> <code>/public/rooms/{handle}/front</code></a></li><li><a href="/docs/reference/public-rooms-handle-updates/"><span class="method m-get">GET</span> <code>/public/rooms/{handle}/updates</code></a></li><li><a href="/docs/reference/public-trending/"><span class="method m-get">GET</span> <code>/public/trending</code></a></li><li><a href="/docs/reference/public-version/"><span class="method m-get">GET</span> <code>/public/version</code></a></li><li><a href="/docs/reference/public-verticals-pack/"><span class="method m-get">GET</span> <code>/public/verticals/{pack}</code></a></li></ul></details><details class="rn" open><summary>Account (/api/me)</summary><ul><li><a href="/docs/reference/api-me-spending/" aria-current="page"><span class="method m-get">GET</span> <code>/api/me/spending</code></a></li><li><a href="/docs/reference/api-me-spending-caps/"><span class="method m-put">PUT</span> <code>/api/me/spending/caps</code></a></li><li><a href="/docs/reference/api-me-spending-pause/"><span class="method m-post">POST</span> <code>/api/me/spending/pause</code></a></li><li><a href="/docs/reference/api-me-spending-resume/"><span class="method m-post">POST</span> <code>/api/me/spending/resume</code></a></li><li><a href="/docs/reference/api-me-spending-top-up-intents-id-confirm/"><span class="method m-post">POST</span> <code>/api/me/spending/top-up-intents/{id}/confirm</code></a></li><li><a href="/docs/reference/api-me-spending-top-up-policy/"><span class="method m-put">PUT</span> <code>/api/me/spending/top-up-policy</code></a></li><li><a href="/docs/reference/api-me-wallets/"><span class="method m-get">GET</span> <code>/api/me/wallets</code></a></li><li><a href="/docs/reference/api-me-wallets-id-entries/"><span class="method m-get">GET</span> <code>/api/me/wallets/{id}/entries</code></a></li></ul></details><details class="rn"><summary>Relay console (/api/relay)</summary><ul><li><a href="/docs/reference/api-relay-accounts/"><span class="method m-get">GET</span> <code>/api/relay/accounts</code></a></li><li><a href="/docs/reference/api-relay-accounts/"><span class="method m-post">POST</span> <code>/api/relay/accounts</code></a></li><li><a href="/docs/reference/api-relay-accounts-id-rotate/"><span class="method m-post">POST</span> <code>/api/relay/accounts/{id}/rotate</code></a></li><li><a href="/docs/reference/api-relay-accounts-id-status/"><span class="method m-post">POST</span> <code>/api/relay/accounts/{id}/status</code></a></li><li><a href="/docs/reference/api-relay-ceilings/"><span class="method m-get">GET</span> <code>/api/relay/ceilings</code></a></li><li><a href="/docs/reference/api-relay-ceilings/"><span class="method m-put">PUT</span> <code>/api/relay/ceilings</code></a></li><li><a href="/docs/reference/api-relay-credentials/"><span class="method m-get">GET</span> <code>/api/relay/credentials</code></a></li><li><a href="/docs/reference/api-relay-credentials-test/"><span class="method m-post">POST</span> <code>/api/relay/credentials/test</code></a></li><li><a href="/docs/reference/api-relay-credentials-name/"><span class="method m-put">PUT</span> <code>/api/relay/credentials/{name}</code></a></li><li><a href="/docs/reference/api-relay-credentials-name/"><span class="method m-delete">DELETE</span> <code>/api/relay/credentials/{name}</code></a></li><li><a href="/docs/reference/api-relay-credentials-name-grants/"><span class="method m-get">GET</span> <code>/api/relay/credentials/{name}/grants</code></a></li><li><a href="/docs/reference/api-relay-credentials-name-grants/"><span class="method m-post">POST</span> <code>/api/relay/credentials/{name}/grants</code></a></li><li><a href="/docs/reference/api-relay-credentials-name-grants-id/"><span class="method m-delete">DELETE</span> <code>/api/relay/credentials/{name}/grants/{id}</code></a></li><li><a href="/docs/reference/api-relay-credentials-name-uses/"><span class="method m-get">GET</span> <code>/api/relay/credentials/{name}/uses</code></a></li><li><a href="/docs/reference/api-relay-end-users/"><span class="method m-get">GET</span> <code>/api/relay/end-users</code></a></li><li><a href="/docs/reference/api-relay-fees/"><span class="method m-get">GET</span> <code>/api/relay/fees</code></a></li><li><a href="/docs/reference/api-relay-free-tier/"><span class="method m-get">GET</span> <code>/api/relay/free-tier</code></a></li><li><a href="/docs/reference/api-relay-free-tier-keys/"><span class="method m-get">GET</span> <code>/api/relay/free-tier-keys</code></a></li><li><a href="/docs/reference/api-relay-free-tier-keys-provider/"><span class="method m-put">PUT</span> <code>/api/relay/free-tier-keys/{provider}</code></a></li><li><a href="/docs/reference/api-relay-guardrails/"><span class="method m-get">GET</span> <code>/api/relay/guardrails</code></a></li><li><a href="/docs/reference/api-relay-guardrails/"><span class="method m-post">POST</span> <code>/api/relay/guardrails</code></a></li><li><a href="/docs/reference/api-relay-guardrails-preview/"><span class="method m-post">POST</span> <code>/api/relay/guardrails/preview</code></a></li><li><a href="/docs/reference/api-relay-guardrails-registry/"><span class="method m-get">GET</span> <code>/api/relay/guardrails/registry</code></a></li><li><a href="/docs/reference/api-relay-guardrails-id/"><span class="method m-patch">PATCH</span> <code>/api/relay/guardrails/{id}</code></a></li><li><a href="/docs/reference/api-relay-guardrails-id-eligibility/"><span class="method m-get">GET</span> <code>/api/relay/guardrails/{id}/eligibility</code></a></li><li><a href="/docs/reference/api-relay-keys-id-policy/"><span class="method m-get">GET</span> <code>/api/relay/keys/{id}/policy</code></a></li><li><a href="/docs/reference/api-relay-model-packs/"><span class="method m-get">GET</span> <code>/api/relay/model-packs</code></a></li><li><a href="/docs/reference/api-relay-model-packs/"><span class="method m-post">POST</span> <code>/api/relay/model-packs</code></a></li><li><a href="/docs/reference/api-relay-model-packs-id/"><span class="method m-delete">DELETE</span> <code>/api/relay/model-packs/{id}</code></a></li><li><a href="/docs/reference/api-relay-nodes-me-earnings/"><span class="method m-get">GET</span> <code>/api/relay/nodes/me/earnings</code></a></li><li><a href="/docs/reference/api-relay-own-models-probe/"><span class="method m-post">POST</span> <code>/api/relay/own-models/probe</code></a></li><li><a href="/docs/reference/api-relay-own-models-seats/"><span class="method m-get">GET</span> <code>/api/relay/own-models/seats</code></a></li><li><a href="/docs/reference/api-relay-own-models-upstreams/"><span class="method m-get">GET</span> <code>/api/relay/own-models/upstreams</code></a></li><li><a href="/docs/reference/api-relay-own-models-upstreams/"><span class="method m-post">POST</span> <code>/api/relay/own-models/upstreams</code></a></li><li><a href="/docs/reference/api-relay-own-models-id-listing/"><span class="method m-put">PUT</span> <code>/api/relay/own-models/{id}/listing</code></a></li><li><a href="/docs/reference/api-relay-own-models-id-listing/"><span class="method m-delete">DELETE</span> <code>/api/relay/own-models/{id}/listing</code></a></li><li><a href="/docs/reference/api-relay-pool/"><span class="method m-get">GET</span> <code>/api/relay/pool</code></a></li><li><a href="/docs/reference/api-relay-routing-rules/"><span class="method m-get">GET</span> <code>/api/relay/routing/rules</code></a></li><li><a href="/docs/reference/api-relay-routing-rules/"><span class="method m-put">PUT</span> <code>/api/relay/routing/rules</code></a></li><li><a href="/docs/reference/api-relay-routing-rules-explain/"><span class="method m-post">POST</span> <code>/api/relay/routing/rules/explain</code></a></li><li><a href="/docs/reference/api-relay-savings/"><span class="method m-get">GET</span> <code>/api/relay/savings</code></a></li><li><a href="/docs/reference/api-relay-scorecards/"><span class="method m-get">GET</span> <code>/api/relay/scorecards</code></a></li><li><a href="/docs/reference/api-relay-scorecards-hop/"><span class="method m-get">GET</span> <code>/api/relay/scorecards/{hop}</code></a></li><li><a href="/docs/reference/api-relay-strategies/"><span class="method m-get">GET</span> <code>/api/relay/strategies</code></a></li></ul></details></details>
+    </nav>
+    <article class="docs-main">
+      <p class="crumbs"><a href="/">Home</a> / <a href="/docs/">Docs</a> / <a href="/docs/reference/">API reference</a></p>
+      <h1>/api/me/spending</h1>
 <section class="card ref" id="ref-get-api-me-spending">
-  <h2><span class="tag built">GET</span> <code>/api/me/spending</code></h2>
-  <p>Who may call: signed-in session; roles: admin, cfo_viewer, fde, hr_ops, manager, member, operator.</p>
-  <p><b>Response schema</b></p>
-  <pre><code>{
-  &quot;description&quot;: &quot;Hand-written, read against me_spending in crates/mr-server/src/routes.rs (and PauseStateDto, TopUpIntentDto, SkippedRunDto in crates/mr-kernel/src/spending.rs). A session credential. With no personal workspace the page is empty (topUpPolicy is then absent).&quot;,
+  <h2 id="ref-get-api-me-spending-head"><span class="method m-get">GET</span> <code>/api/me/spending</code></h2>
+  <p class="ref-auth"><b>Authentication</b> signed-in session; roles: admin, cfo_viewer, fde, hr_ops, manager, member, operator</p>
+  <h3 id="ref-get-api-me-spending-response">Response</h3>
+  <table class="fields"><thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td><code>wallets</code> <span class="req">required</span></td><td>array of object</td><td></td></tr><tr><td><code>wallets[].id</code> <span class="req">required</span></td><td>string</td><td>The answer's id.</td></tr><tr><td><code>wallets[].tenantId</code></td><td>string</td><td></td></tr><tr><td><code>wallets[].ownerKind</code></td><td>string</td><td></td></tr><tr><td><code>wallets[].ownerId</code></td><td>string</td><td></td></tr><tr><td><code>wallets[].kind</code> <span class="req">required</span></td><td>string</td><td></td></tr><tr><td><code>wallets[].balanceMu</code> <span class="req">required</span></td><td>integer</td><td></td></tr><tr><td><code>wallets[].heldMu</code> <span class="req">required</span></td><td>integer</td><td></td></tr><tr><td><code>wallets[].currencyHint</code></td><td>string or null</td><td></td></tr><tr><td><code>wallets[].expiresAt</code></td><td>string or null</td><td></td></tr><tr><td><code>wallets[].spendPriority</code></td><td>integer</td><td></td></tr><tr><td><code>wallets[].sourceKind</code></td><td>string or null</td><td></td></tr><tr><td><code>wallets[].sourceRef</code></td><td>string or null</td><td></td></tr><tr><td><code>wallets[].periodStart</code></td><td>string or null</td><td></td></tr><tr><td><code>wallets[].periodEnd</code></td><td>string or null</td><td></td></tr><tr><td><code>wallets[].rolloverCapMu</code></td><td>integer or null</td><td></td></tr><tr><td><code>wallets[].createdAt</code></td><td>string</td><td></td></tr><tr><td><code>wallets[].closedAt</code></td><td>string or null</td><td></td></tr><tr><td><code>caps</code> <span class="req">required</span></td><td>array of object</td><td></td></tr><tr><td><code>caps[].id</code></td><td>string</td><td>The answer's id.</td></tr><tr><td><code>caps[].period</code></td><td>string</td><td></td></tr><tr><td><code>caps[].tier</code></td><td>object</td><td></td></tr><tr><td><code>caps[].botKey</code></td><td>object</td><td></td></tr><tr><td><code>caps[].limitMu</code></td><td>integer or null</td><td></td></tr><tr><td><code>caps[].perRequestMu</code></td><td>integer or null</td><td></td></tr><tr><td><code>caps[].reservedMu</code></td><td>integer or null</td><td></td></tr><tr><td><code>caps[].spentMu</code></td><td>integer</td><td></td></tr><tr><td><code>caps[].periodStartedAt</code></td><td>string or null</td><td></td></tr><tr><td><code>caps[].runsOutAt</code></td><td>string or null</td><td></td></tr><tr><td><code>pause</code> <span class="req">required</span></td><td>object or null</td><td></td></tr><tr><td><code>pause.pausedAt</code></td><td>string</td><td></td></tr><tr><td><code>pause.pausedBy</code></td><td>string</td><td></td></tr><tr><td><code>pause.note</code></td><td>string or null</td><td></td></tr><tr><td><code>topUpPolicy</code></td><td>object or null</td><td></td></tr><tr><td><code>topUpPolicy.id</code></td><td>string</td><td>The answer's id.</td></tr><tr><td><code>topUpPolicy.amountMu</code></td><td>integer</td><td></td></tr><tr><td><code>topUpPolicy.triggerBalanceMu</code></td><td>integer</td><td></td></tr><tr><td><code>topUpPolicy.monthlyCeilingMu</code></td><td>integer or null</td><td></td></tr><tr><td><code>topUpIntents</code> <span class="req">required</span></td><td>array of object</td><td></td></tr><tr><td><code>topUpIntents[].id</code></td><td>string</td><td>The answer's id.</td></tr><tr><td><code>topUpIntents[].amountMu</code></td><td>integer</td><td></td></tr><tr><td><code>topUpIntents[].reason</code></td><td>string</td><td></td></tr><tr><td><code>topUpIntents[].state</code></td><td>string</td><td></td></tr><tr><td><code>topUpIntents[].periodStart</code></td><td>string</td><td></td></tr><tr><td><code>topUpIntents[].confirmedAt</code></td><td>string or null</td><td></td></tr><tr><td><code>topUpIntents[].createdAt</code></td><td>string</td><td></td></tr><tr><td><code>skippedRuns</code> <span class="req">required</span></td><td>array of object</td><td></td></tr><tr><td><code>skippedRuns[].id</code></td><td>string</td><td>The answer's id.</td></tr><tr><td><code>skippedRuns[].reason</code></td><td>string</td><td></td></tr><tr><td><code>skippedRuns[].detail</code></td><td>string or null</td><td></td></tr><tr><td><code>skippedRuns[].createdAt</code></td><td>string</td><td></td></tr><tr><td><code>trial</code> <span class="req">required</span></td><td>object or null</td><td></td></tr><tr><td><code>trial.balanceMu</code></td><td>integer</td><td></td></tr><tr><td><code>trial.expiresAt</code></td><td>string or null</td><td></td></tr><tr><td><code>trial.daysLeft</code></td><td>number</td><td></td></tr><tr><td><code>trial.freeLaneCallsThisPeriod</code></td><td>integer</td><td></td></tr></tbody></table>
+  <div class="code"><div class="code-p" data-i="0"><div class="code-h"><span>Example response (shape)</span><button type="button" class="copy" aria-label="Copy the JSON example">Copy</button></div><pre><code class="lang-json">{
+  &quot;wallets&quot;: [
+    {
+      &quot;id&quot;: &quot;&lt;id&gt;&quot;,
+      &quot;tenantId&quot;: &quot;&lt;tenantId&gt;&quot;,
+      &quot;ownerKind&quot;: &quot;&lt;ownerKind&gt;&quot;,
+      &quot;ownerId&quot;: &quot;&lt;ownerId&gt;&quot;,
+      &quot;kind&quot;: &quot;&lt;kind&gt;&quot;,
+      &quot;balanceMu&quot;: 0,
+      &quot;heldMu&quot;: 0,
+      &quot;currencyHint&quot;: &quot;&lt;currencyHint&gt;&quot;,
+      &quot;expiresAt&quot;: &quot;&lt;expiresAt&gt;&quot;,
+      &quot;spendPriority&quot;: 0,
+      &quot;sourceKind&quot;: &quot;&lt;sourceKind&gt;&quot;,
+      &quot;sourceRef&quot;: &quot;&lt;sourceRef&gt;&quot;,
+      &quot;periodStart&quot;: &quot;&lt;periodStart&gt;&quot;,
+      &quot;periodEnd&quot;: &quot;&lt;periodEnd&gt;&quot;,
+      &quot;rolloverCapMu&quot;: &quot;&lt;rolloverCapMu&gt;&quot;,
+      &quot;createdAt&quot;: &quot;&lt;createdAt&gt;&quot;,
+      &quot;closedAt&quot;: &quot;&lt;closedAt&gt;&quot;
+    }
+  ],
+  &quot;caps&quot;: [
+    {
+      &quot;id&quot;: &quot;&lt;id&gt;&quot;,
+      &quot;period&quot;: &quot;&lt;period&gt;&quot;,
+      &quot;tier&quot;: &quot;&lt;tier&gt;&quot;,
+      &quot;botKey&quot;: &quot;&lt;botKey&gt;&quot;,
+      &quot;limitMu&quot;: &quot;&lt;limitMu&gt;&quot;,
+      &quot;perRequestMu&quot;: &quot;&lt;perRequestMu&gt;&quot;,
+      &quot;reservedMu&quot;: &quot;&lt;reservedMu&gt;&quot;,
+      &quot;spentMu&quot;: 0,
+      &quot;periodStartedAt&quot;: &quot;&lt;periodStartedAt&gt;&quot;,
+      &quot;runsOutAt&quot;: &quot;&lt;runsOutAt&gt;&quot;
+    }
+  ],
+  &quot;pause&quot;: {
+    &quot;pausedAt&quot;: &quot;&lt;pausedAt&gt;&quot;,
+    &quot;pausedBy&quot;: &quot;&lt;pausedBy&gt;&quot;,
+    &quot;note&quot;: &quot;&lt;note&gt;&quot;
+  },
+  &quot;topUpPolicy&quot;: {
+    &quot;id&quot;: &quot;&lt;id&gt;&quot;,
+    &quot;amountMu&quot;: 0,
+    &quot;triggerBalanceMu&quot;: 0,
+    &quot;monthlyCeilingMu&quot;: &quot;&lt;monthlyCeilingMu&gt;&quot;
+  },
+  &quot;topUpIntents&quot;: [
+    {
+      &quot;id&quot;: &quot;&lt;id&gt;&quot;,
+      &quot;amountMu&quot;: 0,
+      &quot;reason&quot;: &quot;&lt;reason&gt;&quot;,
+      &quot;state&quot;: &quot;&lt;state&gt;&quot;,
+      &quot;periodStart&quot;: &quot;&lt;periodStart&gt;&quot;,
+      &quot;confirmedAt&quot;: &quot;&lt;confirmedAt&gt;&quot;,
+      &quot;createdAt&quot;: &quot;&lt;createdAt&gt;&quot;
+    }
+  ],
+  &quot;skippedRuns&quot;: [
+    {
+      &quot;id&quot;: &quot;&lt;id&gt;&quot;,
+      &quot;reason&quot;: &quot;&lt;reason&gt;&quot;,
+      &quot;detail&quot;: &quot;&lt;detail&gt;&quot;,
+      &quot;createdAt&quot;: &quot;&lt;createdAt&gt;&quot;
+    }
+  ],
+  &quot;trial&quot;: {
+    &quot;balanceMu&quot;: 0,
+    &quot;expiresAt&quot;: &quot;&lt;expiresAt&gt;&quot;,
+    &quot;daysLeft&quot;: 0,
+    &quot;freeLaneCallsThisPeriod&quot;: 0
+  }
+}</code></pre></div></div>
+  <h3 id="ref-get-api-me-spending-errors">Common errors</h3><ul class="ref-errs"><li><code>401</code> not signed in</li></ul><p class="ref-note">Every error has the same JSON shape; see <a href="/docs/errors/">Errors</a> and <a href="/docs/limits/">Limits</a>.</p>
+  <details class="raw"><summary>Full schema (JSON)</summary><p><b>Response schema</b></p><pre><code>{
+  &quot;description&quot;: &quot;A session credential. With no personal workspace the page is empty (topUpPolicy is then absent).&quot;,
   &quot;type&quot;: &quot;object&quot;,
   &quot;required&quot;: [
     &quot;wallets&quot;,
@@ -325,16 +406,21 @@
       }
     }
   }
-}</code></pre>
+}</code></pre></details>
 </section>
-</div></section>
+
+    </article>
+    <aside class="docs-toc" aria-label="On this page"><p>On this page</p><ul><li class="t2"><a href="#ref-get-api-me-spending-head">GET /api/me/spending</a></li><li class="t3"><a href="#ref-get-api-me-spending-response">Response</a></li><li class="t3"><a href="#ref-get-api-me-spending-errors">Common errors</a></li></ul></aside>
+  </div>
+</div>
+<script src="/docs.js" defer></script>
 </main>
 <footer class="foot">
-  <div class="wrap fcols"><div class="fcol"><p class="fh">Assistant</p><a href="/">For people</a><a href="/company/">For companies</a><a href="/rooms/">Rooms</a><a href="/how-it-works/">How it works</a><a href="/how-it-works/#all-scenarios">Scenarios</a><a href="/for/">Who it is for</a><a href="/pricing/">Pricing</a></div><div class="fcol"><p class="fh">Developers</p><a href="/router/">Router</a><a href="/docs/">Docs</a><a href="/pricing/developers/">Developer pricing</a><a href="/registry/">Registry</a><a href="/docs/self-hosted-integration/">Run it yourself</a><a href="/pricing/developers/#rent">Rent out a model or GPUs</a></div><div class="fcol"><p class="fh">AI by field</p><a href="/fields/">The field guide</a><a href="/fields/cases/">Cases</a><a href="/fields/laws/">AI laws</a><a href="/custom-assistant/">Custom assistant</a><a href="/resources/">All resources</a></div><div class="fcol"><p class="fh">About</p><a href="/security/">Security</a><a href="/privacy/">Privacy</a><a href="mailto:support@massrelay.ai">Contact</a><a href="https://github.com/nicholasandreasujitno/massrelay-site">Source of this page</a></div></div>
+  <div class="wrap fcols"><div class="fcol"><p class="fh">Assistant</p><a href="/">For people</a><a href="/company/">For companies</a><a href="/rooms/">Rooms</a><a href="/how-it-works/">How it works</a><a href="/how-it-works/#all-scenarios">Scenarios</a><a href="/for/">Who it is for</a><a href="/pricing/">Pricing</a></div><div class="fcol"><p class="fh">Developers</p><a href="/router/">Router</a><a href="/docs/">Docs</a><a href="/pricing/developers/">Developer pricing</a><a href="/registry/">Registry</a><a href="/docs/self-hosted-integration/">Run it yourself</a><a href="/pricing/developers/#rent">Rent out a model or GPUs</a></div><div class="fcol"><p class="fh">AI by field</p><a href="/fields/">The field guide</a><a href="/fields/cases/">Cases</a><a href="/fields/laws/">AI laws</a><a href="/custom-assistant/">Custom assistant</a><a href="/resources/">All resources</a></div><div class="fcol"><p class="fh">About</p><a href="/security/">Security</a><a href="/privacy/">Privacy</a><a href="/dpa/">DPA</a><a href="mailto:support@massrelay.ai">Contact</a><a href="https://github.com/nicholasandreasujitno/massrelay-site">Source of this page</a></div></div>
   <div class="wrap">
     <span><span class="word">MassRelay</span> · massrelay.ai</span>
     <span><a href="mailto:support@massrelay.ai">Contact</a> · <a href="https://github.com/nicholasandreasujitno/massrelay-site">Source of this page</a></span>
-    <span class="stamp" title="Product version, site version, build">v0.4.0 · site 1 · 1aafc0089</span>
+    <span class="stamp" title="Product version, site version, build">v0.4.0 · site 1 · 27bbc6bc8</span>
   </div>
 </footer>
 

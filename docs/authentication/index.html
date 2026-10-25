@@ -35,7 +35,7 @@
       <div class="dd"><a class="link" href="/">Assistant</a><div class="dd-menu"><a class="sub" href="/">For people</a><a class="sub" href="/rooms/">Rooms</a><a class="sub" href="/how-it-works/">How it works</a><a class="sub" href="/for/">Who it is for</a></div></div>
       <a class="link" href="/company/">For companies</a>
       <div class="dd"><a class="link" href="/pricing/">Pricing</a><div class="dd-menu"><a class="sub" href="/pricing/">For people and teams</a><a class="sub" href="/pricing/developers/">For developers</a></div></div>
-      <div class="dd"><a class="link" href="/router/" aria-current="page">Developers</a><div class="dd-menu"><a class="sub" href="/router/">Router</a><a class="sub" href="/docs/">Docs</a><a class="sub" href="/pricing/developers/">Developer pricing</a><a class="sub" href="/docs/self-hosted-integration/">Run it yourself</a></div></div>
+      <div class="dd"><a class="link" href="/router/" aria-current="page">Developers</a><div class="dd-menu"><a class="sub" href="/router/">Router</a><a class="sub" href="/models/">Your own model</a><a class="sub" href="/docs/">Docs</a><a class="sub" href="/pricing/developers/">Developer pricing</a><a class="sub" href="/docs/self-hosted-integration/">Run it yourself</a></div></div>
       <div class="dd"><a class="link" href="/fields/">AI by field</a><div class="dd-menu"><a class="sub" href="/fields/">The field guide</a><a class="sub" href="/fields/cases/">Cases</a><a class="sub" href="/fields/laws/">AI laws</a><a class="sub" href="/custom-assistant/">Custom assistant</a></div></div>
       <button class="btn ghost sm" id="theme" type="button" aria-label="Switch light and dark">Dark</button>
       <a class="btn primary sm" href="/#join">Join the waiting list</a>
@@ -44,34 +44,65 @@
 </header>
 
 <main id="main">
-<div class="wrap page-head">
-  <p class="crumbs"><a href="/">Home</a> / <a href="/docs/">Docs</a> / Authentication</p>
-  <h1>Authentication</h1>
-  <p class="lead">The relay key, its scopes, and what the router answers when the key is missing or short of a scope.</p>
-</div>
-<section style="padding-top:24px"><div class="wrap">
-<p>Every door under <code>/v1</code> takes a relay key as a bearer token: <code>Authorization: Bearer mrk_&lt;prefix&gt;_&lt;secret&gt;</code>. A missing, malformed, unknown, revoked or expired key all get the same answer, a 401 with code <code>invalid_api_key</code> and a <code>WWW-Authenticate</code> header, so the answer never confirms which keys exist.</p>
-<h2 id="scopes">Scopes</h2>
-<p>A key carries scopes. A door that needs a scope the key lacks answers 403 with code <code>insufficient_scope</code>, and the answer names the scope it wanted in <code>massrelay.requiredScope</code>. The explain door, for one, needs the <code>explain</code> scope.</p>
-<h2 id="where-keys-come-from">Where keys come from</h2>
+<div class="docs">
+  <div class="docs-tabs"><div class="wrap"><a href="/docs/" aria-current="page">Guides</a><a href="/docs/reference/">API reference</a><a href="/docs/self-hosted-integration/">Run it yourself</a><a href="/docs/changelog/">Changelog</a><a class="dt-json" href="/docs/openapi.json">openapi.json</a></div></div>
+  <div class="docs-grid wrap">
+    <nav class="docs-side" aria-label="Documentation">
+      <label class="docs-search"><span class="sr">Search the docs</span><input type="search" id="docsq" placeholder="Search the docs" autocomplete="off"></label>
+      <ul id="docs-results" class="docs-results" hidden></ul>
+      <details class="dn-fold" open><summary>Pages</summary><p class="dn-g">Get started</p><ul><li><a href="/docs/quickstart/">Quickstart</a></li><li><a href="/docs/authentication/" aria-current="page">Authentication</a></li><li><a href="/docs/models/">Models</a></li><li><a href="/docs/sdk/">The SDK</a></li></ul><p class="dn-g">Routing</p><ul><li><a href="/docs/routing/">Routing</a></li><li><a href="/docs/byok/">Bring your own key</a></li><li><a href="/docs/your-model-and-node/">Your model and your node</a></li></ul><p class="dn-g">Usage and billing</p><ul><li><a href="/docs/credits-and-usage/">Credits and usage</a></li><li><a href="/docs/limits/">Limits</a></li></ul><p class="dn-g">Help</p><ul><li><a href="/docs/errors/">Errors</a></li><li><a href="/docs/differences/">How this differs</a></li><li><a href="/docs/changelog/">Changelog</a></li></ul><p class="dn-g">Run it yourself</p><ul><li><a href="/docs/self-hosted-integration/">Integrate against your own install</a></li></ul></details>
+    </nav>
+    <article class="docs-main">
+      <p class="crumbs"><a href="/">Home</a> / <a href="/docs/">Docs</a> / Authentication</p>
+      <h1>Authentication</h1>
+      <p class="lead">The relay key, its scopes, and what the router answers when the key is missing or short of a scope.</p>
+<p>Use this page to authenticate requests and to issue keys for your own users. Every endpoint under <code>/v1</code> takes a relay key as a bearer token.</p>
+<h2 id="send-your-key">Send your key</h2>
+<p>Pass the key in the <code>Authorization</code> header: <code>Authorization: Bearer mrk_&lt;prefix&gt;_&lt;secret&gt;</code>.</p>
+<div class="code"><div class="code-p" data-i="0"><div class="code-h"><span>HTTP</span><button type="button" class="copy" aria-label="Copy the HTTP example">Copy</button></div><pre><code class="lang-http">GET /v1/models HTTP/1.1
+Host: api.massrelay.ai
+Authorization: Bearer mrk_&lt;prefix&gt;_&lt;secret&gt;</code></pre></div></div>
+<p>A missing, malformed, unknown, revoked or expired key all get the same answer: a 401 with code <code>invalid_api_key</code> and a <code>WWW-Authenticate</code> header. The answer never confirms which keys exist.</p>
+<h2 id="create-and-manage-keys">Create and manage keys</h2>
 <p>A workspace member with the right role creates, limits and revokes keys on the Keys page of the console. A key has a policy of its own (allowed models, a budget envelope, a guardrail), set through the console. The secret is shown once, when the key is created.</p>
-<h2 id="provisioning-keys-for-your-users">Provisioning keys for your users</h2>
-<p>A workspace admin can issue a <b>management key</b>: a key with the <code>keys:manage</code> scope, created on the Keys page with an explicit confirmation. It does one thing, which is to mint, list, change and revoke keys for your own users under <code>/v1/management/keys</code>.</p>
-<p>| Call | What it does | |---|---| | <code>POST /v1/management/keys</code> | Mints a key. Body: <code>scopes</code> (any of <code>chat</code>, <code>models</code>, <code>explain</code>; default <code>chat</code>), <code>label</code>, <code>endUser</code>, <code>expiresAt</code> (ISO 8601), <code>budgetEnvelopeId</code>. The answer carries the key once, with <code>Cache-Control: no-store</code>. | | <code>GET /v1/management/keys</code> | The keys this management key minted. Never a secret or a hash. | | <code>GET /v1/management/keys/{id}</code> | One of them. | | <code>PATCH /v1/management/keys/{id}</code> | Sets <code>expiresAt</code> and/or <code>budgetEnvelopeId</code>. An expiry cannot be cleared. | | <code>DELETE /v1/management/keys/{id}</code> | Revokes the key. The row stays; a second call keeps the first time. |</p>
-<p>A provisioned key never carries <code>keys:manage</code> (400 <code>scope_not_delegable</code>), is never an L0 or bring-your-own-upstream key (400 <code>field_not_allowed</code>), and inherits the management key's policy profile and budget envelope unless you name another envelope of the same workspace (400 <code>envelope_not_found</code> otherwise). Your workspace's key ceiling applies: past it the answer is 409 <code>key_limit</code>, and <code>massrelay.limit</code> and <code>massrelay.active</code> say where you stand. A key that is not yours to manage (another management key's, another workspace's, one made in the console) answers 404, the same as a key that does not exist. If the workspace holds these actions for review, a write answers 202 with a <code>proposalId</code> and changes nothing.</p>
-<h2 id="rate-limit-headers">Rate-limit headers</h2>
-<p>Read your key's scopes and spend back with <code>GET /v1/key</code> (see Credits and usage). <code>X-RateLimit-*</code> headers on every answer are coming with a limiter lane; until then a request over the limit answers 429 with a <code>Retry-After</code> header; see Limits.</p>
-<h2 id="console-doors">Console doors</h2>
-<p>The console's own doors under <code>/api</code> take a signed-in session, not a relay key. The reference states, for every door, which of the two it takes.</p>
-<p class="ctas"><a class="btn" href="/docs/quickstart/">Previous: Quickstart</a> <a class="btn" href="/docs/models/">Next: Models</a></p>
-</div></section>
+<p>Read a key's scopes and spend back with <code>GET /v1/key</code> (see <a href="/docs/credits-and-usage/">Credits and usage</a>).</p>
+<h2 id="scopes">Scopes</h2>
+<p>A key carries scopes. An endpoint that needs a scope the key lacks answers 403 with code <code>insufficient_scope</code>, and the answer names the scope it wanted in <code>massrelay.requiredScope</code>. The explain endpoint, for one, needs the <code>explain</code> scope.</p>
+<h2 id="provision-keys-for-your-users">Provision keys for your users</h2>
+<p>A workspace admin can issue a <b>management key</b>: a key with the <code>keys:manage</code> scope, created on the Keys page with an explicit confirmation. It does one thing: it mints, lists, changes and revokes keys for your own users under <code>/v1/management/keys</code>.</p>
+<ul>
+<li>**<code>POST /v1/management/keys</code>** — mints a key. Body: <code>scopes</code> (any of <code>chat</code>, <code>models</code>, <code>explain</code>; default <code>chat</code>), <code>label</code>, <code>endUser</code>, <code>expiresAt</code> (ISO 8601), <code>budgetEnvelopeId</code>. The answer carries the key once, with <code>Cache-Control: no-store</code>.</li>
+<li>**<code>GET /v1/management/keys</code>** — lists the keys this management key minted. Never a secret or a hash.</li>
+<li>**<code>GET /v1/management/keys/{id}</code>** — returns one of them.</li>
+<li>**<code>PATCH /v1/management/keys/{id}</code>** — sets <code>expiresAt</code> and/or <code>budgetEnvelopeId</code>. An expiry cannot be cleared.</li>
+<li>**<code>DELETE /v1/management/keys/{id}</code>** — revokes the key. The row stays; a second call keeps the first time.</li>
+</ul>
+<p>A provisioned key inherits the management key's policy profile and budget envelope unless you name another envelope of the same workspace. These rules apply:</p>
+<ul>
+<li>A provisioned key never carries <code>keys:manage</code>: 400 <code>scope_not_delegable</code>.</li>
+<li>A provisioned key is never an L0 or bring-your-own-upstream key: 400 <code>field_not_allowed</code>.</li>
+<li>An envelope that is not in the same workspace: 400 <code>envelope_not_found</code>.</li>
+<li>Your workspace's key ceiling applies. Past it the answer is 409 <code>key_limit</code>, and <code>massrelay.limit</code> and <code>massrelay.active</code> say where you stand.</li>
+<li>A key that is not yours to manage (another management key's, another workspace's, one made in the console) answers 404, the same as a key that does not exist.</li>
+<li>If the workspace holds these actions for review, a write answers 202 with a <code>proposalId</code> and changes nothing.</li>
+</ul>
+<h2 id="rate-limits">Rate limits</h2>
+<p>Requests over the limit answer 429 with a <code>Retry-After</code> header. See <a href="/docs/limits/">Limits</a>.</p>
+<h2 id="console-endpoints">Console endpoints</h2>
+<p>The console's own endpoints under <code>/api</code> take a signed-in session, not a relay key. The reference states, for every endpoint, which of the two it takes.</p>
+<nav class="docs-pager" aria-label="Previous and next"><a href="/docs/quickstart/"><small>Previous</small>Quickstart</a><a class="nx" href="/docs/models/"><small>Next</small>Models</a></nav>
+    </article>
+    <aside class="docs-toc" aria-label="On this page"><p>On this page</p><ul><li class="t2"><a href="#send-your-key">Send your key</a></li><li class="t2"><a href="#create-and-manage-keys">Create and manage keys</a></li><li class="t2"><a href="#scopes">Scopes</a></li><li class="t2"><a href="#provision-keys-for-your-users">Provision keys for your users</a></li><li class="t2"><a href="#rate-limits">Rate limits</a></li><li class="t2"><a href="#console-endpoints">Console endpoints</a></li></ul></aside>
+  </div>
+</div>
+<script src="/docs.js" defer></script>
 </main>
 <footer class="foot">
-  <div class="wrap fcols"><div class="fcol"><p class="fh">Assistant</p><a href="/">For people</a><a href="/company/">For companies</a><a href="/rooms/">Rooms</a><a href="/how-it-works/">How it works</a><a href="/how-it-works/#all-scenarios">Scenarios</a><a href="/for/">Who it is for</a><a href="/pricing/">Pricing</a></div><div class="fcol"><p class="fh">Developers</p><a href="/router/">Router</a><a href="/docs/">Docs</a><a href="/pricing/developers/">Developer pricing</a><a href="/registry/">Registry</a><a href="/docs/self-hosted-integration/">Run it yourself</a><a href="/pricing/developers/#rent">Rent out a model or GPUs</a></div><div class="fcol"><p class="fh">AI by field</p><a href="/fields/">The field guide</a><a href="/fields/cases/">Cases</a><a href="/fields/laws/">AI laws</a><a href="/custom-assistant/">Custom assistant</a><a href="/resources/">All resources</a></div><div class="fcol"><p class="fh">About</p><a href="/security/">Security</a><a href="/privacy/">Privacy</a><a href="mailto:support@massrelay.ai">Contact</a><a href="https://github.com/nicholasandreasujitno/massrelay-site">Source of this page</a></div></div>
+  <div class="wrap fcols"><div class="fcol"><p class="fh">Assistant</p><a href="/">For people</a><a href="/company/">For companies</a><a href="/rooms/">Rooms</a><a href="/how-it-works/">How it works</a><a href="/how-it-works/#all-scenarios">Scenarios</a><a href="/for/">Who it is for</a><a href="/pricing/">Pricing</a></div><div class="fcol"><p class="fh">Developers</p><a href="/router/">Router</a><a href="/docs/">Docs</a><a href="/pricing/developers/">Developer pricing</a><a href="/registry/">Registry</a><a href="/docs/self-hosted-integration/">Run it yourself</a><a href="/pricing/developers/#rent">Rent out a model or GPUs</a></div><div class="fcol"><p class="fh">AI by field</p><a href="/fields/">The field guide</a><a href="/fields/cases/">Cases</a><a href="/fields/laws/">AI laws</a><a href="/custom-assistant/">Custom assistant</a><a href="/resources/">All resources</a></div><div class="fcol"><p class="fh">About</p><a href="/security/">Security</a><a href="/privacy/">Privacy</a><a href="/dpa/">DPA</a><a href="mailto:support@massrelay.ai">Contact</a><a href="https://github.com/nicholasandreasujitno/massrelay-site">Source of this page</a></div></div>
   <div class="wrap">
     <span><span class="word">MassRelay</span> · massrelay.ai</span>
     <span><a href="mailto:support@massrelay.ai">Contact</a> · <a href="https://github.com/nicholasandreasujitno/massrelay-site">Source of this page</a></span>
-    <span class="stamp" title="Product version, site version, build">v0.4.0 · site 1 · 1aafc0089</span>
+    <span class="stamp" title="Product version, site version, build">v0.4.0 · site 1 · 27bbc6bc8</span>
   </div>
 </footer>
 

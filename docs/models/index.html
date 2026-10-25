@@ -35,7 +35,7 @@
       <div class="dd"><a class="link" href="/">Assistant</a><div class="dd-menu"><a class="sub" href="/">For people</a><a class="sub" href="/rooms/">Rooms</a><a class="sub" href="/how-it-works/">How it works</a><a class="sub" href="/for/">Who it is for</a></div></div>
       <a class="link" href="/company/">For companies</a>
       <div class="dd"><a class="link" href="/pricing/">Pricing</a><div class="dd-menu"><a class="sub" href="/pricing/">For people and teams</a><a class="sub" href="/pricing/developers/">For developers</a></div></div>
-      <div class="dd"><a class="link" href="/router/" aria-current="page">Developers</a><div class="dd-menu"><a class="sub" href="/router/">Router</a><a class="sub" href="/docs/">Docs</a><a class="sub" href="/pricing/developers/">Developer pricing</a><a class="sub" href="/docs/self-hosted-integration/">Run it yourself</a></div></div>
+      <div class="dd"><a class="link" href="/router/" aria-current="page">Developers</a><div class="dd-menu"><a class="sub" href="/router/">Router</a><a class="sub" href="/models/">Your own model</a><a class="sub" href="/docs/">Docs</a><a class="sub" href="/pricing/developers/">Developer pricing</a><a class="sub" href="/docs/self-hosted-integration/">Run it yourself</a></div></div>
       <div class="dd"><a class="link" href="/fields/">AI by field</a><div class="dd-menu"><a class="sub" href="/fields/">The field guide</a><a class="sub" href="/fields/cases/">Cases</a><a class="sub" href="/fields/laws/">AI laws</a><a class="sub" href="/custom-assistant/">Custom assistant</a></div></div>
       <button class="btn ghost sm" id="theme" type="button" aria-label="Switch light and dark">Dark</button>
       <a class="btn primary sm" href="/#join">Join the waiting list</a>
@@ -44,24 +44,82 @@
 </header>
 
 <main id="main">
-<div class="wrap page-head">
-  <p class="crumbs"><a href="/">Home</a> / <a href="/docs/">Docs</a> / Models</p>
-  <h1>Models</h1>
-  <p class="lead">List the models a key may use, with their prices, and read the public catalogue without a key.</p>
-</div>
-<section style="padding-top:24px"><div class="wrap">
-<p><code>GET /v1/models</code> lists what this key may route to, in the OpenAI list shape. Each entry carries a <code>massrelay</code> object with the provider, the custody mode (whose key pays the provider), the family, the prices per million tokens where a rate is known, and the reasoning options where the catalogue states them. A model the workspace brought itself says <code>ownedBy: workspace</code>. Aliases are listed after the models and are marked <code>alias</code>; an alias is a name that routes, never a real model.</p>
-<p>Today the listing is served for keys on the L1 routing layer; other key layers get a 501 <code>not_ported</code> answer rather than a guess.</p>
-<h2 id="without-a-key">Without a key</h2>
+<div class="docs">
+  <div class="docs-tabs"><div class="wrap"><a href="/docs/" aria-current="page">Guides</a><a href="/docs/reference/">API reference</a><a href="/docs/self-hosted-integration/">Run it yourself</a><a href="/docs/changelog/">Changelog</a><a class="dt-json" href="/docs/openapi.json">openapi.json</a></div></div>
+  <div class="docs-grid wrap">
+    <nav class="docs-side" aria-label="Documentation">
+      <label class="docs-search"><span class="sr">Search the docs</span><input type="search" id="docsq" placeholder="Search the docs" autocomplete="off"></label>
+      <ul id="docs-results" class="docs-results" hidden></ul>
+      <details class="dn-fold" open><summary>Pages</summary><p class="dn-g">Get started</p><ul><li><a href="/docs/quickstart/">Quickstart</a></li><li><a href="/docs/authentication/">Authentication</a></li><li><a href="/docs/models/" aria-current="page">Models</a></li><li><a href="/docs/sdk/">The SDK</a></li></ul><p class="dn-g">Routing</p><ul><li><a href="/docs/routing/">Routing</a></li><li><a href="/docs/byok/">Bring your own key</a></li><li><a href="/docs/your-model-and-node/">Your model and your node</a></li></ul><p class="dn-g">Usage and billing</p><ul><li><a href="/docs/credits-and-usage/">Credits and usage</a></li><li><a href="/docs/limits/">Limits</a></li></ul><p class="dn-g">Help</p><ul><li><a href="/docs/errors/">Errors</a></li><li><a href="/docs/differences/">How this differs</a></li><li><a href="/docs/changelog/">Changelog</a></li></ul><p class="dn-g">Run it yourself</p><ul><li><a href="/docs/self-hosted-integration/">Integrate against your own install</a></li></ul></details>
+    </nav>
+    <article class="docs-main">
+      <p class="crumbs"><a href="/">Home</a> / <a href="/docs/">Docs</a> / Models</p>
+      <h1>Models</h1>
+      <p class="lead">List the models a key may use, with their prices, and read the public catalogue without a key.</p>
+<p>Use this page to see which models your key can route to and what they cost. You can also read the public catalogue without a key.</p>
+<h2 id="list-the-models-your-key-can-use">List the models your key can use</h2>
+<p><code>GET /v1/models</code> lists what this key may route to, in the OpenAI list shape.</p>
+<div class="code"><div class="code-p" data-i="0"><div class="code-h"><span>curl</span><button type="button" class="copy" aria-label="Copy the curl example">Copy</button></div><pre><code class="lang-bash">curl https://api.massrelay.ai/v1/models -H &quot;Authorization: Bearer $RELAY_KEY&quot;</code></pre></div></div>
+<p>Each entry carries a <code>massrelay</code> object with these fields:</p>
+<ul>
+<li><b>provider</b> — the provider that serves the model.</li>
+<li><b>custody</b> — whose key pays the provider for this route (see <a href="/docs/byok/">Bring your own key</a>).</li>
+<li><b>family</b> — the model family.</li>
+<li><b>prices</b> — per million tokens, where a rate is known.</li>
+<li><b>reasoning options</b> — where the catalogue states them.</li>
+</ul>
+<p>A model the workspace brought itself says <code>ownedBy: workspace</code>. Aliases are listed after the models and are marked <code>alias</code>; an alias is a name that routes, never a real model.</p>
+<div class="callout c-note" role="note"><b>Note</b> The listing is served for keys on the L1 routing layer. Other key layers get a 501 <code>not_ported</code> answer rather than a guess.</div>
+<h2 id="read-the-public-catalogue">Read the public catalogue</h2>
 <p><code>GET /public/models</code> and <code>GET /public/models/{provider}/{model}</code> need no credential. They show the catalogue with the price per million input and output tokens and, on the detail page, latency and uptime. A figure backed by too few calls is null, never a small number. Partner models appear with <code>partner: true</code>.</p>
-<p>A catalogue generated from the provider feeds (GM-1) is coming; today the catalogue is the one the router ships.</p>
-<h2 id="the-doors-of-this-chapter">The doors of this chapter</h2>
+<div class="code"><div class="code-p" data-i="0"><div class="code-h"><span>curl</span><button type="button" class="copy" aria-label="Copy the curl example">Copy</button></div><pre><code class="lang-bash">curl https://api.massrelay.ai/public/models</code></pre></div></div>
+<p>A catalogue generated from the provider feeds is not available yet; today the catalogue is the one the router ships.</p>
+<h2 id="api-reference">API reference</h2>
 <section class="card ref" id="ref-get-v1-models">
-  <h3><span class="tag built">GET</span> <code>/v1/models</code></h3>
-  <p>Who may call: relay key (bearer).</p>
-  <p><b>Response schema</b></p>
-  <pre><code>{
-  &quot;description&quot;: &quot;Hand-written. Mirrors the OpenAI list-models shape (https://platform.openai.com/docs/api-reference/models/list, read 2026-10-11) plus the massrelay extension block, read against models_inner in crates/mr-gateway/src/routes.rs. Served for an L1 key; any other key layer answers 501 not_ported. The massrelay keys listed are those the handler inserts; a key appears only when its source row exists.&quot;,
+  <h3 id="ref-get-v1-models-head"><span class="method m-get">GET</span> <code>/v1/models</code></h3>
+  <p class="ref-auth"><b>Authentication</b> relay key (bearer)</p>
+  <h4 id="ref-get-v1-models-example">Example request</h4>
+  <div class="code tabs" role="group"><div class="code-tabs" role="tablist"><button type="button" role="tab" data-i="0" aria-selected="true">curl</button><button type="button" role="tab" data-i="1" aria-selected="false">Python</button><button type="button" role="tab" data-i="2" aria-selected="false">TypeScript</button></div><div class="code-p" data-i="0"><div class="code-h"><span>curl</span><button type="button" class="copy" aria-label="Copy the curl example">Copy</button></div><pre><code class="lang-bash">curl https://api.massrelay.ai/v1/models \
+  -H &quot;Authorization: Bearer $RELAY_KEY&quot;</code></pre></div><div class="code-p" data-i="1"><div class="code-h"><span>Python</span><button type="button" class="copy" aria-label="Copy the Python example">Copy</button></div><pre><code class="lang-python">import os, requests
+
+r = requests.get(
+    &quot;https://api.massrelay.ai/v1/models&quot;,
+    headers={&quot;Authorization&quot;: f&quot;Bearer {os.environ['RELAY_KEY']}&quot;},
+)
+r.raise_for_status()
+print(r.json())</code></pre></div><div class="code-p" data-i="2"><div class="code-h"><span>TypeScript</span><button type="button" class="copy" aria-label="Copy the TypeScript example">Copy</button></div><pre><code class="lang-typescript">const r = await fetch(&quot;https://api.massrelay.ai/v1/models&quot;, {
+  method: &quot;GET&quot;,
+  headers: { Authorization: `Bearer ${process.env.RELAY_KEY}` },
+});
+if (!r.ok) throw new Error(`${r.status} ${await r.text()}`);
+console.log(await r.json());</code></pre></div></div>
+  <h4 id="ref-get-v1-models-response">Response</h4>
+  <table class="fields"><thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td><code>object</code> <span class="req">required</span></td><td>string</td><td>The kind of object returned, for example chat.completion. Always &quot;list&quot;.</td></tr><tr><td><code>data</code> <span class="req">required</span></td><td>array of object</td><td>The list of items returned.</td></tr><tr><td><code>data[].id</code> <span class="req">required</span></td><td>string</td><td>A model id, or an alias name (after the models).</td></tr><tr><td><code>data[].object</code> <span class="req">required</span></td><td>string</td><td>The kind of object returned, for example chat.completion. Always &quot;model&quot;.</td></tr><tr><td><code>data[].massrelay</code></td><td>object</td><td></td></tr><tr><td><code>data[].massrelay.provider</code></td><td>string</td><td></td></tr><tr><td><code>data[].massrelay.custody</code></td><td>string</td><td></td></tr><tr><td><code>data[].massrelay.family</code></td><td>string</td><td></td></tr><tr><td><code>data[].massrelay.reasoning_options</code></td><td>object</td><td></td></tr><tr><td><code>data[].massrelay.price_bands</code></td><td>array</td><td></td></tr><tr><td><code>data[].massrelay.ownedBy</code></td><td>string</td><td>Present only for the workspace's own model. Always &quot;workspace&quot;.</td></tr><tr><td><code>data[].massrelay.inputUsdPerM</code></td><td>number</td><td></td></tr><tr><td><code>data[].massrelay.outputUsdPerM</code></td><td>number</td><td></td></tr><tr><td><code>data[].massrelay.alias</code></td><td>boolean</td><td>Present on an alias entry. Always true.</td></tr><tr><td><code>data[].massrelay.startTier</code></td><td>object</td><td></td></tr><tr><td><code>data[].massrelay.preferOwnModels</code></td><td>boolean</td><td></td></tr></tbody></table>
+  <div class="code"><div class="code-p" data-i="0"><div class="code-h"><span>Example response (shape)</span><button type="button" class="copy" aria-label="Copy the JSON example">Copy</button></div><pre><code class="lang-json">{
+  &quot;object&quot;: &quot;list&quot;,
+  &quot;data&quot;: [
+    {
+      &quot;id&quot;: &quot;&lt;id&gt;&quot;,
+      &quot;object&quot;: &quot;model&quot;,
+      &quot;massrelay&quot;: {
+        &quot;provider&quot;: &quot;&lt;provider&gt;&quot;,
+        &quot;custody&quot;: &quot;&lt;custody&gt;&quot;,
+        &quot;family&quot;: &quot;&lt;family&gt;&quot;,
+        &quot;reasoning_options&quot;: &quot;&lt;reasoning_options&gt;&quot;,
+        &quot;price_bands&quot;: [],
+        &quot;ownedBy&quot;: &quot;workspace&quot;,
+        &quot;inputUsdPerM&quot;: 0,
+        &quot;outputUsdPerM&quot;: 0,
+        &quot;alias&quot;: true,
+        &quot;startTier&quot;: &quot;&lt;startTier&gt;&quot;,
+        &quot;preferOwnModels&quot;: false
+      }
+    }
+  ]
+}</code></pre></div></div>
+  <h4 id="ref-get-v1-models-errors">Common errors</h4><ul class="ref-errs"><li><code>401</code> invalid_api_key</li><li><code>403</code> insufficient_scope</li><li><code>429</code> over the request rate; read Retry-After</li></ul><p class="ref-note">Every error has the same JSON shape; see <a href="/docs/errors/">Errors</a> and <a href="/docs/limits/">Limits</a>.</p>
+  <details class="raw"><summary>Full schema (JSON)</summary><p><b>Response schema</b></p><pre><code>{
+  &quot;description&quot;: &quot;Served for an L1 key; any other key layer answers 501 not_ported. The massrelay keys listed are those the handler inserts; a key appears only when its source row exists.&quot;,
   &quot;type&quot;: &quot;object&quot;,
   &quot;required&quot;: [
     &quot;object&quot;,
@@ -128,14 +186,29 @@
       }
     }
   }
-}</code></pre>
+}</code></pre></details>
 </section>
 <section class="card ref" id="ref-get-public-models">
-  <h3><span class="tag built">GET</span> <code>/public/models</code></h3>
-  <p>Who may call: public, no credential.</p>
-  <p><b>Response schema</b></p>
-  <pre><code>{
-  &quot;description&quot;: &quot;Hand-written, read against public_models_list in crates/mr-server/src/public_models.rs. No credential. 404 when the public pages are switched off. `floor` is the k-floor: a figure backed by fewer calls is null, never a small number.&quot;,
+  <h3 id="ref-get-public-models-head"><span class="method m-get">GET</span> <code>/public/models</code></h3>
+  <p class="ref-auth"><b>Authentication</b> public, no credential</p>
+  <h4 id="ref-get-public-models-response">Response</h4>
+  <table class="fields"><thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td><code>floor</code> <span class="req">required</span></td><td>integer</td><td></td></tr><tr><td><code>models</code> <span class="req">required</span></td><td>array of object</td><td></td></tr><tr><td><code>models[].provider</code> <span class="req">required</span></td><td>string</td><td></td></tr><tr><td><code>models[].model</code> <span class="req">required</span></td><td>string</td><td>The model id. In a request it is optional: without it the key's routing chooses.</td></tr><tr><td><code>models[].family</code></td><td>string or null</td><td></td></tr><tr><td><code>models[].contextWindow</code></td><td>integer or null</td><td></td></tr><tr><td><code>models[].priceInputPerMillionUsd</code></td><td>number or null</td><td></td></tr><tr><td><code>models[].priceOutputPerMillionUsd</code></td><td>number or null</td><td></td></tr><tr><td><code>models[].partner</code> <span class="req">required</span></td><td>boolean</td><td></td></tr></tbody></table>
+  <div class="code"><div class="code-p" data-i="0"><div class="code-h"><span>Example response (shape)</span><button type="button" class="copy" aria-label="Copy the JSON example">Copy</button></div><pre><code class="lang-json">{
+  &quot;floor&quot;: 0,
+  &quot;models&quot;: [
+    {
+      &quot;provider&quot;: &quot;&lt;provider&gt;&quot;,
+      &quot;model&quot;: &quot;provider/model-id&quot;,
+      &quot;family&quot;: &quot;&lt;family&gt;&quot;,
+      &quot;contextWindow&quot;: &quot;&lt;contextWindow&gt;&quot;,
+      &quot;priceInputPerMillionUsd&quot;: &quot;&lt;priceInputPerMillionUsd&gt;&quot;,
+      &quot;priceOutputPerMillionUsd&quot;: &quot;&lt;priceOutputPerMillionUsd&gt;&quot;,
+      &quot;partner&quot;: false
+    }
+  ]
+}</code></pre></div></div>
+  <details class="raw"><summary>Full schema (JSON)</summary><p><b>Response schema</b></p><pre><code>{
+  &quot;description&quot;: &quot;No credential. 404 when the public pages are switched off. `floor` is the k-floor: a figure backed by fewer calls is null, never a small number.&quot;,
   &quot;type&quot;: &quot;object&quot;,
   &quot;required&quot;: [
     &quot;floor&quot;,
@@ -192,15 +265,36 @@
       }
     }
   }
-}</code></pre>
+}</code></pre></details>
 </section>
 <section class="card ref" id="ref-get-public-models-provider-model">
-  <h3><span class="tag built">GET</span> <code>/public/models/{provider}/{model}</code></h3>
-  <p>Who may call: public, no credential.</p>
-  <p>Path parameters: <code>provider</code>, <code>model</code>.</p>
-  <p><b>Response schema</b></p>
-  <pre><code>{
-  &quot;description&quot;: &quot;Hand-written, read against public_models_detail in crates/mr-server/src/public_models.rs. 404 {error:not_found} for a name the catalogue and the partner listing do not know. Latency and uptime are null below the k-floor.&quot;,
+  <h3 id="ref-get-public-models-provider-model-head"><span class="method m-get">GET</span> <code>/public/models/{provider}/{model}</code></h3>
+  <p class="ref-auth"><b>Authentication</b> public, no credential</p>
+  <h4 id="ref-get-public-models-provider-model-params">Path parameters</h4><table class="fields"><tbody><tr><td><code>provider</code> <span class="req">required</span></td><td>string</td><td></td></tr><tr><td><code>model</code> <span class="req">required</span></td><td>string</td><td></td></tr></tbody></table>
+  <h4 id="ref-get-public-models-provider-model-response">Response</h4>
+  <table class="fields"><thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td><code>provider</code> <span class="req">required</span></td><td>string</td><td></td></tr><tr><td><code>model</code> <span class="req">required</span></td><td>string</td><td>The model id. In a request it is optional: without it the key's routing chooses.</td></tr><tr><td><code>family</code></td><td>string or null</td><td></td></tr><tr><td><code>contextWindow</code></td><td>integer or null</td><td></td></tr><tr><td><code>priceInputPerMillionUsd</code></td><td>number or null</td><td></td></tr><tr><td><code>priceOutputPerMillionUsd</code></td><td>number or null</td><td></td></tr><tr><td><code>partner</code> <span class="req">required</span></td><td>boolean</td><td></td></tr><tr><td><code>latency</code></td><td>object</td><td></td></tr><tr><td><code>latency.p50Ms</code></td><td>number or null</td><td></td></tr><tr><td><code>latency.p95Ms</code></td><td>number or null</td><td></td></tr><tr><td><code>latency.window</code></td><td>string</td><td> Always &quot;24h&quot;.</td></tr><tr><td><code>uptime</code></td><td>object</td><td></td></tr><tr><td><code>uptime.5m</code></td><td>null</td><td></td></tr><tr><td><code>uptime.30m</code></td><td>null</td><td></td></tr><tr><td><code>uptime.1d</code></td><td>number or null</td><td></td></tr><tr><td><code>floor</code></td><td>integer</td><td></td></tr></tbody></table>
+  <div class="code"><div class="code-p" data-i="0"><div class="code-h"><span>Example response (shape)</span><button type="button" class="copy" aria-label="Copy the JSON example">Copy</button></div><pre><code class="lang-json">{
+  &quot;provider&quot;: &quot;&lt;provider&gt;&quot;,
+  &quot;model&quot;: &quot;provider/model-id&quot;,
+  &quot;family&quot;: &quot;&lt;family&gt;&quot;,
+  &quot;contextWindow&quot;: &quot;&lt;contextWindow&gt;&quot;,
+  &quot;priceInputPerMillionUsd&quot;: &quot;&lt;priceInputPerMillionUsd&gt;&quot;,
+  &quot;priceOutputPerMillionUsd&quot;: &quot;&lt;priceOutputPerMillionUsd&gt;&quot;,
+  &quot;partner&quot;: false,
+  &quot;latency&quot;: {
+    &quot;p50Ms&quot;: &quot;&lt;p50Ms&gt;&quot;,
+    &quot;p95Ms&quot;: &quot;&lt;p95Ms&gt;&quot;,
+    &quot;window&quot;: &quot;24h&quot;
+  },
+  &quot;uptime&quot;: {
+    &quot;5m&quot;: null,
+    &quot;30m&quot;: null,
+    &quot;1d&quot;: &quot;&lt;1d&gt;&quot;
+  },
+  &quot;floor&quot;: 0
+}</code></pre></div></div>
+  <details class="raw"><summary>Full schema (JSON)</summary><p><b>Response schema</b></p><pre><code>{
+  &quot;description&quot;: &quot;404 {error:not_found} for a name the catalogue and the partner listing do not know. Latency and uptime are null below the k-floor.&quot;,
   &quot;type&quot;: &quot;object&quot;,
   &quot;required&quot;: [
     &quot;provider&quot;,
@@ -282,17 +376,21 @@
       &quot;type&quot;: &quot;integer&quot;
     }
   }
-}</code></pre>
+}</code></pre></details>
 </section>
-<p class="ctas"><a class="btn" href="/docs/authentication/">Previous: Authentication</a> <a class="btn" href="/docs/routing/">Next: Routing</a></p>
-</div></section>
+<nav class="docs-pager" aria-label="Previous and next"><a href="/docs/authentication/"><small>Previous</small>Authentication</a><a class="nx" href="/docs/routing/"><small>Next</small>Routing</a></nav>
+    </article>
+    <aside class="docs-toc" aria-label="On this page"><p>On this page</p><ul><li class="t2"><a href="#list-the-models-your-key-can-use">List the models your key can use</a></li><li class="t2"><a href="#read-the-public-catalogue">Read the public catalogue</a></li><li class="t2"><a href="#api-reference">API reference</a></li><li class="t3"><a href="#ref-get-v1-models-head">GET /v1/models</a></li><li class="t3"><a href="#ref-get-public-models-head">GET /public/models</a></li><li class="t3"><a href="#ref-get-public-models-provider-model-head">GET /public/models/{provider}/{model}</a></li></ul></aside>
+  </div>
+</div>
+<script src="/docs.js" defer></script>
 </main>
 <footer class="foot">
-  <div class="wrap fcols"><div class="fcol"><p class="fh">Assistant</p><a href="/">For people</a><a href="/company/">For companies</a><a href="/rooms/">Rooms</a><a href="/how-it-works/">How it works</a><a href="/how-it-works/#all-scenarios">Scenarios</a><a href="/for/">Who it is for</a><a href="/pricing/">Pricing</a></div><div class="fcol"><p class="fh">Developers</p><a href="/router/">Router</a><a href="/docs/">Docs</a><a href="/pricing/developers/">Developer pricing</a><a href="/registry/">Registry</a><a href="/docs/self-hosted-integration/">Run it yourself</a><a href="/pricing/developers/#rent">Rent out a model or GPUs</a></div><div class="fcol"><p class="fh">AI by field</p><a href="/fields/">The field guide</a><a href="/fields/cases/">Cases</a><a href="/fields/laws/">AI laws</a><a href="/custom-assistant/">Custom assistant</a><a href="/resources/">All resources</a></div><div class="fcol"><p class="fh">About</p><a href="/security/">Security</a><a href="/privacy/">Privacy</a><a href="mailto:support@massrelay.ai">Contact</a><a href="https://github.com/nicholasandreasujitno/massrelay-site">Source of this page</a></div></div>
+  <div class="wrap fcols"><div class="fcol"><p class="fh">Assistant</p><a href="/">For people</a><a href="/company/">For companies</a><a href="/rooms/">Rooms</a><a href="/how-it-works/">How it works</a><a href="/how-it-works/#all-scenarios">Scenarios</a><a href="/for/">Who it is for</a><a href="/pricing/">Pricing</a></div><div class="fcol"><p class="fh">Developers</p><a href="/router/">Router</a><a href="/docs/">Docs</a><a href="/pricing/developers/">Developer pricing</a><a href="/registry/">Registry</a><a href="/docs/self-hosted-integration/">Run it yourself</a><a href="/pricing/developers/#rent">Rent out a model or GPUs</a></div><div class="fcol"><p class="fh">AI by field</p><a href="/fields/">The field guide</a><a href="/fields/cases/">Cases</a><a href="/fields/laws/">AI laws</a><a href="/custom-assistant/">Custom assistant</a><a href="/resources/">All resources</a></div><div class="fcol"><p class="fh">About</p><a href="/security/">Security</a><a href="/privacy/">Privacy</a><a href="/dpa/">DPA</a><a href="mailto:support@massrelay.ai">Contact</a><a href="https://github.com/nicholasandreasujitno/massrelay-site">Source of this page</a></div></div>
   <div class="wrap">
     <span><span class="word">MassRelay</span> · massrelay.ai</span>
     <span><a href="mailto:support@massrelay.ai">Contact</a> · <a href="https://github.com/nicholasandreasujitno/massrelay-site">Source of this page</a></span>
-    <span class="stamp" title="Product version, site version, build">v0.4.0 · site 1 · 1aafc0089</span>
+    <span class="stamp" title="Product version, site version, build">v0.4.0 · site 1 · 27bbc6bc8</span>
   </div>
 </footer>
 

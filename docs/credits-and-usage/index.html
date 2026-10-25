@@ -35,7 +35,7 @@
       <div class="dd"><a class="link" href="/">Assistant</a><div class="dd-menu"><a class="sub" href="/">For people</a><a class="sub" href="/rooms/">Rooms</a><a class="sub" href="/how-it-works/">How it works</a><a class="sub" href="/for/">Who it is for</a></div></div>
       <a class="link" href="/company/">For companies</a>
       <div class="dd"><a class="link" href="/pricing/">Pricing</a><div class="dd-menu"><a class="sub" href="/pricing/">For people and teams</a><a class="sub" href="/pricing/developers/">For developers</a></div></div>
-      <div class="dd"><a class="link" href="/router/" aria-current="page">Developers</a><div class="dd-menu"><a class="sub" href="/router/">Router</a><a class="sub" href="/docs/">Docs</a><a class="sub" href="/pricing/developers/">Developer pricing</a><a class="sub" href="/docs/self-hosted-integration/">Run it yourself</a></div></div>
+      <div class="dd"><a class="link" href="/router/" aria-current="page">Developers</a><div class="dd-menu"><a class="sub" href="/router/">Router</a><a class="sub" href="/models/">Your own model</a><a class="sub" href="/docs/">Docs</a><a class="sub" href="/pricing/developers/">Developer pricing</a><a class="sub" href="/docs/self-hosted-integration/">Run it yourself</a></div></div>
       <div class="dd"><a class="link" href="/fields/">AI by field</a><div class="dd-menu"><a class="sub" href="/fields/">The field guide</a><a class="sub" href="/fields/cases/">Cases</a><a class="sub" href="/fields/laws/">AI laws</a><a class="sub" href="/custom-assistant/">Custom assistant</a></div></div>
       <button class="btn ghost sm" id="theme" type="button" aria-label="Switch light and dark">Dark</button>
       <a class="btn primary sm" href="/#join">Join the waiting list</a>
@@ -44,19 +44,52 @@
 </header>
 
 <main id="main">
-<div class="wrap page-head">
-  <p class="crumbs"><a href="/">Home</a> / <a href="/docs/">Docs</a> / Credits and usage</p>
-  <h1>Credits and usage</h1>
-  <p class="lead">Read your balance, your spending limits and the usage behind a bill.</p>
-</div>
-<section style="padding-top:24px"><div class="wrap">
-<p>Money is held in wallets and counted in mu, the unit of account. Today the balance and the spending page are session doors of the console, not relay-key doors:</p>
+<div class="docs">
+  <div class="docs-tabs"><div class="wrap"><a href="/docs/" aria-current="page">Guides</a><a href="/docs/reference/">API reference</a><a href="/docs/self-hosted-integration/">Run it yourself</a><a href="/docs/changelog/">Changelog</a><a class="dt-json" href="/docs/openapi.json">openapi.json</a></div></div>
+  <div class="docs-grid wrap">
+    <nav class="docs-side" aria-label="Documentation">
+      <label class="docs-search"><span class="sr">Search the docs</span><input type="search" id="docsq" placeholder="Search the docs" autocomplete="off"></label>
+      <ul id="docs-results" class="docs-results" hidden></ul>
+      <details class="dn-fold" open><summary>Pages</summary><p class="dn-g">Get started</p><ul><li><a href="/docs/quickstart/">Quickstart</a></li><li><a href="/docs/authentication/">Authentication</a></li><li><a href="/docs/models/">Models</a></li><li><a href="/docs/sdk/">The SDK</a></li></ul><p class="dn-g">Routing</p><ul><li><a href="/docs/routing/">Routing</a></li><li><a href="/docs/byok/">Bring your own key</a></li><li><a href="/docs/your-model-and-node/">Your model and your node</a></li></ul><p class="dn-g">Usage and billing</p><ul><li><a href="/docs/credits-and-usage/" aria-current="page">Credits and usage</a></li><li><a href="/docs/limits/">Limits</a></li></ul><p class="dn-g">Help</p><ul><li><a href="/docs/errors/">Errors</a></li><li><a href="/docs/differences/">How this differs</a></li><li><a href="/docs/changelog/">Changelog</a></li></ul><p class="dn-g">Run it yourself</p><ul><li><a href="/docs/self-hosted-integration/">Integrate against your own install</a></li></ul></details>
+    </nav>
+    <article class="docs-main">
+      <p class="crumbs"><a href="/">Home</a> / <a href="/docs/">Docs</a> / Credits and usage</p>
+      <h1>Credits and usage</h1>
+      <p class="lead">Read your balance, your spending limits and the usage behind a bill.</p>
+<p>Use this page to read your balance, your spending limits and the usage behind a bill. Money is held in wallets and counted in mu, the unit of account.</p>
+<h2 id="read-your-balance-and-spending">Read your balance and spending</h2>
+<p>Today the balance and the spending page are session endpoints of the console, not relay-key endpoints:</p>
 <section class="card ref" id="ref-get-api-me-wallets">
-  <h3><span class="tag built">GET</span> <code>/api/me/wallets</code></h3>
-  <p>Who may call: signed-in session; roles: admin, cfo_viewer, fde, hr_ops, manager, member, operator.</p>
-  <p><b>Response schema</b></p>
-  <pre><code>{
-  &quot;description&quot;: &quot;Hand-written, read against me_wallets in crates/mr-server/src/routes.rs and WalletRow in crates/mr-kernel/src/wallets.rs. A session credential. A person with no personal workspace yet gets an empty list, not an error. Amounts are in mu (the unit of account).&quot;,
+  <h3 id="ref-get-api-me-wallets-head"><span class="method m-get">GET</span> <code>/api/me/wallets</code></h3>
+  <p class="ref-auth"><b>Authentication</b> signed-in session; roles: admin, cfo_viewer, fde, hr_ops, manager, member, operator</p>
+  <h4 id="ref-get-api-me-wallets-response">Response</h4>
+  <table class="fields"><thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td><code>wallets</code> <span class="req">required</span></td><td>array of object</td><td></td></tr><tr><td><code>wallets[].id</code> <span class="req">required</span></td><td>string</td><td>The answer's id.</td></tr><tr><td><code>wallets[].tenantId</code></td><td>string</td><td></td></tr><tr><td><code>wallets[].ownerKind</code></td><td>string</td><td></td></tr><tr><td><code>wallets[].ownerId</code></td><td>string</td><td></td></tr><tr><td><code>wallets[].kind</code> <span class="req">required</span></td><td>string</td><td></td></tr><tr><td><code>wallets[].balanceMu</code> <span class="req">required</span></td><td>integer</td><td></td></tr><tr><td><code>wallets[].heldMu</code> <span class="req">required</span></td><td>integer</td><td></td></tr><tr><td><code>wallets[].currencyHint</code></td><td>string or null</td><td></td></tr><tr><td><code>wallets[].expiresAt</code></td><td>string or null</td><td></td></tr><tr><td><code>wallets[].spendPriority</code></td><td>integer</td><td></td></tr><tr><td><code>wallets[].sourceKind</code></td><td>string or null</td><td></td></tr><tr><td><code>wallets[].sourceRef</code></td><td>string or null</td><td></td></tr><tr><td><code>wallets[].periodStart</code></td><td>string or null</td><td></td></tr><tr><td><code>wallets[].periodEnd</code></td><td>string or null</td><td></td></tr><tr><td><code>wallets[].rolloverCapMu</code></td><td>integer or null</td><td></td></tr><tr><td><code>wallets[].createdAt</code></td><td>string</td><td></td></tr><tr><td><code>wallets[].closedAt</code></td><td>string or null</td><td></td></tr></tbody></table>
+  <div class="code"><div class="code-p" data-i="0"><div class="code-h"><span>Example response (shape)</span><button type="button" class="copy" aria-label="Copy the JSON example">Copy</button></div><pre><code class="lang-json">{
+  &quot;wallets&quot;: [
+    {
+      &quot;id&quot;: &quot;&lt;id&gt;&quot;,
+      &quot;tenantId&quot;: &quot;&lt;tenantId&gt;&quot;,
+      &quot;ownerKind&quot;: &quot;&lt;ownerKind&gt;&quot;,
+      &quot;ownerId&quot;: &quot;&lt;ownerId&gt;&quot;,
+      &quot;kind&quot;: &quot;&lt;kind&gt;&quot;,
+      &quot;balanceMu&quot;: 0,
+      &quot;heldMu&quot;: 0,
+      &quot;currencyHint&quot;: &quot;&lt;currencyHint&gt;&quot;,
+      &quot;expiresAt&quot;: &quot;&lt;expiresAt&gt;&quot;,
+      &quot;spendPriority&quot;: 0,
+      &quot;sourceKind&quot;: &quot;&lt;sourceKind&gt;&quot;,
+      &quot;sourceRef&quot;: &quot;&lt;sourceRef&gt;&quot;,
+      &quot;periodStart&quot;: &quot;&lt;periodStart&gt;&quot;,
+      &quot;periodEnd&quot;: &quot;&lt;periodEnd&gt;&quot;,
+      &quot;rolloverCapMu&quot;: &quot;&lt;rolloverCapMu&gt;&quot;,
+      &quot;createdAt&quot;: &quot;&lt;createdAt&gt;&quot;,
+      &quot;closedAt&quot;: &quot;&lt;closedAt&gt;&quot;
+    }
+  ]
+}</code></pre></div></div>
+  <h4 id="ref-get-api-me-wallets-errors">Common errors</h4><ul class="ref-errs"><li><code>401</code> not signed in</li></ul><p class="ref-note">Every error has the same JSON shape; see <a href="/docs/errors/">Errors</a> and <a href="/docs/limits/">Limits</a>.</p>
+  <details class="raw"><summary>Full schema (JSON)</summary><p><b>Response schema</b></p><pre><code>{
+  &quot;description&quot;: &quot;A session credential. A person with no personal workspace yet gets an empty list, not an error. Amounts are in mu (the unit of account).&quot;,
   &quot;type&quot;: &quot;object&quot;,
   &quot;required&quot;: [
     &quot;wallets&quot;
@@ -152,14 +185,89 @@
       }
     }
   }
-}</code></pre>
+}</code></pre></details>
 </section>
 <section class="card ref" id="ref-get-api-me-spending">
-  <h3><span class="tag built">GET</span> <code>/api/me/spending</code></h3>
-  <p>Who may call: signed-in session; roles: admin, cfo_viewer, fde, hr_ops, manager, member, operator.</p>
-  <p><b>Response schema</b></p>
-  <pre><code>{
-  &quot;description&quot;: &quot;Hand-written, read against me_spending in crates/mr-server/src/routes.rs (and PauseStateDto, TopUpIntentDto, SkippedRunDto in crates/mr-kernel/src/spending.rs). A session credential. With no personal workspace the page is empty (topUpPolicy is then absent).&quot;,
+  <h3 id="ref-get-api-me-spending-head"><span class="method m-get">GET</span> <code>/api/me/spending</code></h3>
+  <p class="ref-auth"><b>Authentication</b> signed-in session; roles: admin, cfo_viewer, fde, hr_ops, manager, member, operator</p>
+  <h4 id="ref-get-api-me-spending-response">Response</h4>
+  <table class="fields"><thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td><code>wallets</code> <span class="req">required</span></td><td>array of object</td><td></td></tr><tr><td><code>wallets[].id</code> <span class="req">required</span></td><td>string</td><td>The answer's id.</td></tr><tr><td><code>wallets[].tenantId</code></td><td>string</td><td></td></tr><tr><td><code>wallets[].ownerKind</code></td><td>string</td><td></td></tr><tr><td><code>wallets[].ownerId</code></td><td>string</td><td></td></tr><tr><td><code>wallets[].kind</code> <span class="req">required</span></td><td>string</td><td></td></tr><tr><td><code>wallets[].balanceMu</code> <span class="req">required</span></td><td>integer</td><td></td></tr><tr><td><code>wallets[].heldMu</code> <span class="req">required</span></td><td>integer</td><td></td></tr><tr><td><code>wallets[].currencyHint</code></td><td>string or null</td><td></td></tr><tr><td><code>wallets[].expiresAt</code></td><td>string or null</td><td></td></tr><tr><td><code>wallets[].spendPriority</code></td><td>integer</td><td></td></tr><tr><td><code>wallets[].sourceKind</code></td><td>string or null</td><td></td></tr><tr><td><code>wallets[].sourceRef</code></td><td>string or null</td><td></td></tr><tr><td><code>wallets[].periodStart</code></td><td>string or null</td><td></td></tr><tr><td><code>wallets[].periodEnd</code></td><td>string or null</td><td></td></tr><tr><td><code>wallets[].rolloverCapMu</code></td><td>integer or null</td><td></td></tr><tr><td><code>wallets[].createdAt</code></td><td>string</td><td></td></tr><tr><td><code>wallets[].closedAt</code></td><td>string or null</td><td></td></tr><tr><td><code>caps</code> <span class="req">required</span></td><td>array of object</td><td></td></tr><tr><td><code>caps[].id</code></td><td>string</td><td>The answer's id.</td></tr><tr><td><code>caps[].period</code></td><td>string</td><td></td></tr><tr><td><code>caps[].tier</code></td><td>object</td><td></td></tr><tr><td><code>caps[].botKey</code></td><td>object</td><td></td></tr><tr><td><code>caps[].limitMu</code></td><td>integer or null</td><td></td></tr><tr><td><code>caps[].perRequestMu</code></td><td>integer or null</td><td></td></tr><tr><td><code>caps[].reservedMu</code></td><td>integer or null</td><td></td></tr><tr><td><code>caps[].spentMu</code></td><td>integer</td><td></td></tr><tr><td><code>caps[].periodStartedAt</code></td><td>string or null</td><td></td></tr><tr><td><code>caps[].runsOutAt</code></td><td>string or null</td><td></td></tr><tr><td><code>pause</code> <span class="req">required</span></td><td>object or null</td><td></td></tr><tr><td><code>pause.pausedAt</code></td><td>string</td><td></td></tr><tr><td><code>pause.pausedBy</code></td><td>string</td><td></td></tr><tr><td><code>pause.note</code></td><td>string or null</td><td></td></tr><tr><td><code>topUpPolicy</code></td><td>object or null</td><td></td></tr><tr><td><code>topUpPolicy.id</code></td><td>string</td><td>The answer's id.</td></tr><tr><td><code>topUpPolicy.amountMu</code></td><td>integer</td><td></td></tr><tr><td><code>topUpPolicy.triggerBalanceMu</code></td><td>integer</td><td></td></tr><tr><td><code>topUpPolicy.monthlyCeilingMu</code></td><td>integer or null</td><td></td></tr><tr><td><code>topUpIntents</code> <span class="req">required</span></td><td>array of object</td><td></td></tr><tr><td><code>topUpIntents[].id</code></td><td>string</td><td>The answer's id.</td></tr><tr><td><code>topUpIntents[].amountMu</code></td><td>integer</td><td></td></tr><tr><td><code>topUpIntents[].reason</code></td><td>string</td><td></td></tr><tr><td><code>topUpIntents[].state</code></td><td>string</td><td></td></tr><tr><td><code>topUpIntents[].periodStart</code></td><td>string</td><td></td></tr><tr><td><code>topUpIntents[].confirmedAt</code></td><td>string or null</td><td></td></tr><tr><td><code>topUpIntents[].createdAt</code></td><td>string</td><td></td></tr><tr><td><code>skippedRuns</code> <span class="req">required</span></td><td>array of object</td><td></td></tr><tr><td><code>skippedRuns[].id</code></td><td>string</td><td>The answer's id.</td></tr><tr><td><code>skippedRuns[].reason</code></td><td>string</td><td></td></tr><tr><td><code>skippedRuns[].detail</code></td><td>string or null</td><td></td></tr><tr><td><code>skippedRuns[].createdAt</code></td><td>string</td><td></td></tr><tr><td><code>trial</code> <span class="req">required</span></td><td>object or null</td><td></td></tr><tr><td><code>trial.balanceMu</code></td><td>integer</td><td></td></tr><tr><td><code>trial.expiresAt</code></td><td>string or null</td><td></td></tr><tr><td><code>trial.daysLeft</code></td><td>number</td><td></td></tr><tr><td><code>trial.freeLaneCallsThisPeriod</code></td><td>integer</td><td></td></tr></tbody></table>
+  <div class="code"><div class="code-p" data-i="0"><div class="code-h"><span>Example response (shape)</span><button type="button" class="copy" aria-label="Copy the JSON example">Copy</button></div><pre><code class="lang-json">{
+  &quot;wallets&quot;: [
+    {
+      &quot;id&quot;: &quot;&lt;id&gt;&quot;,
+      &quot;tenantId&quot;: &quot;&lt;tenantId&gt;&quot;,
+      &quot;ownerKind&quot;: &quot;&lt;ownerKind&gt;&quot;,
+      &quot;ownerId&quot;: &quot;&lt;ownerId&gt;&quot;,
+      &quot;kind&quot;: &quot;&lt;kind&gt;&quot;,
+      &quot;balanceMu&quot;: 0,
+      &quot;heldMu&quot;: 0,
+      &quot;currencyHint&quot;: &quot;&lt;currencyHint&gt;&quot;,
+      &quot;expiresAt&quot;: &quot;&lt;expiresAt&gt;&quot;,
+      &quot;spendPriority&quot;: 0,
+      &quot;sourceKind&quot;: &quot;&lt;sourceKind&gt;&quot;,
+      &quot;sourceRef&quot;: &quot;&lt;sourceRef&gt;&quot;,
+      &quot;periodStart&quot;: &quot;&lt;periodStart&gt;&quot;,
+      &quot;periodEnd&quot;: &quot;&lt;periodEnd&gt;&quot;,
+      &quot;rolloverCapMu&quot;: &quot;&lt;rolloverCapMu&gt;&quot;,
+      &quot;createdAt&quot;: &quot;&lt;createdAt&gt;&quot;,
+      &quot;closedAt&quot;: &quot;&lt;closedAt&gt;&quot;
+    }
+  ],
+  &quot;caps&quot;: [
+    {
+      &quot;id&quot;: &quot;&lt;id&gt;&quot;,
+      &quot;period&quot;: &quot;&lt;period&gt;&quot;,
+      &quot;tier&quot;: &quot;&lt;tier&gt;&quot;,
+      &quot;botKey&quot;: &quot;&lt;botKey&gt;&quot;,
+      &quot;limitMu&quot;: &quot;&lt;limitMu&gt;&quot;,
+      &quot;perRequestMu&quot;: &quot;&lt;perRequestMu&gt;&quot;,
+      &quot;reservedMu&quot;: &quot;&lt;reservedMu&gt;&quot;,
+      &quot;spentMu&quot;: 0,
+      &quot;periodStartedAt&quot;: &quot;&lt;periodStartedAt&gt;&quot;,
+      &quot;runsOutAt&quot;: &quot;&lt;runsOutAt&gt;&quot;
+    }
+  ],
+  &quot;pause&quot;: {
+    &quot;pausedAt&quot;: &quot;&lt;pausedAt&gt;&quot;,
+    &quot;pausedBy&quot;: &quot;&lt;pausedBy&gt;&quot;,
+    &quot;note&quot;: &quot;&lt;note&gt;&quot;
+  },
+  &quot;topUpPolicy&quot;: {
+    &quot;id&quot;: &quot;&lt;id&gt;&quot;,
+    &quot;amountMu&quot;: 0,
+    &quot;triggerBalanceMu&quot;: 0,
+    &quot;monthlyCeilingMu&quot;: &quot;&lt;monthlyCeilingMu&gt;&quot;
+  },
+  &quot;topUpIntents&quot;: [
+    {
+      &quot;id&quot;: &quot;&lt;id&gt;&quot;,
+      &quot;amountMu&quot;: 0,
+      &quot;reason&quot;: &quot;&lt;reason&gt;&quot;,
+      &quot;state&quot;: &quot;&lt;state&gt;&quot;,
+      &quot;periodStart&quot;: &quot;&lt;periodStart&gt;&quot;,
+      &quot;confirmedAt&quot;: &quot;&lt;confirmedAt&gt;&quot;,
+      &quot;createdAt&quot;: &quot;&lt;createdAt&gt;&quot;
+    }
+  ],
+  &quot;skippedRuns&quot;: [
+    {
+      &quot;id&quot;: &quot;&lt;id&gt;&quot;,
+      &quot;reason&quot;: &quot;&lt;reason&gt;&quot;,
+      &quot;detail&quot;: &quot;&lt;detail&gt;&quot;,
+      &quot;createdAt&quot;: &quot;&lt;createdAt&gt;&quot;
+    }
+  ],
+  &quot;trial&quot;: {
+    &quot;balanceMu&quot;: 0,
+    &quot;expiresAt&quot;: &quot;&lt;expiresAt&gt;&quot;,
+    &quot;daysLeft&quot;: 0,
+    &quot;freeLaneCallsThisPeriod&quot;: 0
+  }
+}</code></pre></div></div>
+  <h4 id="ref-get-api-me-spending-errors">Common errors</h4><ul class="ref-errs"><li><code>401</code> not signed in</li></ul><p class="ref-note">Every error has the same JSON shape; see <a href="/docs/errors/">Errors</a> and <a href="/docs/limits/">Limits</a>.</p>
+  <details class="raw"><summary>Full schema (JSON)</summary><p><b>Response schema</b></p><pre><code>{
+  &quot;description&quot;: &quot;A session credential. With no personal workspace the page is empty (topUpPolicy is then absent).&quot;,
   &quot;type&quot;: &quot;object&quot;,
   &quot;required&quot;: [
     &quot;wallets&quot;,
@@ -430,20 +538,55 @@
       }
     }
   }
-}</code></pre>
+}</code></pre></details>
 </section>
-<p>A wallet has a balance and an amount held; a spending cap has a period, a limit and what is spent so far, and a forecast of the day it runs out. A person can pause spending, and the page lists the runs a pause skipped.</p>
-<h2 id="budgets-degrade-before-they-block">Budgets degrade before they block</h2>
-<p>When a budget runs out the router first lowers autonomy or files a request for help; a hard stop comes after. When a request does stop for money it answers 402; see Errors.</p>
-<h2 id="for-a-key-holder-four-doors-under-v1">For a key holder: four doors under <code>/v1</code></h2>
-<p>These doors take the relay key itself as the bearer, exactly as the completion doors do, and only read. A revoked, expired or unknown key is refused with the same 401 as everywhere else. They read the key's own ledgers: a decision of another key or another workspace is a 404, never a 403. Each costs one request against the key's rate limit.</p>
-<pre><code>curl https://api.massrelay.ai/v1/key -H &quot;Authorization: Bearer mrk_&lt;prefix&gt;_&lt;secret&gt;&quot;</code></pre>
+<p>A wallet has a balance and an amount held. A spending cap has a period, a limit, what is spent so far, and a forecast of the day it runs out. A person can pause spending, and the page lists the runs a pause skipped.</p>
+<h2 id="what-happens-when-a-budget-runs-out">What happens when a budget runs out</h2>
+<p>Budgets degrade before they block. When a budget runs out the router first lowers autonomy or files a request for help; a hard stop comes after. When a request does stop for money it answers 402; see <a href="/docs/errors/">Errors</a>.</p>
+<h2 id="read-usage-with-your-relay-key">Read usage with your relay key</h2>
+<p>Four read-only endpoints under <code>/v1</code> take the relay key itself as the bearer, exactly as the completion endpoints do. A revoked, expired or unknown key is refused with the same 401 as everywhere else. They read the key's own ledgers: a decision of another key or another workspace is a 404, never a 403. Each costs one request against the key's rate limit.</p>
+<div class="code"><div class="code-p" data-i="0"><div class="code-h"><span>curl</span><button type="button" class="copy" aria-label="Copy the curl example">Copy</button></div><pre><code class="lang-bash">curl https://api.massrelay.ai/v1/key -H &quot;Authorization: Bearer mrk_&lt;prefix&gt;_&lt;secret&gt;&quot;</code></pre></div></div>
+<h3 id="key">Key</h3>
 <section class="card ref" id="ref-get-v1-key">
-  <h3><span class="tag built">GET</span> <code>/v1/key</code></h3>
-  <p>Who may call: relay key (bearer).</p>
-  <p><b>Response schema</b></p>
-  <pre><code>{
-  &quot;description&quot;: &quot;Read against crates/mr-gateway/src/key_doors.rs `key_body`.&quot;,
+  <h3 id="ref-get-v1-key-head"><span class="method m-get">GET</span> <code>/v1/key</code></h3>
+  <p class="ref-auth"><b>Authentication</b> relay key (bearer)</p>
+  <h4 id="ref-get-v1-key-example">Example request</h4>
+  <div class="code tabs" role="group"><div class="code-tabs" role="tablist"><button type="button" role="tab" data-i="0" aria-selected="true">curl</button><button type="button" role="tab" data-i="1" aria-selected="false">Python</button><button type="button" role="tab" data-i="2" aria-selected="false">TypeScript</button></div><div class="code-p" data-i="0"><div class="code-h"><span>curl</span><button type="button" class="copy" aria-label="Copy the curl example">Copy</button></div><pre><code class="lang-bash">curl https://api.massrelay.ai/v1/key \
+  -H &quot;Authorization: Bearer $RELAY_KEY&quot;</code></pre></div><div class="code-p" data-i="1"><div class="code-h"><span>Python</span><button type="button" class="copy" aria-label="Copy the Python example">Copy</button></div><pre><code class="lang-python">import os, requests
+
+r = requests.get(
+    &quot;https://api.massrelay.ai/v1/key&quot;,
+    headers={&quot;Authorization&quot;: f&quot;Bearer {os.environ['RELAY_KEY']}&quot;},
+)
+r.raise_for_status()
+print(r.json())</code></pre></div><div class="code-p" data-i="2"><div class="code-h"><span>TypeScript</span><button type="button" class="copy" aria-label="Copy the TypeScript example">Copy</button></div><pre><code class="lang-typescript">const r = await fetch(&quot;https://api.massrelay.ai/v1/key&quot;, {
+  method: &quot;GET&quot;,
+  headers: { Authorization: `Bearer ${process.env.RELAY_KEY}` },
+});
+if (!r.ok) throw new Error(`${r.status} ${await r.text()}`);
+console.log(await r.json());</code></pre></div></div>
+  <h4 id="ref-get-v1-key-response">Response</h4>
+  <table class="fields"><thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td><code>object</code> <span class="req">required</span></td><td>string</td><td>The kind of object returned, for example chat.completion. Always &quot;key&quot;.</td></tr><tr><td><code>id</code> <span class="req">required</span></td><td>string</td><td>The answer's id.</td></tr><tr><td><code>prefix</code> <span class="req">required</span></td><td>string</td><td></td></tr><tr><td><code>scopes</code> <span class="req">required</span></td><td>array of string</td><td></td></tr><tr><td><code>budgetEnvelopeId</code> <span class="req">required</span></td><td>string or null</td><td></td></tr><tr><td><code>expiresAt</code> <span class="req">required</span></td><td>string or null</td><td></td></tr><tr><td><code>createdAt</code> <span class="req">required</span></td><td>string</td><td></td></tr><tr><td><code>lastUsedAt</code> <span class="req">required</span></td><td>string or null</td><td></td></tr><tr><td><code>unit</code> <span class="req">required</span></td><td>string</td><td> Always &quot;mu&quot;.</td></tr><tr><td><code>spendMu</code> <span class="req">required</span></td><td>integer</td><td>micro-dollars, the unit of account</td></tr><tr><td><code>period</code> <span class="req">required</span></td><td>object</td><td></td></tr><tr><td><code>period.from</code> <span class="req">required</span></td><td>string</td><td></td></tr><tr><td><code>period.to</code> <span class="req">required</span></td><td>string</td><td></td></tr></tbody></table>
+  <div class="code"><div class="code-p" data-i="0"><div class="code-h"><span>Example response (shape)</span><button type="button" class="copy" aria-label="Copy the JSON example">Copy</button></div><pre><code class="lang-json">{
+  &quot;object&quot;: &quot;key&quot;,
+  &quot;id&quot;: &quot;&lt;id&gt;&quot;,
+  &quot;prefix&quot;: &quot;&lt;prefix&gt;&quot;,
+  &quot;scopes&quot;: [
+    &quot;&lt;scopes&gt;&quot;
+  ],
+  &quot;budgetEnvelopeId&quot;: &quot;&lt;budgetEnvelopeId&gt;&quot;,
+  &quot;expiresAt&quot;: &quot;&lt;expiresAt&gt;&quot;,
+  &quot;createdAt&quot;: &quot;&lt;createdAt&gt;&quot;,
+  &quot;lastUsedAt&quot;: &quot;&lt;lastUsedAt&gt;&quot;,
+  &quot;unit&quot;: &quot;mu&quot;,
+  &quot;spendMu&quot;: 0,
+  &quot;period&quot;: {
+    &quot;from&quot;: &quot;&lt;from&gt;&quot;,
+    &quot;to&quot;: &quot;&lt;to&gt;&quot;
+  }
+}</code></pre></div></div>
+  <h4 id="ref-get-v1-key-errors">Common errors</h4><ul class="ref-errs"><li><code>401</code> invalid_api_key</li><li><code>403</code> insufficient_scope</li><li><code>429</code> over the request rate; read Retry-After</li></ul><p class="ref-note">Every error has the same JSON shape; see <a href="/docs/errors/">Errors</a> and <a href="/docs/limits/">Limits</a>.</p>
+  <details class="raw"><summary>Full schema (JSON)</summary><p><b>Response schema</b></p><pre><code>{
   &quot;type&quot;: &quot;object&quot;,
   &quot;required&quot;: [
     &quot;object&quot;,
@@ -518,15 +661,59 @@
       }
     }
   }
-}</code></pre>
+}</code></pre></details>
 </section>
-<p>The key's id, prefix, scopes, budget envelope, expiry, and what it spent this calendar month in mu. Never the hash.</p>
+<p>Returns the key's id, prefix, scopes, budget envelope, expiry, and what it spent this calendar month in mu. Never the hash.</p>
+<h3 id="credits">Credits</h3>
 <section class="card ref" id="ref-get-v1-credits">
-  <h3><span class="tag built">GET</span> <code>/v1/credits</code></h3>
-  <p>Who may call: relay key (bearer).</p>
-  <p><b>Response schema</b></p>
-  <pre><code>{
-  &quot;description&quot;: &quot;Read against crates/mr-gateway/src/key_doors.rs `credits_inner`. The wallets are the key's workspace's own (owner kind workspace).&quot;,
+  <h3 id="ref-get-v1-credits-head"><span class="method m-get">GET</span> <code>/v1/credits</code></h3>
+  <p class="ref-auth"><b>Authentication</b> relay key (bearer)</p>
+  <h4 id="ref-get-v1-credits-example">Example request</h4>
+  <div class="code tabs" role="group"><div class="code-tabs" role="tablist"><button type="button" role="tab" data-i="0" aria-selected="true">curl</button><button type="button" role="tab" data-i="1" aria-selected="false">Python</button><button type="button" role="tab" data-i="2" aria-selected="false">TypeScript</button></div><div class="code-p" data-i="0"><div class="code-h"><span>curl</span><button type="button" class="copy" aria-label="Copy the curl example">Copy</button></div><pre><code class="lang-bash">curl https://api.massrelay.ai/v1/credits \
+  -H &quot;Authorization: Bearer $RELAY_KEY&quot;</code></pre></div><div class="code-p" data-i="1"><div class="code-h"><span>Python</span><button type="button" class="copy" aria-label="Copy the Python example">Copy</button></div><pre><code class="lang-python">import os, requests
+
+r = requests.get(
+    &quot;https://api.massrelay.ai/v1/credits&quot;,
+    headers={&quot;Authorization&quot;: f&quot;Bearer {os.environ['RELAY_KEY']}&quot;},
+)
+r.raise_for_status()
+print(r.json())</code></pre></div><div class="code-p" data-i="2"><div class="code-h"><span>TypeScript</span><button type="button" class="copy" aria-label="Copy the TypeScript example">Copy</button></div><pre><code class="lang-typescript">const r = await fetch(&quot;https://api.massrelay.ai/v1/credits&quot;, {
+  method: &quot;GET&quot;,
+  headers: { Authorization: `Bearer ${process.env.RELAY_KEY}` },
+});
+if (!r.ok) throw new Error(`${r.status} ${await r.text()}`);
+console.log(await r.json());</code></pre></div></div>
+  <h4 id="ref-get-v1-credits-response">Response</h4>
+  <table class="fields"><thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td><code>object</code> <span class="req">required</span></td><td>string</td><td>The kind of object returned, for example chat.completion. Always &quot;credits&quot;.</td></tr><tr><td><code>unit</code> <span class="req">required</span></td><td>string</td><td> Always &quot;mu&quot;.</td></tr><tr><td><code>displayCurrency</code> <span class="req">required</span></td><td>string or null</td><td></td></tr><tr><td><code>totalBalanceMu</code> <span class="req">required</span></td><td>integer</td><td>micro-dollars, the unit of account</td></tr><tr><td><code>totalAvailableMu</code> <span class="req">required</span></td><td>integer</td><td>micro-dollars, the unit of account</td></tr><tr><td><code>wallets</code> <span class="req">required</span></td><td>array of object</td><td></td></tr><tr><td><code>wallets[].id</code> <span class="req">required</span></td><td>string</td><td>The answer's id.</td></tr><tr><td><code>wallets[].kind</code> <span class="req">required</span></td><td>object</td><td> One of: prepaid, allowance, grant, pool, sponsor.</td></tr><tr><td><code>wallets[].balanceMu</code> <span class="req">required</span></td><td>integer</td><td>micro-dollars, the unit of account</td></tr><tr><td><code>wallets[].heldMu</code> <span class="req">required</span></td><td>integer</td><td>micro-dollars, the unit of account</td></tr><tr><td><code>wallets[].availableMu</code> <span class="req">required</span></td><td>integer</td><td>micro-dollars, the unit of account</td></tr><tr><td><code>wallets[].currency</code> <span class="req">required</span></td><td>string or null</td><td></td></tr><tr><td><code>wallets[].expiresAt</code> <span class="req">required</span></td><td>string or null</td><td></td></tr><tr><td><code>freeAllowanceLeft</code> <span class="req">required</span></td><td>integer or null</td><td>requests left in this month's free allowance; null when the plan has none</td></tr><tr><td><code>freeAllowance</code> <span class="req">required</span></td><td>object or null</td><td></td></tr><tr><td><code>freeAllowance.meter</code></td><td>string</td><td></td></tr><tr><td><code>freeAllowance.plan</code></td><td>string or null</td><td></td></tr><tr><td><code>freeAllowance.allowance</code></td><td>integer</td><td></td></tr><tr><td><code>freeAllowance.used</code></td><td>integer</td><td></td></tr><tr><td><code>freeAllowance.resetsAt</code></td><td>string</td><td></td></tr></tbody></table>
+  <div class="code"><div class="code-p" data-i="0"><div class="code-h"><span>Example response (shape)</span><button type="button" class="copy" aria-label="Copy the JSON example">Copy</button></div><pre><code class="lang-json">{
+  &quot;object&quot;: &quot;credits&quot;,
+  &quot;unit&quot;: &quot;mu&quot;,
+  &quot;displayCurrency&quot;: &quot;&lt;displayCurrency&gt;&quot;,
+  &quot;totalBalanceMu&quot;: 0,
+  &quot;totalAvailableMu&quot;: 0,
+  &quot;wallets&quot;: [
+    {
+      &quot;id&quot;: &quot;&lt;id&gt;&quot;,
+      &quot;kind&quot;: &quot;prepaid&quot;,
+      &quot;balanceMu&quot;: 0,
+      &quot;heldMu&quot;: 0,
+      &quot;availableMu&quot;: 0,
+      &quot;currency&quot;: &quot;&lt;currency&gt;&quot;,
+      &quot;expiresAt&quot;: &quot;&lt;expiresAt&gt;&quot;
+    }
+  ],
+  &quot;freeAllowanceLeft&quot;: &quot;&lt;freeAllowanceLeft&gt;&quot;,
+  &quot;freeAllowance&quot;: {
+    &quot;meter&quot;: &quot;&lt;meter&gt;&quot;,
+    &quot;plan&quot;: &quot;&lt;plan&gt;&quot;,
+    &quot;allowance&quot;: 0,
+    &quot;used&quot;: 0,
+    &quot;resetsAt&quot;: &quot;&lt;resetsAt&gt;&quot;
+  }
+}</code></pre></div></div>
+  <h4 id="ref-get-v1-credits-errors">Common errors</h4><ul class="ref-errs"><li><code>401</code> invalid_api_key</li><li><code>403</code> insufficient_scope</li><li><code>429</code> over the request rate; read Retry-After</li></ul><p class="ref-note">Every error has the same JSON shape; see <a href="/docs/errors/">Errors</a> and <a href="/docs/limits/">Limits</a>.</p>
+  <details class="raw"><summary>Full schema (JSON)</summary><p><b>Response schema</b></p><pre><code>{
+  &quot;description&quot;: &quot;The wallets are the key's workspace's own (owner kind workspace).&quot;,
   &quot;type&quot;: &quot;object&quot;,
   &quot;required&quot;: [
     &quot;object&quot;,
@@ -646,16 +833,52 @@
       }
     }
   }
-}</code></pre>
+}</code></pre></details>
 </section>
-<p>The wallets of the workspace that owns the key: balance, held and available per wallet in mu, with the currency the wallet shows in, plus <code>freeAllowanceLeft</code>, the requests left in this month's free allowance (<code>null</code> when the plan has none).</p>
+<p>Returns the wallets of the workspace that owns the key: balance, held and available per wallet in mu, with the currency the wallet shows in, plus <code>freeAllowanceLeft</code>, the requests left in this month's free allowance (<code>null</code> when the plan has none).</p>
+<h3 id="generation">Generation</h3>
 <section class="card ref" id="ref-get-v1-generation-id">
-  <h3><span class="tag built">GET</span> <code>/v1/generation/{id}</code></h3>
-  <p>Who may call: relay key (bearer).</p>
-  <p>Path parameters: <code>id</code>.</p>
-  <p><b>Response schema</b></p>
-  <pre><code>{
-  &quot;description&quot;: &quot;Read against crates/mr-gateway/src/key_doors.rs `generation_inner`. 404 decision_not_found for another key's, another workspace's or a missing id.&quot;,
+  <h3 id="ref-get-v1-generation-id-head"><span class="method m-get">GET</span> <code>/v1/generation/{id}</code></h3>
+  <p class="ref-auth"><b>Authentication</b> relay key (bearer)</p>
+  <h4 id="ref-get-v1-generation-id-params">Path parameters</h4><table class="fields"><tbody><tr><td><code>id</code> <span class="req">required</span></td><td>string</td><td></td></tr></tbody></table>
+  <h4 id="ref-get-v1-generation-id-example">Example request</h4>
+  <div class="code tabs" role="group"><div class="code-tabs" role="tablist"><button type="button" role="tab" data-i="0" aria-selected="true">curl</button><button type="button" role="tab" data-i="1" aria-selected="false">Python</button><button type="button" role="tab" data-i="2" aria-selected="false">TypeScript</button></div><div class="code-p" data-i="0"><div class="code-h"><span>curl</span><button type="button" class="copy" aria-label="Copy the curl example">Copy</button></div><pre><code class="lang-bash">curl https://api.massrelay.ai/v1/generation/{id} \
+  -H &quot;Authorization: Bearer $RELAY_KEY&quot;</code></pre></div><div class="code-p" data-i="1"><div class="code-h"><span>Python</span><button type="button" class="copy" aria-label="Copy the Python example">Copy</button></div><pre><code class="lang-python">import os, requests
+
+r = requests.get(
+    &quot;https://api.massrelay.ai/v1/generation/{id}&quot;,
+    headers={&quot;Authorization&quot;: f&quot;Bearer {os.environ['RELAY_KEY']}&quot;},
+)
+r.raise_for_status()
+print(r.json())</code></pre></div><div class="code-p" data-i="2"><div class="code-h"><span>TypeScript</span><button type="button" class="copy" aria-label="Copy the TypeScript example">Copy</button></div><pre><code class="lang-typescript">const r = await fetch(&quot;https://api.massrelay.ai/v1/generation/{id}&quot;, {
+  method: &quot;GET&quot;,
+  headers: { Authorization: `Bearer ${process.env.RELAY_KEY}` },
+});
+if (!r.ok) throw new Error(`${r.status} ${await r.text()}`);
+console.log(await r.json());</code></pre></div></div>
+  <h4 id="ref-get-v1-generation-id-response">Response</h4>
+  <table class="fields"><thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td><code>object</code> <span class="req">required</span></td><td>string</td><td>The kind of object returned, for example chat.completion. Always &quot;generation&quot;.</td></tr><tr><td><code>id</code> <span class="req">required</span></td><td>string</td><td>The answer's id.</td></tr><tr><td><code>model</code> <span class="req">required</span></td><td>string or null</td><td>The model id. In a request it is optional: without it the key's routing chooses.</td></tr><tr><td><code>provider</code> <span class="req">required</span></td><td>string or null</td><td></td></tr><tr><td><code>inputTokens</code> <span class="req">required</span></td><td>integer</td><td></td></tr><tr><td><code>outputTokens</code> <span class="req">required</span></td><td>integer</td><td></td></tr><tr><td><code>unit</code> <span class="req">required</span></td><td>string</td><td> Always &quot;mu&quot;.</td></tr><tr><td><code>costMu</code> <span class="req">required</span></td><td>integer</td><td>micro-dollars, the unit of account</td></tr><tr><td><code>fee</code> <span class="req">required</span></td><td>object or null</td><td></td></tr><tr><td><code>fee.costMu</code></td><td>integer</td><td>micro-dollars, the unit of account</td></tr><tr><td><code>fee.plan</code></td><td>string or null</td><td></td></tr><tr><td><code>fee.reason</code></td><td>string or null</td><td></td></tr><tr><td><code>latencyMs</code> <span class="req">required</span></td><td>integer or null</td><td></td></tr><tr><td><code>createdAt</code> <span class="req">required</span></td><td>string or null</td><td></td></tr><tr><td><code>explain</code> <span class="req">required</span></td><td>string</td><td>the /v1/route/explain/{id} path</td></tr></tbody></table>
+  <div class="code"><div class="code-p" data-i="0"><div class="code-h"><span>Example response (shape)</span><button type="button" class="copy" aria-label="Copy the JSON example">Copy</button></div><pre><code class="lang-json">{
+  &quot;object&quot;: &quot;generation&quot;,
+  &quot;id&quot;: &quot;&lt;id&gt;&quot;,
+  &quot;model&quot;: &quot;provider/model-id&quot;,
+  &quot;provider&quot;: &quot;&lt;provider&gt;&quot;,
+  &quot;inputTokens&quot;: 0,
+  &quot;outputTokens&quot;: 0,
+  &quot;unit&quot;: &quot;mu&quot;,
+  &quot;costMu&quot;: 0,
+  &quot;fee&quot;: {
+    &quot;costMu&quot;: 0,
+    &quot;plan&quot;: &quot;&lt;plan&gt;&quot;,
+    &quot;reason&quot;: &quot;&lt;reason&gt;&quot;
+  },
+  &quot;latencyMs&quot;: &quot;&lt;latencyMs&gt;&quot;,
+  &quot;createdAt&quot;: &quot;&lt;createdAt&gt;&quot;,
+  &quot;explain&quot;: &quot;&lt;explain&gt;&quot;
+}</code></pre></div></div>
+  <h4 id="ref-get-v1-generation-id-errors">Common errors</h4><ul class="ref-errs"><li><code>401</code> invalid_api_key</li><li><code>403</code> insufficient_scope</li><li><code>429</code> over the request rate; read Retry-After</li></ul><p class="ref-note">Every error has the same JSON shape; see <a href="/docs/errors/">Errors</a> and <a href="/docs/limits/">Limits</a>.</p>
+  <details class="raw"><summary>Full schema (JSON)</summary><p><b>Response schema</b></p><pre><code>{
+  &quot;description&quot;: &quot;404 decision_not_found for another key's, another workspace's or a missing id.&quot;,
   &quot;type&quot;: &quot;object&quot;,
   &quot;required&quot;: [
     &quot;object&quot;,
@@ -744,15 +967,55 @@
       &quot;description&quot;: &quot;the /v1/route/explain/{id} path&quot;
     }
   }
-}</code></pre>
+}</code></pre></details>
 </section>
-<p>One decision: model, provider, tokens, cost in mu, the request-fee line when one was charged, latency, and the path of its explanation (<code>/v1/route/explain/{id}</code>).</p>
+<p>Returns one decision: model, provider, tokens, cost in mu, the request-fee line when one was charged, latency, and the path of its explanation (<code>/v1/route/explain/{id}</code>).</p>
+<h3 id="usage">Usage</h3>
 <section class="card ref" id="ref-get-v1-usage">
-  <h3><span class="tag built">GET</span> <code>/v1/usage</code></h3>
-  <p>Who may call: relay key (bearer).</p>
-  <p><b>Response schema</b></p>
-  <pre><code>{
-  &quot;description&quot;: &quot;Read against crates/mr-gateway/src/key_doors.rs `usage_body`. Query: from, to (ISO date or datetime, default the UTC calendar month), end_user (one tag), group_by=end_user (one row per tag).&quot;,
+  <h3 id="ref-get-v1-usage-head"><span class="method m-get">GET</span> <code>/v1/usage</code></h3>
+  <p class="ref-auth"><b>Authentication</b> relay key (bearer)</p>
+  <h4 id="ref-get-v1-usage-example">Example request</h4>
+  <div class="code tabs" role="group"><div class="code-tabs" role="tablist"><button type="button" role="tab" data-i="0" aria-selected="true">curl</button><button type="button" role="tab" data-i="1" aria-selected="false">Python</button><button type="button" role="tab" data-i="2" aria-selected="false">TypeScript</button></div><div class="code-p" data-i="0"><div class="code-h"><span>curl</span><button type="button" class="copy" aria-label="Copy the curl example">Copy</button></div><pre><code class="lang-bash">curl https://api.massrelay.ai/v1/usage \
+  -H &quot;Authorization: Bearer $RELAY_KEY&quot;</code></pre></div><div class="code-p" data-i="1"><div class="code-h"><span>Python</span><button type="button" class="copy" aria-label="Copy the Python example">Copy</button></div><pre><code class="lang-python">import os, requests
+
+r = requests.get(
+    &quot;https://api.massrelay.ai/v1/usage&quot;,
+    headers={&quot;Authorization&quot;: f&quot;Bearer {os.environ['RELAY_KEY']}&quot;},
+)
+r.raise_for_status()
+print(r.json())</code></pre></div><div class="code-p" data-i="2"><div class="code-h"><span>TypeScript</span><button type="button" class="copy" aria-label="Copy the TypeScript example">Copy</button></div><pre><code class="lang-typescript">const r = await fetch(&quot;https://api.massrelay.ai/v1/usage&quot;, {
+  method: &quot;GET&quot;,
+  headers: { Authorization: `Bearer ${process.env.RELAY_KEY}` },
+});
+if (!r.ok) throw new Error(`${r.status} ${await r.text()}`);
+console.log(await r.json());</code></pre></div></div>
+  <h4 id="ref-get-v1-usage-response">Response</h4>
+  <table class="fields"><thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td><code>object</code> <span class="req">required</span></td><td>string</td><td>The kind of object returned, for example chat.completion. Always &quot;usage&quot;.</td></tr><tr><td><code>unit</code> <span class="req">required</span></td><td>string</td><td> Always &quot;mu&quot;.</td></tr><tr><td><code>period</code> <span class="req">required</span></td><td>object</td><td></td></tr><tr><td><code>period.from</code> <span class="req">required</span></td><td>string</td><td></td></tr><tr><td><code>period.to</code> <span class="req">required</span></td><td>string</td><td></td></tr><tr><td><code>endUser</code></td><td>string</td><td></td></tr><tr><td><code>requests</code> <span class="req">required</span></td><td>integer</td><td></td></tr><tr><td><code>inputTokens</code> <span class="req">required</span></td><td>integer</td><td></td></tr><tr><td><code>outputTokens</code> <span class="req">required</span></td><td>integer</td><td></td></tr><tr><td><code>costMu</code> <span class="req">required</span></td><td>integer</td><td>micro-dollars, the unit of account</td></tr><tr><td><code>byEndUser</code></td><td>array of object</td><td></td></tr><tr><td><code>byEndUser[].endUser</code> <span class="req">required</span></td><td>string</td><td></td></tr><tr><td><code>byEndUser[].requests</code> <span class="req">required</span></td><td>integer</td><td></td></tr><tr><td><code>byEndUser[].inputTokens</code> <span class="req">required</span></td><td>integer</td><td></td></tr><tr><td><code>byEndUser[].outputTokens</code> <span class="req">required</span></td><td>integer</td><td></td></tr><tr><td><code>byEndUser[].costMu</code> <span class="req">required</span></td><td>integer</td><td>micro-dollars, the unit of account</td></tr></tbody></table>
+  <div class="code"><div class="code-p" data-i="0"><div class="code-h"><span>Example response (shape)</span><button type="button" class="copy" aria-label="Copy the JSON example">Copy</button></div><pre><code class="lang-json">{
+  &quot;object&quot;: &quot;usage&quot;,
+  &quot;unit&quot;: &quot;mu&quot;,
+  &quot;period&quot;: {
+    &quot;from&quot;: &quot;&lt;from&gt;&quot;,
+    &quot;to&quot;: &quot;&lt;to&gt;&quot;
+  },
+  &quot;endUser&quot;: &quot;&lt;endUser&gt;&quot;,
+  &quot;requests&quot;: 0,
+  &quot;inputTokens&quot;: 0,
+  &quot;outputTokens&quot;: 0,
+  &quot;costMu&quot;: 0,
+  &quot;byEndUser&quot;: [
+    {
+      &quot;endUser&quot;: &quot;&lt;endUser&gt;&quot;,
+      &quot;requests&quot;: 0,
+      &quot;inputTokens&quot;: 0,
+      &quot;outputTokens&quot;: 0,
+      &quot;costMu&quot;: 0
+    }
+  ]
+}</code></pre></div></div>
+  <h4 id="ref-get-v1-usage-errors">Common errors</h4><ul class="ref-errs"><li><code>401</code> invalid_api_key</li><li><code>403</code> insufficient_scope</li><li><code>429</code> over the request rate; read Retry-After</li></ul><p class="ref-note">Every error has the same JSON shape; see <a href="/docs/errors/">Errors</a> and <a href="/docs/limits/">Limits</a>.</p>
+  <details class="raw"><summary>Full schema (JSON)</summary><p><b>Response schema</b></p><pre><code>{
+  &quot;description&quot;: &quot;Query: from, to (ISO date or datetime, default the UTC calendar month), end_user (one tag), group_by=end_user (one row per tag).&quot;,
   &quot;type&quot;: &quot;object&quot;,
   &quot;required&quot;: [
     &quot;object&quot;,
@@ -833,23 +1096,33 @@
       }
     }
   }
-}</code></pre>
+}</code></pre></details>
 </section>
-<p>The rollup of the key's ledger rows for a period: requests, tokens and cost. <code>from</code> and <code>to</code> take an ISO date or datetime (default: this UTC calendar month); <code>end_user</code> narrows to one end-user tag; <code>group_by=end_user</code> returns one row per tag.</p>
-<pre><code>curl &quot;https://api.massrelay.ai/v1/usage?group_by=end_user&quot; -H &quot;Authorization: Bearer mrk_&lt;prefix&gt;_&lt;secret&gt;&quot;</code></pre>
-<h2 id="rate-limit-headers">Rate-limit headers</h2>
-<p>Every <code>/v1</code> answer whose request reached the rate limiter carries the state of the limit that binds that key, read from the same evaluation that admitted the request (a header never costs a second slot).</p>
-<p>| header | meaning | |---|---| | <code>X-RateLimit-Limit</code> | requests per minute of the binding limit (the key's, or its workspace's if that is tighter) | | <code>X-RateLimit-Remaining</code> | whole requests still admitted right now without being queued | | <code>X-RateLimit-Reset</code> | seconds, rounded up, until one more request would be admitted without queueing (0 while some remain) | | <code>Retry-After</code> | on a 429 only: seconds to wait, rounded up |</p>
-<p>When no limit is configured for the key or its workspace, the three <code>X-RateLimit-*</code> headers are not sent. The same headers ride on streamed answers and on the 429.</p>
-<p class="ctas"><a class="btn" href="/docs/your-model-and-node/">Previous: Your model and your node</a> <a class="btn" href="/docs/errors/">Next: Errors</a></p>
-</div></section>
+<p>Returns the rollup of the key's ledger rows for a period: requests, tokens and cost. <code>from</code> and <code>to</code> take an ISO date or datetime (default: this UTC calendar month). <code>end_user</code> narrows to one end-user tag, and <code>group_by=end_user</code> returns one row per tag.</p>
+<div class="code"><div class="code-p" data-i="0"><div class="code-h"><span>curl</span><button type="button" class="copy" aria-label="Copy the curl example">Copy</button></div><pre><code class="lang-bash">curl &quot;https://api.massrelay.ai/v1/usage?group_by=end_user&quot; \
+  -H &quot;Authorization: Bearer mrk_&lt;prefix&gt;_&lt;secret&gt;&quot;</code></pre></div></div>
+<h2 id="read-the-rate-limit-headers">Read the rate-limit headers</h2>
+<p>Every <code>/v1</code> answer whose request reached the rate limiter carries the state of the limit that binds that key, read from the same evaluation that admitted the request, so a header never costs a second slot.</p>
+<ul>
+<li>**<code>X-RateLimit-Limit</code>** — requests per minute of the binding limit (the key's, or its workspace's if that is tighter).</li>
+<li>**<code>X-RateLimit-Remaining</code>** — whole requests still admitted right now without being queued.</li>
+<li>**<code>X-RateLimit-Reset</code>** — seconds, rounded up, until one more request would be admitted without queueing (0 while some remain).</li>
+<li>**<code>Retry-After</code>** — on a 429 only: seconds to wait, rounded up.</li>
+</ul>
+<p>When no limit is configured for the key or its workspace, the three <code>X-RateLimit-*</code> headers are not sent. The same headers ride on streamed answers and on the 429. See <a href="/docs/limits/">Limits</a> for how limits are applied.</p>
+<nav class="docs-pager" aria-label="Previous and next"><a href="/docs/your-model-and-node/"><small>Previous</small>Your model and your node</a><a class="nx" href="/docs/errors/"><small>Next</small>Errors</a></nav>
+    </article>
+    <aside class="docs-toc" aria-label="On this page"><p>On this page</p><ul><li class="t2"><a href="#read-your-balance-and-spending">Read your balance and spending</a></li><li class="t3"><a href="#ref-get-api-me-wallets-head">GET /api/me/wallets</a></li><li class="t3"><a href="#ref-get-api-me-spending-head">GET /api/me/spending</a></li><li class="t2"><a href="#what-happens-when-a-budget-runs-out">What happens when a budget runs out</a></li><li class="t2"><a href="#read-usage-with-your-relay-key">Read usage with your relay key</a></li><li class="t3"><a href="#key">Key</a></li><li class="t3"><a href="#ref-get-v1-key-head">GET /v1/key</a></li><li class="t3"><a href="#credits">Credits</a></li><li class="t3"><a href="#ref-get-v1-credits-head">GET /v1/credits</a></li><li class="t3"><a href="#generation">Generation</a></li><li class="t3"><a href="#ref-get-v1-generation-id-head">GET /v1/generation/{id}</a></li><li class="t3"><a href="#usage">Usage</a></li><li class="t3"><a href="#ref-get-v1-usage-head">GET /v1/usage</a></li><li class="t2"><a href="#read-the-rate-limit-headers">Read the rate-limit headers</a></li></ul></aside>
+  </div>
+</div>
+<script src="/docs.js" defer></script>
 </main>
 <footer class="foot">
-  <div class="wrap fcols"><div class="fcol"><p class="fh">Assistant</p><a href="/">For people</a><a href="/company/">For companies</a><a href="/rooms/">Rooms</a><a href="/how-it-works/">How it works</a><a href="/how-it-works/#all-scenarios">Scenarios</a><a href="/for/">Who it is for</a><a href="/pricing/">Pricing</a></div><div class="fcol"><p class="fh">Developers</p><a href="/router/">Router</a><a href="/docs/">Docs</a><a href="/pricing/developers/">Developer pricing</a><a href="/registry/">Registry</a><a href="/docs/self-hosted-integration/">Run it yourself</a><a href="/pricing/developers/#rent">Rent out a model or GPUs</a></div><div class="fcol"><p class="fh">AI by field</p><a href="/fields/">The field guide</a><a href="/fields/cases/">Cases</a><a href="/fields/laws/">AI laws</a><a href="/custom-assistant/">Custom assistant</a><a href="/resources/">All resources</a></div><div class="fcol"><p class="fh">About</p><a href="/security/">Security</a><a href="/privacy/">Privacy</a><a href="mailto:support@massrelay.ai">Contact</a><a href="https://github.com/nicholasandreasujitno/massrelay-site">Source of this page</a></div></div>
+  <div class="wrap fcols"><div class="fcol"><p class="fh">Assistant</p><a href="/">For people</a><a href="/company/">For companies</a><a href="/rooms/">Rooms</a><a href="/how-it-works/">How it works</a><a href="/how-it-works/#all-scenarios">Scenarios</a><a href="/for/">Who it is for</a><a href="/pricing/">Pricing</a></div><div class="fcol"><p class="fh">Developers</p><a href="/router/">Router</a><a href="/docs/">Docs</a><a href="/pricing/developers/">Developer pricing</a><a href="/registry/">Registry</a><a href="/docs/self-hosted-integration/">Run it yourself</a><a href="/pricing/developers/#rent">Rent out a model or GPUs</a></div><div class="fcol"><p class="fh">AI by field</p><a href="/fields/">The field guide</a><a href="/fields/cases/">Cases</a><a href="/fields/laws/">AI laws</a><a href="/custom-assistant/">Custom assistant</a><a href="/resources/">All resources</a></div><div class="fcol"><p class="fh">About</p><a href="/security/">Security</a><a href="/privacy/">Privacy</a><a href="/dpa/">DPA</a><a href="mailto:support@massrelay.ai">Contact</a><a href="https://github.com/nicholasandreasujitno/massrelay-site">Source of this page</a></div></div>
   <div class="wrap">
     <span><span class="word">MassRelay</span> · massrelay.ai</span>
     <span><a href="mailto:support@massrelay.ai">Contact</a> · <a href="https://github.com/nicholasandreasujitno/massrelay-site">Source of this page</a></span>
-    <span class="stamp" title="Product version, site version, build">v0.4.0 · site 1 · 1aafc0089</span>
+    <span class="stamp" title="Product version, site version, build">v0.4.0 · site 1 · 27bbc6bc8</span>
   </div>
 </footer>
 
